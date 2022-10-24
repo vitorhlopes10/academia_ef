@@ -10,7 +10,7 @@ namespace academia_ef.Context.Mapping
         {
             builder.ToTable("Aluno")
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Matricula)
                 .HasColumnType("varchar(20)")

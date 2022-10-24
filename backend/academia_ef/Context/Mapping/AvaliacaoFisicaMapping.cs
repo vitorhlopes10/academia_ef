@@ -10,7 +10,7 @@ namespace academia_ef.Context.Mapping
         {
             builder.ToTable("AvaliacaoFisica")
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.DataCriacao)
                 .HasColumnType("datetime")

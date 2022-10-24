@@ -10,6 +10,7 @@
         public bool Fixo { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Telefone { get; set; }
+        public bool Status { get; set; }
 
         public Sexo Sexo { get; set; }
         public Endereco Endereco { get; set; }
@@ -25,6 +26,6 @@
         public int IdEndereco { get; set; }
         public int IdUsuario { get; set; }
         public int IdCargo { get; set; }
-        public int IdAcademia { get; set; }
+        public int? IdAcademia { get; set; }
     }
 }

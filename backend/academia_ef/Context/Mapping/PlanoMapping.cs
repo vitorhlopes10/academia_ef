@@ -10,7 +10,7 @@ namespace academia_ef.Context.Mapping
         {
             builder.ToTable("Plano")
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Nome)
                 .HasColumnType("varchar(30)")

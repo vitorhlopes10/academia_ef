@@ -10,6 +10,7 @@
         public DateTime DataNascimento { get; set; }
         public string Telefone { get; set; }
         public DateTime DataMatricula { get; set; }
+        public bool Status { get; set; }
 
         public Sexo Sexo { get; set; }
         public Endereco Endereco { get; set; }
@@ -21,8 +22,7 @@
         public List<Treino> Treinos { get; set; }
         public List<AvaliacaoFisica> AvaliacoesFisica { get; set; }
 
-
-        public int IdAcademia { get; set; }
+        public int? IdAcademia { get; set; }
         public int IdSexo { get; set; }
         public int IdEndereco { get; set; }
         public int IdPlano { get; set; }

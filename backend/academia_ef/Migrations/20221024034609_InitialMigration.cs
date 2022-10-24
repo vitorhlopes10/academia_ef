@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace academia_ef.Migrations
 {
-    public partial class MigrationInicial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -181,7 +181,8 @@ namespace academia_ef.Migrations
                     DataNascimento = table.Column<DateTime>(type: "datetime", nullable: false),
                     Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
                     DataMatricula = table.Column<DateTime>(type: "datetime", nullable: false),
-                    IdAcademia = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    IdAcademia = table.Column<int>(type: "int", nullable: true),
                     IdSexo = table.Column<int>(type: "int", nullable: false),
                     IdEndereco = table.Column<int>(type: "int", nullable: false),
                     IdPlano = table.Column<int>(type: "int", nullable: false),
@@ -242,11 +243,12 @@ namespace academia_ef.Migrations
                     Fixo = table.Column<bool>(type: "bit", nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "datetime", nullable: false),
                     Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     IdSexo = table.Column<int>(type: "int", nullable: false),
                     IdEndereco = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
                     IdCargo = table.Column<int>(type: "int", nullable: false),
-                    IdAcademia = table.Column<int>(type: "int", nullable: false)
+                    IdAcademia = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -277,6 +279,28 @@ namespace academia_ef.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Funcionario_Usuario_IdUsuario",
+                        column: x => x.IdUsuario,
+                        principalTable: "Usuario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patrimonio",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ValorPago = table.Column<double>(type: "float", nullable: false),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patrimonio", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Patrimonio_Usuario_IdUsuario",
                         column: x => x.IdUsuario,
                         principalTable: "Usuario",
                         principalColumn: "Id",
@@ -457,7 +481,8 @@ namespace academia_ef.Migrations
                 name: "IX_Aluno_IdAcademia",
                 table: "Aluno",
                 column: "IdAcademia",
-                unique: true);
+                unique: true,
+                filter: "[IdAcademia] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdAcordoMensalidade",
@@ -506,7 +531,8 @@ namespace academia_ef.Migrations
                 name: "IX_Funcionario_IdAcademia",
                 table: "Funcionario",
                 column: "IdAcademia",
-                unique: true);
+                unique: true,
+                filter: "[IdAcademia] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdCargo",
@@ -541,6 +567,12 @@ namespace academia_ef.Migrations
                 column: "IdFuncionario");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Patrimonio_IdUsuario",
+                table: "Patrimonio",
+                column: "IdUsuario",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Treino_IdAluno",
                 table: "Treino",
                 column: "IdAluno");
@@ -563,6 +595,9 @@ namespace academia_ef.Migrations
 
             migrationBuilder.DropTable(
                 name: "PagamentoMensalidade");
+
+            migrationBuilder.DropTable(
+                name: "Patrimonio");
 
             migrationBuilder.DropTable(
                 name: "Treino");

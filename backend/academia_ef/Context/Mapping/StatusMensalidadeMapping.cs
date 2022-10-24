@@ -10,7 +10,7 @@ namespace academia_ef.Context.Mapping
         {
             builder.ToTable("StatusMensalidade")
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Descricao)
                 .HasColumnType("varchar(20)")

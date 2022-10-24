@@ -1,5 +1,4 @@
-﻿using academia_ef.Context.Mapping;
-using academia_ef.Model;
+﻿using academia_ef.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -7,11 +6,7 @@ namespace academia_ef.Context
 {
     public class AcademiaEfContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-                @"Server=localhost;Database=ACADEMIA_EF;Trusted_Connection=True");
-        }
+        public AcademiaEfContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,5 +28,6 @@ namespace academia_ef.Context
         public DbSet<StatusUsuario> StatusUsuario { get; set; }
         public DbSet<Treino> Treino { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Patrimonio> Patrimonio { get; set; }
     }
 }

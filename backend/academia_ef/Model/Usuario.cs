@@ -8,6 +8,7 @@
 
         public Aluno Aluno { get; set; }
         public Funcionario Funcionario { get; set; }
+        public Patrimonio Patrimonio { get; set; }
         public StatusUsuario StatusUsuario { get; set; }
 
         public int IdStatusUsuario { get; set; }

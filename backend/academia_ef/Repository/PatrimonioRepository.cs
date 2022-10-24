@@ -4,44 +4,44 @@ using academia_ef.Repository.Interfaces;
 
 namespace academia_ef.Repository
 {
-    public class AlunoRepository : IAlunoRepository
+    public class PatrimonioRepository : IPatrimonioRepository
     {
         private readonly AcademiaEfContext _context;
 
-        public AlunoRepository(AcademiaEfContext context)
+        public PatrimonioRepository(AcademiaEfContext context)
         {
             _context = context;
         }
 
-        public Aluno Buscar(int id)
+        public Patrimonio Buscar(int id)
         {
-            var obj = _context.Find<Aluno>(typeof(Aluno), id);
+            var obj = _context.Find<Patrimonio>(id);
             return obj;
         }
 
-        public List<Aluno> BuscarTodos()
+        public List<Patrimonio> BuscarTodos()
         {
-            var obj = _context.Aluno.ToList();
+            var obj = _context.Patrimonio.ToList();
             return obj;
         }
 
-        public Aluno Inserir(Aluno aluno)
+        public Patrimonio Inserir(Patrimonio aluno)
         {
             var obj = _context.Add(aluno);
             _context.SaveChanges();
             return obj.Entity;
         }
 
-        public Aluno Atualizar(Aluno aluno)
+        public Patrimonio Atualizar(Patrimonio aluno)
         {
             var obj = _context.Update(aluno);
             _context.SaveChanges();
             return obj.Entity;
         }
 
-        public bool Inativar(int id)
+        public bool Deletar(int id)
         {
-            var obj = _context.Find<Aluno>(id);
+            var obj = _context.Find<Patrimonio>(id);
 
             if (obj != null)
             {
