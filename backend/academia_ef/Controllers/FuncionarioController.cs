@@ -47,7 +47,7 @@ namespace academia_ef.Controllers
             return _funcionarioService.Atualizar(funcionario);
         }
 
-        [HttpPut("{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<bool> Inativar(int id)
