@@ -36,9 +36,28 @@ namespace academia_ef.Context.Mapping
                 .WithOne(s => s.Endereco)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Academia)
+            builder.HasOne(x => x.Unidade)
                 .WithOne(s => s.Endereco)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasData(
+                new Endereco()
+                {
+                    Id = 1,
+                    Descricao = "1A Etapa QN 8C",
+                    Cidade = "Riacho Fundo II",
+                    Estado = "DF",
+                    Cep = "72650-600"
+                },
+                new Endereco()
+                {
+                    Id = 2,
+                    Descricao = "Q 804 Núcleo Rural Monjolo Conj. 10-A",
+                    Cidade = "Recanto das Emas",
+                    Estado = "DF",
+                    Cep = "72650-600"
+                }
+            );
         }
     }
 }

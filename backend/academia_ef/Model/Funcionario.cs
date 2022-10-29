@@ -14,7 +14,7 @@
 
         public Sexo Sexo { get; set; }
         public Endereco Endereco { get; set; }
-        public Academia Academia { get; set; }
+        public Unidade Unidade { get; set; }
         public Usuario Usuario { get; set; }
         public Cargo Cargo { get; set; }
 

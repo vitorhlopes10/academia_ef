@@ -12,7 +12,7 @@ using academia_ef.Context;
 namespace academia_ef.Migrations
 {
     [DbContext(typeof(AcademiaEfContext))]
-    [Migration("20221024034609_InitialMigration")]
+    [Migration("20221026054143_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,37 +23,6 @@ namespace academia_ef.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("academia_ef.Model.Academia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Cnpj")
-                        .IsRequired()
-                        .HasColumnType("varchar(14)");
-
-                    b.Property<int>("IdEndereco")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdEndereco")
-                        .IsUnique();
-
-                    b.ToTable("Academia", (string)null);
-                });
 
             modelBuilder.Entity("academia_ef.Model.AcordoMensalidade", b =>
                 {
@@ -316,6 +285,24 @@ namespace academia_ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Endereco", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cep = "72650-600",
+                            Cidade = "Riacho Fundo II",
+                            Descricao = "1A Etapa QN 8C",
+                            Estado = "DF"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cep = "72650-600",
+                            Cidade = "Recanto das Emas",
+                            Descricao = "Q 804 Núcleo Rural Monjolo Conj. 10-A",
+                            Estado = "DF"
+                        });
                 });
 
             modelBuilder.Entity("academia_ef.Model.Funcionario", b =>
@@ -606,6 +593,55 @@ namespace academia_ef.Migrations
                     b.ToTable("Treino", (string)null);
                 });
 
+            modelBuilder.Entity("academia_ef.Model.Unidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasColumnType("varchar(14)");
+
+                    b.Property<int>("IdEndereco")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEndereco")
+                        .IsUnique();
+
+                    b.ToTable("Unidade", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cnpj = "42696940000107",
+                            IdEndereco = 1,
+                            Nome = "Equilíbrio Fitness - Riacho Fundo II",
+                            Telefone = "3434-5340"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cnpj = "58013325000199",
+                            IdEndereco = 2,
+                            Nome = "Equilíbrio Fitness - Recanto das Emas",
+                            Telefone = "3434-5460"
+                        });
+                });
+
             modelBuilder.Entity("academia_ef.Model.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -632,17 +668,6 @@ namespace academia_ef.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
-            modelBuilder.Entity("academia_ef.Model.Academia", b =>
-                {
-                    b.HasOne("academia_ef.Model.Endereco", "Endereco")
-                        .WithOne("Academia")
-                        .HasForeignKey("academia_ef.Model.Academia", "IdEndereco")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Endereco");
-                });
-
             modelBuilder.Entity("academia_ef.Model.AcordoMensalidade", b =>
                 {
                     b.HasOne("academia_ef.Model.StatusMensalidade", "StatusMensalidade")
@@ -656,7 +681,7 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Aluno", b =>
                 {
-                    b.HasOne("academia_ef.Model.Academia", "Academia")
+                    b.HasOne("academia_ef.Model.Unidade", "Unidade")
                         .WithOne("Aluno")
                         .HasForeignKey("academia_ef.Model.Aluno", "IdAcademia")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -691,8 +716,6 @@ namespace academia_ef.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Academia");
-
                     b.Navigation("AcordoMensalidade");
 
                     b.Navigation("Endereco");
@@ -700,6 +723,8 @@ namespace academia_ef.Migrations
                     b.Navigation("Plano");
 
                     b.Navigation("Sexo");
+
+                    b.Navigation("Unidade");
 
                     b.Navigation("Usuario");
                 });
@@ -733,7 +758,7 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Funcionario", b =>
                 {
-                    b.HasOne("academia_ef.Model.Academia", "Academia")
+                    b.HasOne("academia_ef.Model.Unidade", "Unidade")
                         .WithOne("Funcionario")
                         .HasForeignKey("academia_ef.Model.Funcionario", "IdAcademia")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -762,13 +787,13 @@ namespace academia_ef.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Academia");
-
                     b.Navigation("Cargo");
 
                     b.Navigation("Endereco");
 
                     b.Navigation("Sexo");
+
+                    b.Navigation("Unidade");
 
                     b.Navigation("Usuario");
                 });
@@ -822,6 +847,17 @@ namespace academia_ef.Migrations
                     b.Navigation("Funcionario");
                 });
 
+            modelBuilder.Entity("academia_ef.Model.Unidade", b =>
+                {
+                    b.HasOne("academia_ef.Model.Endereco", "Endereco")
+                        .WithOne("Unidade")
+                        .HasForeignKey("academia_ef.Model.Unidade", "IdEndereco")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Endereco");
+                });
+
             modelBuilder.Entity("academia_ef.Model.Usuario", b =>
                 {
                     b.HasOne("academia_ef.Model.StatusUsuario", "StatusUsuario")
@@ -831,15 +867,6 @@ namespace academia_ef.Migrations
                         .IsRequired();
 
                     b.Navigation("StatusUsuario");
-                });
-
-            modelBuilder.Entity("academia_ef.Model.Academia", b =>
-                {
-                    b.Navigation("Aluno")
-                        .IsRequired();
-
-                    b.Navigation("Funcionario")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("academia_ef.Model.AcordoMensalidade", b =>
@@ -869,13 +896,13 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Endereco", b =>
                 {
-                    b.Navigation("Academia")
-                        .IsRequired();
-
                     b.Navigation("Aluno")
                         .IsRequired();
 
                     b.Navigation("Funcionario")
+                        .IsRequired();
+
+                    b.Navigation("Unidade")
                         .IsRequired();
                 });
 
@@ -908,6 +935,15 @@ namespace academia_ef.Migrations
             modelBuilder.Entity("academia_ef.Model.StatusUsuario", b =>
                 {
                     b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("academia_ef.Model.Unidade", b =>
+                {
+                    b.Navigation("Aluno")
+                        .IsRequired();
+
+                    b.Navigation("Funcionario")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("academia_ef.Model.Usuario", b =>

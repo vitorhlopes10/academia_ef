@@ -45,7 +45,26 @@ namespace academia_ef.Repository
 
             if (obj != null)
             {
-                _context.Remove(obj);
+                obj.Status = false;
+
+                obj = _context.Update(obj).Entity;
+
+                _context.SaveChanges();
+            }
+
+            return obj != null;
+        }
+
+        public bool Ativar(int id)
+        {
+            var obj = _context.Find<Funcionario>(id);
+
+            if (obj != null)
+            {
+                obj.Status = true;
+
+                obj = _context.Update(obj).Entity;
+
                 _context.SaveChanges();
             }
 

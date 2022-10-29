@@ -13,7 +13,7 @@ namespace academia_ef.Context
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        public DbSet<Academia> Academia { get; set; }
+        public DbSet<Unidade> Unidade { get; set; }
         public DbSet<AcordoMensalidade> AcordoMensalidade { get; set; }
         public DbSet<Aluno> Aluno { get; set; }
         public DbSet<AvaliacaoFisica> AvaliacaoFisica { get; set; }
@@ -24,7 +24,7 @@ namespace academia_ef.Context
         public DbSet<PagamentoMensalidade> PagamentoMensalidade { get; set; }
         public DbSet<Plano> Plano { get; set; }
         public DbSet<Sexo> Sexo { get; set; }
-        public DbSet<StatusMensalidade> StatusMensalidades { get; set; }
+        public DbSet<StatusMensalidade> StatusMensalidade { get; set; }
         public DbSet<StatusUsuario> StatusUsuario { get; set; }
         public DbSet<Treino> Treino { get; set; }
         public DbSet<Usuario> Usuario { get; set; }

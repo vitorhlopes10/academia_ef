@@ -1,4 +1,5 @@
 ﻿using academia_ef.Model;
+using academia_ef.Repository;
 using academia_ef.Repository.Interfaces;
 using academia_ef.Services.Interfaces;
 
@@ -39,6 +40,12 @@ namespace academia_ef.Services
         {
             var deletado = _funcionarioRepository.Inativar(id);
             return deletado;
+        }
+
+        public bool Ativar(int id)
+        {
+            var ativado = _funcionarioRepository.Ativar(id);
+            return ativado;
         }
     }
 }

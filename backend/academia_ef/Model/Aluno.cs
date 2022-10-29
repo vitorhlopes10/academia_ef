@@ -15,7 +15,7 @@
         public Sexo Sexo { get; set; }
         public Endereco Endereco { get; set; }
         public Plano Plano { get; set; }
-        public Academia Academia { get; set; }
+        public Unidade Unidade { get; set; }
         public AcordoMensalidade AcordoMensalidade { get; set; }
         public Usuario Usuario { get; set; }
 

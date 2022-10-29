@@ -40,5 +40,11 @@ namespace academia_ef.Services
             var deletado = _alunoRepository.Inativar(id);
             return deletado;
         }
+
+        public bool Ativar(int id)
+        {
+            var ativado = _alunoRepository.Ativar(id);
+            return ativado;
+        }
     }
 }

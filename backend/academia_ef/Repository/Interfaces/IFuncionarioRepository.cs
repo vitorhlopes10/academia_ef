@@ -9,5 +9,6 @@ namespace academia_ef.Repository.Interfaces
         Funcionario Inserir(Funcionario aluno);
         Funcionario Atualizar(Funcionario aluno);
         bool Inativar(int id);
+        bool Ativar(int id);
     }
 }

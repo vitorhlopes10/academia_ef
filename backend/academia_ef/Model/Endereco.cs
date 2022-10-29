@@ -10,6 +10,6 @@
 
         public Funcionario Funcionario { get; set; }
         public Aluno Aluno { get; set; }
-        public Academia Academia { get; set; }
+        public Unidade Unidade { get; set; }
     }
 }

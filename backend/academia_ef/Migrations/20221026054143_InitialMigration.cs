@@ -106,7 +106,7 @@ namespace academia_ef.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Academia",
+                name: "Unidade",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -118,9 +118,9 @@ namespace academia_ef.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Academia", x => x.Id);
+                    table.PrimaryKey("PK_Unidade", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Academia_Endereco_IdEndereco",
+                        name: "FK_Unidade_Endereco_IdEndereco",
                         column: x => x.IdEndereco,
                         principalTable: "Endereco",
                         principalColumn: "Id",
@@ -193,12 +193,6 @@ namespace academia_ef.Migrations
                 {
                     table.PrimaryKey("PK_Aluno", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Aluno_Academia_IdAcademia",
-                        column: x => x.IdAcademia,
-                        principalTable: "Academia",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Aluno_AcordoMensalidade_IdAcordoMensalidade",
                         column: x => x.IdAcordoMensalidade,
                         principalTable: "AcordoMensalidade",
@@ -220,6 +214,12 @@ namespace academia_ef.Migrations
                         name: "FK_Aluno_Sexo_IdSexo",
                         column: x => x.IdSexo,
                         principalTable: "Sexo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Aluno_Unidade_IdAcademia",
+                        column: x => x.IdAcademia,
+                        principalTable: "Unidade",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -254,12 +254,6 @@ namespace academia_ef.Migrations
                 {
                     table.PrimaryKey("PK_Funcionario", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Funcionario_Academia_IdAcademia",
-                        column: x => x.IdAcademia,
-                        principalTable: "Academia",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Funcionario_Cargo_IdCargo",
                         column: x => x.IdCargo,
                         principalTable: "Cargo",
@@ -275,6 +269,12 @@ namespace academia_ef.Migrations
                         name: "FK_Funcionario_Sexo_IdSexo",
                         column: x => x.IdSexo,
                         principalTable: "Sexo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Funcionario_Unidade_IdAcademia",
+                        column: x => x.IdAcademia,
+                        principalTable: "Unidade",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -431,6 +431,15 @@ namespace academia_ef.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Endereco",
+                columns: new[] { "Id", "Cep", "Cidade", "Descricao", "Estado" },
+                values: new object[,]
+                {
+                    { 1, "72650-600", "Riacho Fundo II", "1A Etapa QN 8C", "DF" },
+                    { 2, "72650-600", "Recanto das Emas", "Q 804 Núcleo Rural Monjolo Conj. 10-A", "DF" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Plano",
                 columns: new[] { "Id", "DescricaoRegras", "Nome", "Valor" },
                 values: new object[,]
@@ -466,11 +475,15 @@ namespace academia_ef.Migrations
                     { 2, "Inativo" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Academia_IdEndereco",
-                table: "Academia",
-                column: "IdEndereco",
-                unique: true);
+            migrationBuilder.InsertData(
+                table: "Unidade",
+                columns: new[] { "Id", "Cnpj", "IdEndereco", "Nome", "Telefone" },
+                values: new object[] { 1, "42696940000107", 1, "Equilíbrio Fitness - Riacho Fundo II", "3434-5340" });
+
+            migrationBuilder.InsertData(
+                table: "Unidade",
+                columns: new[] { "Id", "Cnpj", "IdEndereco", "Nome", "Telefone" },
+                values: new object[] { 2, "58013325000199", 2, "Equilíbrio Fitness - Recanto das Emas", "3434-5460" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AcordoMensalidade_IdStatusMensalidade",
@@ -583,6 +596,12 @@ namespace academia_ef.Migrations
                 column: "IdFuncionario");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Unidade_IdEndereco",
+                table: "Unidade",
+                column: "IdEndereco",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Usuario_IdStatusUsuario",
                 table: "Usuario",
                 column: "IdStatusUsuario");
@@ -618,13 +637,13 @@ namespace academia_ef.Migrations
                 name: "Plano");
 
             migrationBuilder.DropTable(
-                name: "Academia");
-
-            migrationBuilder.DropTable(
                 name: "Cargo");
 
             migrationBuilder.DropTable(
                 name: "Sexo");
+
+            migrationBuilder.DropTable(
+                name: "Unidade");
 
             migrationBuilder.DropTable(
                 name: "Usuario");

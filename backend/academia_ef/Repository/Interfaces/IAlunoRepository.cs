@@ -9,5 +9,6 @@ namespace academia_ef.Repository.Interfaces
         Aluno Inserir(Aluno aluno);
         Aluno Atualizar(Aluno aluno);
         bool Inativar(int id);
+        bool Ativar(int id);
     }
 }

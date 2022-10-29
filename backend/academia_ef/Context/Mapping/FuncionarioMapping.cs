@@ -50,7 +50,7 @@ namespace academia_ef.Context.Mapping
                 .HasForeignKey<Funcionario>(s => s.IdEndereco)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Academia)
+            builder.HasOne(x => x.Unidade)
                .WithOne(s => s.Funcionario)
                .HasForeignKey<Funcionario>(s => s.IdAcademia)
                .OnDelete(DeleteBehavior.Restrict);
