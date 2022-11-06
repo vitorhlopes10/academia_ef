@@ -57,7 +57,7 @@ namespace academia_ef.Context.Mapping
 
             builder.HasOne(x => x.Unidade)
                .WithOne(s => s.Aluno)
-               .HasForeignKey<Aluno>(s => s.IdAcademia)
+               .HasForeignKey<Aluno>(s => s.IdUnidade)
                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.AcordoMensalidade)

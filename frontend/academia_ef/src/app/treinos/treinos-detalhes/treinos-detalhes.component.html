@@ -1,0 +1,29 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
+    <div class="container">
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-4">
+                <label for="float-input">Alunos</label>
+                <p-dropdown [options]="alunos" [(ngModel)]="alunoSelecionado" placeholder="Selecione o Aluno"
+                    optionLabel="name" [disabled]="true">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="row p-fluid">
+            <div class="col-8">
+                <label for="float-input">Descrição</label>
+                <textarea pInputTextarea [(ngModel)]="treino.descricao" disabled="true"></textarea>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-end">
+            <div class="col-7">
+                <button pButton pRipple type="button" label="Voltar" class="p-button-secondary"
+                    (click)="voltar()" style="margin-top: 50px;"></button>
+            </div>
+        </div>
+    </div>
+</div>

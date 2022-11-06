@@ -1,5 +1,8 @@
 using academia_ef.Model;
+using academia_ef.Services;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Aluno;
+using academia_ef.ViewModel.Funcionario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace academia_ef.Controllers
@@ -30,6 +33,13 @@ namespace academia_ef.Controllers
         public ActionResult<List<Funcionario>> BuscarTodos()
         {
             var resultado = _funcionarioService.BuscarTodos();
+            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+        }
+
+        [HttpGet("Filtro")]
+        public ActionResult<List<Funcionario>> Filtro([FromQuery] FuncionarioFiltroViewModel filtro)
+        {
+            var resultado = _funcionarioService.Filtrar(filtro);
             return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 

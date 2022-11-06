@@ -32,6 +32,10 @@ namespace academia_ef.Context.Mapping
                 .WithMany(s => s.Usuarios)
                 .HasForeignKey(s => s.IdStatusUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(x => x.Patrimonio)
+                .WithOne(s => s.Usuario)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -25,16 +25,22 @@ namespace academia_ef.Repository
             return obj;
         }
 
-        public Patrimonio Inserir(Patrimonio aluno)
+        public List<Patrimonio> Filtrar(string nome)
         {
-            var obj = _context.Add(aluno);
+            var obj = _context.Patrimonio.Where(x => x.Nome.Equals(nome)).ToList();
+            return obj;
+        }
+
+        public Patrimonio Inserir(Patrimonio item)
+        {
+            var obj = _context.Add(item);
             _context.SaveChanges();
             return obj.Entity;
         }
 
-        public Patrimonio Atualizar(Patrimonio aluno)
+        public Patrimonio Atualizar(Patrimonio item)
         {
-            var obj = _context.Update(aluno);
+            var obj = _context.Update(item);
             _context.SaveChanges();
             return obj.Entity;
         }

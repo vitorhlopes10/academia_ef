@@ -1,0 +1,36 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
+    <div class="container">
+        <div class="row p-fluid">
+            <div class="col-6">
+                <label for="float-input">Nome</label>
+                <input type="text" pInputText [(ngModel)]="itemProduto.nome" disabled="true" disabled="true">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-6">
+                <label for="float-input">Descrição</label>
+                <input type="text" pInputText [(ngModel)]="itemProduto.descricao" disabled="true">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-6">
+                <label for="stacked">Valor Pago</label>
+                <p-inputNumber [(ngModel)]="itemProduto.valorPago" inputId="valorPago" [min]="0"
+                    mode="currency" currency="BRL" [disabled]="true">
+                </p-inputNumber>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-end">
+            <div class="col-7">
+                <button pButton pRipple type="button" label="Voltar" class="p-button-secondary"
+                    (click)="voltar()" style="margin-top: 50px;"></button>
+            </div>
+        </div>
+    </div>
+</div>

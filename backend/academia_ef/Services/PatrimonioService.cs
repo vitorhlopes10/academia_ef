@@ -1,6 +1,7 @@
 ﻿using academia_ef.Model;
 using academia_ef.Repository.Interfaces;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Patrimonio;
 
 namespace academia_ef.Services
 {
@@ -23,16 +24,38 @@ namespace academia_ef.Services
             return _patrimonioRepository.BuscarTodos();
         }
 
-        public Patrimonio Inserir(Patrimonio aluno)
+        public List<Patrimonio> Filtrar(string nome)
         {
-            var obj = _patrimonioRepository.Inserir(aluno);
-            return obj;
+            return _patrimonioRepository.Filtrar(nome);
         }
 
-        public Patrimonio Atualizar(Patrimonio aluno)
+        public Patrimonio Inserir(PatrimonioViewModel novoItem)
         {
-            var obj = _patrimonioRepository.Atualizar(aluno);
-            return obj;
+            var obj = new Patrimonio();
+
+            obj.Nome = novoItem.Nome;
+            obj.Descricao = novoItem.Descricao;
+            obj.ValorPago = novoItem.ValorPago;
+            obj.IdUsuario = novoItem.IdUsuario;
+
+            var retorno = _patrimonioRepository.Inserir(obj);
+
+            return retorno;
+        }
+
+        public Patrimonio Atualizar(PatrimonioViewModel item)
+        {
+            var obj = new Patrimonio();
+
+            obj.Id = item.Id;
+            obj.Nome = item.Nome;
+            obj.Descricao = item.Descricao;
+            obj.ValorPago = item.ValorPago;
+            obj.IdUsuario = item.IdUsuario;
+
+            var retorno = _patrimonioRepository.Atualizar(obj);
+
+            return retorno;
         }
 
         public bool Deletar(int id)

@@ -65,9 +65,6 @@ namespace academia_ef.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int?>("IdAcademia")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdAcordoMensalidade")
                         .HasColumnType("int");
 
@@ -78,6 +75,9 @@ namespace academia_ef.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IdSexo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdUnidade")
                         .HasColumnType("int");
 
                     b.Property<int>("IdUsuario")
@@ -100,10 +100,6 @@ namespace academia_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdAcademia")
-                        .IsUnique()
-                        .HasFilter("[IdAcademia] IS NOT NULL");
-
                     b.HasIndex("IdAcordoMensalidade")
                         .IsUnique();
 
@@ -113,6 +109,10 @@ namespace academia_ef.Migrations
                     b.HasIndex("IdPlano");
 
                     b.HasIndex("IdSexo");
+
+                    b.HasIndex("IdUnidade")
+                        .IsUnique()
+                        .HasFilter("[IdUnidade] IS NOT NULL");
 
                     b.HasIndex("IdUsuario")
                         .IsUnique();
@@ -325,9 +325,6 @@ namespace academia_ef.Migrations
                     b.Property<bool>("Fixo")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("IdAcademia")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdCargo")
                         .HasColumnType("int");
 
@@ -335,6 +332,9 @@ namespace academia_ef.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IdSexo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdUnidade")
                         .HasColumnType("int");
 
                     b.Property<int>("IdUsuario")
@@ -357,16 +357,16 @@ namespace academia_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdAcademia")
-                        .IsUnique()
-                        .HasFilter("[IdAcademia] IS NOT NULL");
-
                     b.HasIndex("IdCargo");
 
                     b.HasIndex("IdEndereco")
                         .IsUnique();
 
                     b.HasIndex("IdSexo");
+
+                    b.HasIndex("IdUnidade")
+                        .IsUnique()
+                        .HasFilter("[IdUnidade] IS NOT NULL");
 
                     b.HasIndex("IdUsuario")
                         .IsUnique();
@@ -428,8 +428,7 @@ namespace academia_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdUsuario")
-                        .IsUnique();
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Patrimonio", (string)null);
                 });
@@ -679,11 +678,6 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Aluno", b =>
                 {
-                    b.HasOne("academia_ef.Model.Unidade", "Unidade")
-                        .WithOne("Aluno")
-                        .HasForeignKey("academia_ef.Model.Aluno", "IdAcademia")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("academia_ef.Model.AcordoMensalidade", "AcordoMensalidade")
                         .WithOne("Aluno")
                         .HasForeignKey("academia_ef.Model.Aluno", "IdAcordoMensalidade")
@@ -707,6 +701,11 @@ namespace academia_ef.Migrations
                         .HasForeignKey("IdSexo")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("academia_ef.Model.Unidade", "Unidade")
+                        .WithOne("Aluno")
+                        .HasForeignKey("academia_ef.Model.Aluno", "IdUnidade")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("academia_ef.Model.Usuario", "Usuario")
                         .WithOne("Aluno")
@@ -756,11 +755,6 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Funcionario", b =>
                 {
-                    b.HasOne("academia_ef.Model.Unidade", "Unidade")
-                        .WithOne("Funcionario")
-                        .HasForeignKey("academia_ef.Model.Funcionario", "IdAcademia")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("academia_ef.Model.Cargo", "Cargo")
                         .WithMany("Funcionarios")
                         .HasForeignKey("IdCargo")
@@ -778,6 +772,11 @@ namespace academia_ef.Migrations
                         .HasForeignKey("IdSexo")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("academia_ef.Model.Unidade", "Unidade")
+                        .WithOne("Funcionario")
+                        .HasForeignKey("academia_ef.Model.Funcionario", "IdUnidade")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("academia_ef.Model.Usuario", "Usuario")
                         .WithOne("Funcionario")
@@ -818,8 +817,8 @@ namespace academia_ef.Migrations
             modelBuilder.Entity("academia_ef.Model.Patrimonio", b =>
                 {
                     b.HasOne("academia_ef.Model.Usuario", "Usuario")
-                        .WithOne("Patrimonio")
-                        .HasForeignKey("academia_ef.Model.Patrimonio", "IdUsuario")
+                        .WithMany("Patrimonio")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -952,8 +951,7 @@ namespace academia_ef.Migrations
                     b.Navigation("Funcionario")
                         .IsRequired();
 
-                    b.Navigation("Patrimonio")
-                        .IsRequired();
+                    b.Navigation("Patrimonio");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,7 @@
 using academia_ef.Model;
+using academia_ef.Services;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Aluno;
 using Microsoft.AspNetCore.Mvc;
 
 namespace academia_ef.Controllers
@@ -33,16 +35,23 @@ namespace academia_ef.Controllers
             return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
+        [HttpGet("Filtro")]
+        public ActionResult<List<Aluno>> Filtro([FromQuery] AlunoFiltroViewModel filtro)
+        {
+            var resultado = _alunoService.Filtrar(filtro);
+            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+        }
+
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<Aluno> Inserir(Aluno aluno)
+        public ActionResult<Aluno> Inserir(AlunoViewModel aluno)
         {
             var resultado = _alunoService.Inserir(aluno);
             return resultado is null ? NotFound("Não foi possível realizar o cadastro!") : resultado;
         }
 
         [HttpPut()]
-        public ActionResult<Aluno> Atualizar(Aluno aluno)
+        public ActionResult<Aluno> Atualizar(AlunoViewModel aluno)
         {
             var resultado = _alunoService.Atualizar(aluno);
             return resultado is null ? NotFound("Não foi possível atualizar o cadastro!") : Ok(resultado);

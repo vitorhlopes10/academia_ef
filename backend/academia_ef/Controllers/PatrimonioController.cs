@@ -1,22 +1,24 @@
 using academia_ef.Model;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Patrimonio;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace academia_ef.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PatrimoniosController : ControllerBase
+    public class PatrimonioController : ControllerBase
     {
         private readonly IPatrimonioService _patrimonioService;
 
-        public PatrimoniosController(IPatrimonioService patrimonioService)
+        public PatrimonioController(IPatrimonioService patrimonioService)
         {
             _patrimonioService = patrimonioService;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Patrimonio> Buscar(int id)
+        public ActionResult<Patrimonio> BuscarPorId(int id)
         {
             if (!(id > 0))
                 return BadRequest("É necessário informar um ID maior que 0!");
@@ -33,23 +35,30 @@ namespace academia_ef.Controllers
             return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
+        [HttpGet("Filtro/{nome}")]
+        public ActionResult<List<Patrimonio>> Filtro(string nome)
+        {
+            var resultado = _patrimonioService.Filtrar(nome);
+            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+        }
+
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<Patrimonio> Inserir(Patrimonio patrimonio)
+        public ActionResult<Patrimonio> Inserir([FromBody] PatrimonioViewModel obj)
         {
-            var resultado = _patrimonioService.Inserir(patrimonio);
+            var resultado = _patrimonioService.Inserir(obj);
             return resultado is null ? NotFound("Não foi possível realizar o cadastro!") : resultado;
         }
 
         [HttpPut()]
-        public ActionResult<Patrimonio> Atualizar(Patrimonio patrimonio)
+        public ActionResult<Patrimonio> Atualizar([FromBody] PatrimonioViewModel obj)
         {
-            var resultado = _patrimonioService.Atualizar(patrimonio);
+            var resultado = _patrimonioService.Atualizar(obj);
             return resultado is null ? NotFound("Não foi possível atualizar o cadastro!") : Ok(resultado);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<bool> Deletar(int id)
+        public ActionResult Deletar(int id)
         {
             if (!(id > 0))
                 return BadRequest("É necessário informar um ID maior que 0!");

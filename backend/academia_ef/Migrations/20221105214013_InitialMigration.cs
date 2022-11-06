@@ -182,7 +182,7 @@ namespace academia_ef.Migrations
                     Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
                     DataMatricula = table.Column<DateTime>(type: "datetime", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    IdAcademia = table.Column<int>(type: "int", nullable: true),
+                    IdUnidade = table.Column<int>(type: "int", nullable: true),
                     IdSexo = table.Column<int>(type: "int", nullable: false),
                     IdEndereco = table.Column<int>(type: "int", nullable: false),
                     IdPlano = table.Column<int>(type: "int", nullable: false),
@@ -217,8 +217,8 @@ namespace academia_ef.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Aluno_Unidade_IdAcademia",
-                        column: x => x.IdAcademia,
+                        name: "FK_Aluno_Unidade_IdUnidade",
+                        column: x => x.IdUnidade,
                         principalTable: "Unidade",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -248,7 +248,7 @@ namespace academia_ef.Migrations
                     IdEndereco = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
                     IdCargo = table.Column<int>(type: "int", nullable: false),
-                    IdAcademia = table.Column<int>(type: "int", nullable: true)
+                    IdUnidade = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -272,8 +272,8 @@ namespace academia_ef.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Funcionario_Unidade_IdAcademia",
-                        column: x => x.IdAcademia,
+                        name: "FK_Funcionario_Unidade_IdUnidade",
+                        column: x => x.IdUnidade,
                         principalTable: "Unidade",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -491,13 +491,6 @@ namespace academia_ef.Migrations
                 column: "IdStatusMensalidade");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aluno_IdAcademia",
-                table: "Aluno",
-                column: "IdAcademia",
-                unique: true,
-                filter: "[IdAcademia] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdAcordoMensalidade",
                 table: "Aluno",
                 column: "IdAcordoMensalidade",
@@ -518,6 +511,13 @@ namespace academia_ef.Migrations
                 name: "IX_Aluno_IdSexo",
                 table: "Aluno",
                 column: "IdSexo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Aluno_IdUnidade",
+                table: "Aluno",
+                column: "IdUnidade",
+                unique: true,
+                filter: "[IdUnidade] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdUsuario",
@@ -541,13 +541,6 @@ namespace academia_ef.Migrations
                 column: "IdFuncionario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Funcionario_IdAcademia",
-                table: "Funcionario",
-                column: "IdAcademia",
-                unique: true,
-                filter: "[IdAcademia] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdCargo",
                 table: "Funcionario",
                 column: "IdCargo");
@@ -562,6 +555,13 @@ namespace academia_ef.Migrations
                 name: "IX_Funcionario_IdSexo",
                 table: "Funcionario",
                 column: "IdSexo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Funcionario_IdUnidade",
+                table: "Funcionario",
+                column: "IdUnidade",
+                unique: true,
+                filter: "[IdUnidade] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdUsuario",
@@ -582,8 +582,7 @@ namespace academia_ef.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Patrimonio_IdUsuario",
                 table: "Patrimonio",
-                column: "IdUsuario",
-                unique: true);
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Treino_IdAluno",

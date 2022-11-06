@@ -1,38 +1,74 @@
-<div class="container py-4">
-    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-        aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item active" aria-current="page">Patrimônio</li>
-        </ol>
-    </nav>
-</div>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast> 
 
-<div class="container"> 
-    <table class="table table-info table-striped">
-        <thead>
-          <tr>
-            <th scope="col-3">Nº de Patrimônio</th>
-            <th scope="col-3">Nome</th>
-            <th scope="col-3">Valor de Compra</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>20220523156</td>
-            <th>Leg 45°</th>
-            <td>3.999,99</td>
-          </tr>
-          <tr>
-            <td>20220523156</td>
-            <th>Mesa reta Supino</th>           
-            <td>379.99</td>
-          </tr>
-          <tr>
-            <td>20220523156</td>
-            <th>Monocross Over Polia Simples</th>     
-            <td>3.390</td>
-          </tr>
-        </tbody>
-      </table>  
+<div class="container-principal">
+  <div class="container">
+    <div class="row p-fluid">
+      <div class="col-6">
+        <span class="p-float-label">
+          <input type="text" pInputText [(ngModel)]="nomeProduto">
+          <label for="float-input">Nome</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-btns-pesquisa">
+    <div class="row justify-content-md-start">
+      <div class="col-10">
+        <button pButton pRipple type="button" label="Limpar" class="p-button-secondary" (click)="limpar()"></button>
+        <button pButton pRipple type="button" label="Pesquisar" class="p-button-primary" style="margin-left: 6px;"
+          (click)="buscar()"></button>
+      </div>
+      <div class="col-2">
+        <button id="btnCadastrar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
+          (click)="cadastrar()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-tabela">
+    <p-table #dt [value]="patrimonio" [rows]="10" [paginator]="patrimonio.length > 0"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+      [showCurrentPageReport]="patrimonio.length > 0">
+      <ng-template pTemplate="header">
+        <tr>
+          <th> Nome </th>
+          <th> Valor Pago </th>
+          <th style="width:190px"> </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-produto>
+        <tr>
+          <td>{{produto.nome}}</td>
+          <td>{{produto.valorPago | currency: 'R$'}}</td>
+          <td>
+            <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
+              (click)="detalhes(produto.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+              (click)="confirmarEdicao(produto.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+              (click)="confirmarDelecao(produto.id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer" let-columns>
+        <tr>
+          <td [attr.colspan]="4" *ngIf="valorTotalPatrimonio > 0" style="text-align: right;">
+            Total do Patrimônio: {{ valorTotalPatrimonio | currency: 'R$' }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="4" style="text-align: center;">
+            Não encontrado
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+  </p-confirmDialog>
 </div>

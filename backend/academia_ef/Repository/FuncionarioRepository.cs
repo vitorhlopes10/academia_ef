@@ -19,9 +19,9 @@ namespace academia_ef.Repository
             return obj;
         }
 
-        public List<Funcionario> BuscarTodos()
+        public IQueryable<Funcionario> BuscarTodos()
         {
-            var obj = _context.Funcionario.ToList();
+            var obj = _context.Funcionario.AsQueryable();
             return obj;
         }
 

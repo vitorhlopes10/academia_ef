@@ -25,8 +25,8 @@ namespace academia_ef.Context.Mapping
             .IsRequired();
 
             builder.HasOne(x => x.Usuario)
-                .WithOne(s => s.Patrimonio)
-                .HasForeignKey<Patrimonio>(s => s.IdUsuario)
+                .WithMany(s => s.Patrimonio)
+                .HasForeignKey(s => s.IdUsuario)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         }

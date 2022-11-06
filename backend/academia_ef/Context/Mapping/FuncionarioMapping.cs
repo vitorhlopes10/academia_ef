@@ -52,7 +52,7 @@ namespace academia_ef.Context.Mapping
 
             builder.HasOne(x => x.Unidade)
                .WithOne(s => s.Funcionario)
-               .HasForeignKey<Funcionario>(s => s.IdAcademia)
+               .HasForeignKey<Funcionario>(s => s.IdUnidade)
                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Usuario)

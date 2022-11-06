@@ -22,7 +22,7 @@
         public List<Treino> Treinos { get; set; }
         public List<AvaliacaoFisica> AvaliacoesFisica { get; set; }
 
-        public int? IdAcademia { get; set; }
+        public int? IdUnidade { get; set; }
         public int IdSexo { get; set; }
         public int IdEndereco { get; set; }
         public int IdPlano { get; set; }

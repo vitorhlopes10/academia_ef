@@ -1,38 +1,92 @@
-<div class="container py-4">
-    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-        aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item active" aria-current="page">Alunos</li>
-        </ol>
-    </nav>
-</div>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
 
-<div class="container"> 
-    <table class="table table-info table-striped">
-        <thead>
-          <tr>
-            <th scope="col">CPF</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Telefone</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>999.999.999-99</td>
-            <th>Vitor</th>
-            <td>61 9999-9999</td>
-          </tr>
-          <tr>
-            <td>999.999.999-99</td>
-            <th>Régis</th>
-            <td>61 9999-9999</td>
-          </tr>
-          <tr>
-            <td>999.999.999-99</td>
-            <th>Aline</th>
-            <td>61 9999-9999</td>
-          </tr>
-        </tbody>
-      </table>  
+<div class="container-principal">
+  <div class="container">
+    <div class="row p-fluid">
+      <div class="col-3">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.matricula">
+          <label for="float-input">Matrícula</label>
+        </span>
+      </div>
+      <div class="col-3">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.cpf" placeholder="999.999.999-99">
+          <label for="float-input">CPF</label>
+        </span>
+      </div>
+      <div class="col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.nome">
+          <label for="float-input">Nome</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-btns-pesquisa">
+    <div class="row justify-content-md-start">
+      <div class="col-10">
+        <button pButton pRipple type="button" label="Limpar" class="p-button-secondary" (click)="limpar()"></button>
+        <button pButton pRipple type="button" label="Pesquisar" class="p-button-primary" style="margin-left: 6px;"
+          (click)="buscar()"></button>
+      </div>
+      <div class="col-2">
+        <button id="btnCadastrar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
+          (click)="cadastrar()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-tabela">
+    <p-table #dt [value]="alunos" [rows]="10" [paginator]="this.alunos.length > 0" dataKey="id"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+      [showCurrentPageReport]="this.alunos.length > 0">
+      <ng-template pTemplate="header">
+        <tr>
+          <th> Matrícula </th>
+          <th> CPF </th>
+          <th> Nome </th>
+          <th> Status </th>
+          <th style="width:150px"> </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-aluno>
+        <tr>
+          <td>{{aluno.matricula}}</td>
+          <td>{{aluno.Cpf}}</td>
+          <td>{{aluno.nome}}</td>
+          <td>
+            <span [class]="'aluno-badge status-' + (aluno.status ? aluno.status.toLowerCase() : '')"> {{aluno.status}}
+            </span>
+          </td>
+          <td>
+            <button *ngIf="aluno.status" pButton pRipple icon="pi-power-off"
+              class="p-button-rounded p-button-success mr-2" (click)="ativar(aluno.id)"
+              style="margin-right: 6px;"></button>
+            <button *ngIf="!(aluno.status)" pButton pRipple icon="pi-power-off"
+              class="p-button-rounded p-button-danger mr-2" (click)="inativar(aluno.id)"
+              style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
+              (click)="detalhes(aluno.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+              (click)="confirmarEdicao(aluno.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+              (click)="confirmarDelecao(aluno.id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="5" style="text-align: center;">
+            Não encontrado
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+  </p-confirmDialog>
 </div>

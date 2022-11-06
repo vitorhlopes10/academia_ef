@@ -26,6 +26,6 @@
         public int IdEndereco { get; set; }
         public int IdUsuario { get; set; }
         public int IdCargo { get; set; }
-        public int? IdAcademia { get; set; }
+        public int? IdUnidade { get; set; }
     }
 }

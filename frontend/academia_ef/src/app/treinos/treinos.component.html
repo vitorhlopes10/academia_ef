@@ -1,0 +1,70 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
+  <div class="container">
+    <div class="row p-fluid">
+      <div class="col-3">
+        <span class="p-float-label">
+          <label for="float-input">Data Inicial</label>
+          <p-calendar [(ngModel)]="filtro.dataInicial" [showIcon]="true" inputId="icon"
+              dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+        </span>
+      </div>
+      <div class="col-3">
+        <span class="p-float-label">
+          <label for="float-input">Data Final</label>
+          <p-calendar [(ngModel)]="filtro.dataFinal" [showIcon]="true" inputId="icon"
+              dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-btns-pesquisa">
+    <div class="row justify-content-md-start">
+      <div class="col-10">
+        <button pButton pRipple type="button" label="Limpar" class="p-button-secondary" (click)="limpar()"></button>
+        <button pButton pRipple type="button" label="Pesquisar" class="p-button-primary" style="margin-left: 6px;"
+          (click)="buscar()"></button>
+      </div>
+      <div class="col-2">
+        <button id="btnCadastrar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
+          (click)="cadastrar()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-tabela">
+    <p-table #dt [value]="treinos" [rows]="10" [paginator]="this.treinos.length > 0" dataKey="id"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+      [showCurrentPageReport]="this.treinos.length > 0">
+      <ng-template pTemplate="header">
+        <tr>
+          <th> Data de Criação </th>
+          <th style="width:150px"> </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-treino>
+        <tr>
+          <td>{{treino.dataCriacao}}</td>
+          <td>
+            <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
+              (click)="detalhes(treino.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+              (click)="confirmarEdicao(treino.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+              (click)="confirmarDelecao(treino.id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="2" style="text-align: center;">
+            Não encontrado
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
+    <div class="container">
+        <div class="row p-fluid">
+            <div class="col-6">
+                <label for="float-input">Nome</label>
+                <input type="text" pInputText [(ngModel)]="itemProduto.nome">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-6">
+                <label for="float-input">Descrição</label>
+                <input type="text" pInputText [(ngModel)]="itemProduto.descricao">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-6">
+                <label for="stacked">Valor Pago</label>
+                <p-inputNumber [(ngModel)]="itemProduto.valorPago" [showButtons]="true" inputId="valorPago" [min]="0"
+                    mode="currency" currency="BRL">
+                </p-inputNumber>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-end">
+            <div class="col-9">
+                <button id="btnVoltar" pButton pRipple type="button" label="Voltar" class="p-button-secondary"
+                    (click)="voltar()" style="margin-top: 50px; margin-left: 20px;"></button>
+                <button id="btnSalvar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
+                    (click)="validarCadastro()" style="margin-top: 50px; margin-left: 5px;"></button>
+            </div>
+        </div>
+    </div>
+</div>

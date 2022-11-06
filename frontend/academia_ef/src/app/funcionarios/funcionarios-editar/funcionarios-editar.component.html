@@ -1,0 +1,128 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
+    <div class="container">
+        <div class="row p-fluid">
+            <h4>Dados Básicos</h4>
+        </div>
+        <div class="row p-fluid">
+            <div class="col-8">
+                <label for="float-input">Nome</label>
+                <input type="text" pInputText [(ngModel)]="funcionario.nome">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-4">
+                <label for="float-input">CPF</label>
+                <p-inputMask [(ngModel)]="funcionario.cpf" placeholder="999.999.999-99" mask="999.999.999-99">
+                </p-inputMask>
+            </div>
+            <div class="col-4">
+                <label for="float-input">Unidades</label>
+                <p-dropdown [options]="unidades" [(ngModel)]="unidadeSelecionada" placeholder="Selecione a unidade"
+                    optionLabel="name" [disabled]="funcionario.fixo">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-8">
+                <label for="float-input">Email</label>
+                <input type="email" pInputText [(ngModel)]="funcionario.email">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-4">
+                <label for="float-input">Data de Nascimento</label>
+                <p-calendar [(ngModel)]="funcionario.dataNascimento" [showIcon]="true" inputId="icon"
+                    dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+            </div>
+            <div class="col-4">
+                <label for="float-input">Cargos</label>
+                <p-dropdown [options]="cargos" [(ngModel)]="cargoSelecionado" placeholder="Selecione o plano"
+                    optionLabel="name">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-4">
+                <label for="float-input">Telefone</label>
+                <p-inputMask [(ngModel)]="funcionario.telefone" placeholder="(99) 9999-9999" mask="(99) 9999-9999">
+                </p-inputMask>
+            </div>
+            <div class="col-4">
+                <label for="float-input">Sexos</label>
+                <p-dropdown [options]="sexos" [(ngModel)]="sexoSelecionado" placeholder="Selecione o sexo"
+                    optionLabel="name">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-4">
+                <label for="float-input" style="margin-right: 5px;">Fixo?</label>
+                <p-checkbox [(ngModel)]="funcionario.fixo" [binary]="true" style="margin-left: 5px;" [disabled]="true"></p-checkbox>
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 50px;">
+            <h4>Endereço</h4>
+        </div>
+
+        <div class="row p-fluid">
+            <div class="col-8">
+                <label for="float-input">Descrição</label>
+                <input type="text" pInputText [(ngModel)]="funcionario.endereco.descricao">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-4">
+                <label for="float-input">Cidade</label>
+                <input type="text" pInputText [(ngModel)]="funcionario.endereco.cidade">
+            </div>
+            <div class="col-4">
+                <label for="float-input">Estado</label>
+                <input type="text" pInputText [(ngModel)]="funcionario.endereco.estado">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-8">
+                <label for="float-input">CEP</label>
+                <input type="text" pInputText [(ngModel)]="funcionario.endereco.cep">
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 50px;">
+            <h4>Usuário</h4>
+        </div>
+
+        <div class="row p-fluid">
+            <div class="col-8">
+                <label for="float-input">Senha</label>
+                <input type="password" pInputText>
+            </div>
+        </div>
+
+        <div class="row p-fluid" style="margin-top: 15px;">
+            <div class="col-8">
+                <label for="float-input">Confirmar Senha</label>
+                <input type="password" pInputText>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-end">
+            <div class="col-7">
+                <button id="btnVoltar" pButton pRipple type="button" label="Voltar" class="p-button-secondary"
+                    (click)="voltar()" style="margin-top: 50px; margin-left: 20px;"></button>
+                <button id="btnSalvar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
+                    (click)="validarCadastro()" style="margin-top: 50px; margin-left: 5px;"></button>
+            </div>
+        </div>
+    </div>
+</div>

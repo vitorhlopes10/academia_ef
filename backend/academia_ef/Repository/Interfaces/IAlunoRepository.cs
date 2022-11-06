@@ -1,11 +1,12 @@
 ﻿using academia_ef.Model;
+using academia_ef.ViewModel.Aluno;
 
 namespace academia_ef.Repository.Interfaces
 {
     public interface IAlunoRepository
     {
         Aluno Buscar(int id);
-        List<Aluno> BuscarTodos();
+        IQueryable<Aluno> BuscarTodos();
         Aluno Inserir(Aluno aluno);
         Aluno Atualizar(Aluno aluno);
         bool Inativar(int id);

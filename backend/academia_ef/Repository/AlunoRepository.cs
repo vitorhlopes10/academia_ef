@@ -1,6 +1,7 @@
 ﻿using academia_ef.Context;
 using academia_ef.Model;
 using academia_ef.Repository.Interfaces;
+using academia_ef.ViewModel.Aluno;
 
 namespace academia_ef.Repository
 {
@@ -15,13 +16,13 @@ namespace academia_ef.Repository
 
         public Aluno Buscar(int id)
         {
-            var obj = _context.Find<Aluno>(typeof(Aluno), id);
+            var obj = _context.Find<Aluno>(id);
             return obj;
         }
 
-        public List<Aluno> BuscarTodos()
+        public IQueryable<Aluno> BuscarTodos()
         {
-            var obj = _context.Aluno.ToList();
+            var obj = _context.Aluno.AsQueryable();
             return obj;
         }
 

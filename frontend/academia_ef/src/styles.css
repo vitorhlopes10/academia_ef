@@ -89,3 +89,33 @@ body {
     --bs-code-color: #d63384;
     --bs-highlight-bg: #fff3cd;
   }
+
+.container-principal {
+    position: relative;
+    top: 35px;
+}
+
+.container-tabela {
+    position: relative;
+    top: 50px;
+}
+
+.container-btns-pesquisa {
+    position: relative;
+    top: 25px;
+}
+
+#btnCadastrar {
+    position: relative;
+    left: 80px;
+}
+
+#btnSalvar {
+    position: relative;
+    left: 80px;
+}
+
+#btnVoltar{
+    position: relative;
+    left: 80px;
+}

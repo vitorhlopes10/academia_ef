@@ -1,4 +1,5 @@
 ﻿using academia_ef.Model;
+using academia_ef.ViewModel.Patrimonio;
 
 namespace academia_ef.Services.Interfaces
 {
@@ -6,8 +7,9 @@ namespace academia_ef.Services.Interfaces
     {
         Patrimonio Buscar(int id);
         List<Patrimonio> BuscarTodos();
-        Patrimonio Inserir(Patrimonio aluno);
-        Patrimonio Atualizar(Patrimonio aluno);
+        List<Patrimonio> Filtrar(string nome);
+        Patrimonio Inserir(PatrimonioViewModel aluno);
+        Patrimonio Atualizar(PatrimonioViewModel aluno);
         bool Deletar(int id);
     }
 }

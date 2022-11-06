@@ -6,6 +6,7 @@ namespace academia_ef.Repository.Interfaces
     {
         Patrimonio Buscar(int id);
         List<Patrimonio> BuscarTodos();
+        List<Patrimonio> Filtrar(string nome);
         Patrimonio Inserir(Patrimonio aluno);
         Patrimonio Atualizar(Patrimonio aluno);
         bool Deletar(int id);

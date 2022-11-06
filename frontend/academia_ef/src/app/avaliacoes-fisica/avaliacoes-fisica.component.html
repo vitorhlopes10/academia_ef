@@ -1,0 +1,41 @@
+<!-- <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+<div class="container">
+  <p-table #dt [value]="avaliacoes" [rows]="10" [paginator]="this.avaliacoes.length > 0" dataKey="id"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+    [showCurrentPageReport]="this.avaliacoes.length > 0">
+    <ng-template pTemplate="header">
+      <tr>
+        <th> Matrícula </th>
+        <th> CPF </th>
+        <th> Nome </th>
+        <th> Status </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-avaliacao>
+      <tr>
+        <td>{{avaliacao.Matricula}}</td>
+        <td>{{avaliacao.Cpf}}</td>
+        <td>{{avaliacao.Nome}}</td>
+        <td>
+          <span [class]="'avaliacao-badge status-' + (avaliacao.Status ? avaliacao.Status.toLowerCase() : '')">
+            {{avaliacao.Status}}
+          </span>
+        </td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+            (click)="editAvaliacao(avaliacao)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            (click)="deleteAvaliacao(avaliacao.Id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="4" style="text-align: center;">
+          Não encontrado
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div> -->
