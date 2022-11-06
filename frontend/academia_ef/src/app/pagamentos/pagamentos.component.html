@@ -1,48 +1,68 @@
-<!-- <div class="container py-4">
-    <nav
-      style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-      aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active" aria-current="page">Alunos</li>
-      </ol>
-    </nav>
-  </div>
-  
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
   <div class="container">
+    <div class="row p-fluid">
+      <div class="col-3">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.matricula">
+          <label for="float-input">Matrícula</label>
+        </span>
+      </div>
+      <div class="col-3">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.cpf" placeholder="999.999.999-99">
+          <label for="float-input">CPF</label>
+        </span>
+      </div>
+      <div class="col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.nome">
+          <label for="float-input">Nome</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-btns-pesquisa">
+    <div class="row justify-content-md-start">
+      <div class="col-10">
+        <button pButton pRipple type="button" label="Limpar" class="p-button-secondary" (click)="limpar()"></button>
+        <button pButton pRipple type="button" label="Pesquisar" class="p-button-primary" style="margin-left: 6px;"
+          (click)="buscar()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-tabela">
     <p-table #dt [value]="alunos" [rows]="10" [paginator]="this.alunos.length > 0" dataKey="id"
-      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas" [showCurrentPageReport]="this.alunos.length > 0">
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+      [showCurrentPageReport]="this.alunos.length > 0">
       <ng-template pTemplate="header">
         <tr>
-          <th> Matrícula </th>
-          <th> CPF </th>
-          <th> Nome </th>
-          <th> Status </th>
+          <th> Aluno </th>
+          <th> Status de Mensalidade </th>
+          <th style="width:150px"> </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-aluno>
         <tr>
-          <td>{{aluno.Matricula}}</td>
-          <td>{{aluno.Cpf}}</td>
-          <td>{{aluno.Nome}}</td>
+          <td>{{aluno.nome}}</td>
+          <td>{{aluno.acordoMensalidade.statusMensalidade.descricao}}</td>
           <td>
-            <span [class]="'aluno-badge status-' + (aluno.Status ? aluno.Status.toLowerCase() : '')"> {{aluno.Status}}
-            </span>
-          </td>
-          <td>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
-              (click)="editAluno(aluno)"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-              (click)="deleteAluno(aluno.Id)"></button>
+            <button pButton pRipple icon="pi pi-arrow-right" class="p-button-rounded p-button-help mr-2"
+              (click)="verificar(aluno.id)" style="margin-right: 6px;"></button>
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
-          <td [attr.colspan]="4" style="text-align: center;">
+          <td [attr.colspan]="3" style="text-align: center;">
             Não encontrado
           </td>
         </tr>
       </ng-template>
     </p-table>
-  </div> -->
+  </div>
+</div>

@@ -3,121 +3,117 @@
 
 <div class="container-principal">
     <div class="container">
-        <div class="row p-fluid">
-            <h4>Dados Básicos</h4>
-        </div>
-        <div class="row p-fluid">
-            <div class="col-8">
-                <label for="float-input">Nome</label>
-                <input type="text" pInputText [(ngModel)]="novoFuncionario.nome">
+        <p-fieldset legend="Dados Básicos" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Nome</label>
+                    <input type="text" pInputText [(ngModel)]="novoFuncionario.nome">
+                </div>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">CPF</label>
-                <p-inputMask [(ngModel)]="novoFuncionario.cpf" placeholder="999.999.999-99" mask="999.999.999-99">
-                </p-inputMask>
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">CPF</label>
+                    <p-inputMask [(ngModel)]="novoFuncionario.cpf" placeholder="999.999.999-99" mask="999.999.999-99">
+                    </p-inputMask>
+                </div>
+                <div class="col">
+                    <label for="float-input">Unidades</label>
+                    <p-dropdown [options]="unidades" [(ngModel)]="unidadeSelecionada" placeholder="Selecione a unidade"
+                        optionLabel="name" [disabled]="this.novoFuncionario.fixo">
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Unidades</label>
-                <p-dropdown [options]="unidades" [(ngModel)]="unidadeSelecionada" placeholder="Selecione a unidade"
-                    optionLabel="name" [disabled]="this.novoFuncionario.fixo">
-                </p-dropdown>
-            </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-8">
-                <label for="float-input">Email</label>
-                <input type="email" pInputText [(ngModel)]="novoFuncionario.email">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Email</label>
+                    <input type="email" pInputText [(ngModel)]="novoFuncionario.email">
+                </div>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">Data de Nascimento</label>
-                <p-calendar [(ngModel)]="novoFuncionario.dataNascimento" [showIcon]="true" inputId="icon"
-                    dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Data de Nascimento</label>
+                    <p-calendar [(ngModel)]="novoFuncionario.dataNascimento" [showIcon]="true" inputId="icon"
+                        dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+                </div>
+                <div class="col">
+                    <label for="float-input">Cargos</label>
+                    <p-dropdown [options]="cargos" [(ngModel)]="cargoSelecionado" placeholder="Selecione o cargo"
+                        optionLabel="name">
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Cargos</label>
-                <p-dropdown [options]="cargos" [(ngModel)]="cargoSelecionado" placeholder="Selecione o cargo"
-                    optionLabel="name">
-                </p-dropdown>
-            </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">Telefone</label>
-                <p-inputMask [(ngModel)]="novoFuncionario.telefone" placeholder="(99) 9999-9999" mask="(99) 9999-9999">
-                </p-inputMask>
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Telefone</label>
+                    <p-inputMask [(ngModel)]="novoFuncionario.telefone" placeholder="(99) 9999-9999"
+                        mask="(99) 9999-9999">
+                    </p-inputMask>
+                </div>
+                <div class="col">
+                    <label for="float-input">Sexos</label>
+                    <p-dropdown [options]="sexos" [(ngModel)]="sexoSelecionado" placeholder="Selecione o sexo"
+                        optionLabel="name">
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Sexos</label>
-                <p-dropdown [options]="sexos" [(ngModel)]="sexoSelecionado" placeholder="Selecione o sexo"
-                    optionLabel="name">
-                </p-dropdown>
-            </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input" style="margin-right: 5px;">Fixo?</label>
-                <p-checkbox [(ngModel)]="novoFuncionario.fixo" [binary]="true"></p-checkbox>
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input" style="margin-right: 5px;">Fixo?</label>
+                    <p-checkbox [(ngModel)]="novoFuncionario.fixo" [binary]="true"></p-checkbox>
+                </div>
             </div>
-        </div>
+        </p-fieldset>
 
-        <div class="row p-fluid" style="margin-top: 50px;">
-            <h4>Endereço</h4>
-        </div>
-
-        <div class="row p-fluid">
-            <div class="col-8">
-                <label for="float-input">Descrição</label>
-                <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.descricao">
+        <p-fieldset legend="Endereço" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Descrição</label>
+                    <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.descricao">
+                </div>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">Cidade</label>
-                <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.cidade">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Cidade</label>
+                    <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.cidade">
+                </div>
+                <div class="col">
+                    <label for="float-input">Estado</label>
+                    <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.estado">
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Estado</label>
-                <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.estado">
-            </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-8">
-                <label for="float-input">CEP</label>
-                <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.cep">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">CEP</label>
+                    <input type="text" pInputText [(ngModel)]="novoFuncionario.endereco.cep">
+                </div>
             </div>
-        </div>
+        </p-fieldset>
 
-        <div class="row p-fluid" style="margin-top: 50px;">
-            <h4>Usuário</h4>
-        </div>
-
-        <div class="row p-fluid">
-            <div class="col-8">
-                <label for="float-input">Senha</label>
-                <input type="password" pInputText>
+        <p-fieldset legend="Usuário" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Senha</label>
+                    <input type="password" pInputText>
+                </div>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-8">
-                <label for="float-input">Confirmar Senha</label>
-                <input type="password" pInputText>
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Confirmar Senha</label>
+                    <input type="password" pInputText>
+                </div>
             </div>
-        </div>
+        </p-fieldset>
 
         <div class="row justify-content-md-end">
-            <div class="col-7">
+            <div class="col-3">
                 <button id="btnVoltar" pButton pRipple type="button" label="Voltar" class="p-button-secondary"
                     (click)="voltar()" style="margin-top: 50px; margin-left: 20px;"></button>
                 <button id="btnSalvar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"

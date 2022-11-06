@@ -16,13 +16,13 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { MeusDadosComponent } from './meus-dados/meus-dados.component';
+import { MeusPagamentosAlunoComponent } from './meus-pagamentos-aluno/meus-pagamentos-aluno.component';
+import { PagamentoDetalheComponent } from './meus-pagamentos-aluno/pagamento-detalhe/pagamento-detalhe.component';
 import { MeusTreinosAlunoComponent } from './meus-treinos-aluno/meus-treinos-aluno.component';
 import { TreinoAtualDetalhesComponent } from './meus-treinos-aluno/treino-atual-detalhes/treino-atual-detalhes.component';
 import { AvaliacaoFisicaAtualDetalhesComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-atual-detalhes/avaliacao-fisica-atual-detalhes.component';
 import { MinhasAvaliacoesFisicaAlunoComponent } from './minhas-avaliacoes-fisica-aluno/minhas-avaliacoes-fisica-aluno.component';
-import { PagamentosCadastrarComponent } from './pagamentos/pagamentos-cadastrar/pagamentos-cadastrar.component';
-import { PagamentosDetalhesComponent } from './pagamentos/pagamentos-detalhes/pagamentos-detalhes.component';
-import { PagamentosEditarComponent } from './pagamentos/pagamentos-editar/pagamentos-editar.component';
+import { PagamentosDetalhadosComponent } from './pagamentos/pagamentos-detalhados/pagamentos-detalhados.component';
 import { PagamentosComponent } from './pagamentos/pagamentos.component';
 import { PatrimonioCadastrarComponent } from './patrimonio/patrimonio-cadastrar/patrimonio-cadastrar.component';
 import { PatrimonioDetalhesComponent } from './patrimonio/patrimonio-detalhes/patrimonio-detalhes.component';
@@ -44,16 +44,19 @@ const routes: Routes = [
   
   { path: 'meus-dados', component: MeusDadosComponent },
 
-  { path: 'alunos', component: AlunosComponent },
-  { path: 'alunos/cadastrar', component: AlunosCadastrarComponent },
-  { path: 'alunos/detalhes/:parametro', component: AlunosDetalhesComponent },
-  { path: 'alunos/editar/:parametro', component: AlunosEditarComponent },
-
   { path: 'meus-treinos', component: MeusTreinosAlunoComponent },
   { path: 'meus-treinos/treino-atual-detalhes/:parametro', component: TreinoAtualDetalhesComponent },
 
   { path: 'minhas-avaliacoes-fisica', component: MinhasAvaliacoesFisicaAlunoComponent },
   { path: 'minhas-avaliacoes-fisica/avaliacao-fisica-atual-detalhes/:parametro', component: AvaliacaoFisicaAtualDetalhesComponent },
+
+  { path: 'meus-pagamentos', component: MeusPagamentosAlunoComponent },
+  { path: 'meus-pagamentos/meus-pagamentos-detalhes/:parametro', component: PagamentoDetalheComponent },
+
+  { path: 'alunos', component: AlunosComponent },
+  { path: 'alunos/cadastrar', component: AlunosCadastrarComponent },
+  { path: 'alunos/detalhes/:parametro', component: AlunosDetalhesComponent },
+  { path: 'alunos/editar/:parametro', component: AlunosEditarComponent },
 
   { path: 'funcionarios', component: FuncionariosComponent },
   { path: 'funcionarios/cadastrar', component: FuncionariosCadastrarComponent },
@@ -71,9 +74,7 @@ const routes: Routes = [
   { path: 'avaliacoes-fisica/editar/:parametro', component: AvaliacoesFisicaEditarComponent },
 
   { path: 'pagamentos', component: PagamentosComponent },
-  { path: 'pagamentos/cadastrar', component: PagamentosCadastrarComponent },
-  { path: 'pagamentos/detalhes/:parametro', component: PagamentosEditarComponent },
-  { path: 'pagamentos/editar/:parametro', component: PagamentosDetalhesComponent },
+  { path: 'pagamentos/pagamentos-detalhados/:parametro', component: PagamentosDetalhadosComponent },
 
   { path: 'patrimonio', component: PatrimonioComponent },
   { path: 'patrimonio/cadastrar', component: PatrimonioCadastrarComponent },
@@ -81,7 +82,6 @@ const routes: Routes = [
   { path: 'patrimonio/editar/:parametro', component: PatrimonioEditarComponent },
 
   { path: 'sobre', component: SobreComponent }
-
 ];
 
 @NgModule({

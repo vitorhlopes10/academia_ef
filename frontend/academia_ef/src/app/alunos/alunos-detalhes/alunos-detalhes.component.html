@@ -3,63 +3,94 @@
 
 <div class="container-principal">
     <div class="container">
-        <div class="row p-fluid">
-            <div class="col-8">
-                <label for="float-input">Nome</label>
-                <input type="text" pInputText [(ngModel)]="aluno.nome" disabled="true">
+        <p-fieldset legend="Dados Básicos" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Nome</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.nome" disabled="true">
+                </div>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">CPF</label>
-                <input type="email" pInputText [(ngModel)]="aluno.cpf" placeholder="999.999.999-99" disabled="true">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">CPF</label>
+                    <input type="email" pInputText [(ngModel)]="aluno.cpf" placeholder="999.999.999-99" disabled="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Unidades</label>
+                    <p-dropdown [(ngModel)]="aluno.unidade.nome" placeholder="Selecione a unidade" optionLabel="nome"
+                        [disabled]="true">
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Unidades</label>
-                <p-dropdown [(ngModel)]="aluno.unidade.nome" placeholder="Selecione a unidade"
-                    optionLabel="nome" [disabled]="true">
-                </p-dropdown>
-            </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-8">
-                <label for="float-input">Email</label>
-                <input type="text" pInputText [(ngModel)]="aluno.email" disabled="true">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Email</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.email" disabled="true">
+                </div>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">Data de Nascimento</label>
-                <p-calendar [(ngModel)]="aluno.dataNascimento" [showIcon]="true" inputId="icon" disabled="true"></p-calendar>
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Data de Nascimento</label>
+                    <p-calendar [(ngModel)]="aluno.dataNascimento" [showIcon]="true" inputId="icon" disabled="true">
+                    </p-calendar>
+                </div>
+                <div class="col">
+                    <label for="float-input">Planos</label>
+                    <p-dropdown [(ngModel)]="aluno.plano.nome" placeholder="Selecione o plano" optionLabel="name"
+                        [disabled]="true">
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Planos</label>
-                <p-dropdown  [(ngModel)]="aluno.plano.nome" placeholder="Selecione o plano"
-                    optionLabel="name" [disabled]="true">
-                </p-dropdown>
-            </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">Telefone</label>
-                <input type="text" pInputText [(ngModel)]="aluno.telefone" placeholder="(99) 99999-9999" disabled="true">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Telefone</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.telefone" placeholder="(99) 99999-9999"
+                        disabled="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Sexos</label>
+                    <p-dropdown [(ngModel)]="aluno.sexo.nome" placeholder="Selecione o sexo" optionLabel="name"
+                        [disabled]="true">
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="float-input">Sexos</label>
-                <p-dropdown [(ngModel)]="aluno.sexo.nome" placeholder="Selecione o sexo"
-                    optionLabel="name" [disabled]="true">
-                </p-dropdown>
+        </p-fieldset>
+
+        <p-fieldset legend="Endereço" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Descrição</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.endereco.descricao" [disabled]="true">
+                </div>
             </div>
-        </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Cidade</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.endereco.cidade" [disabled]="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Estado</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.endereco.estado" [disabled]="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">CEP</label>
+                    <input type="text" pInputText [(ngModel)]="aluno.endereco.cep" [disabled]="true">
+                </div>
+            </div>
+        </p-fieldset>
 
         <div class="row justify-content-md-end">
             <div class="col-7">
-                <button pButton pRipple type="button" label="Voltar" class="p-button-secondary"
-                    (click)="voltar()" style="margin-top: 50px;"></button>
+                <button pButton pRipple type="button" label="Voltar" class="p-button-secondary" (click)="voltar()"
+                    style="margin-top: 50px;"></button>
             </div>
         </div>
     </div>

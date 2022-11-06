@@ -1,5 +1,5 @@
-export class AvaliacaoFisicaFiltro {
+export class PagamentoFiltro {
     dataInicial: Date = new Date();
     dataFinal: Date = new Date();
-    nomeAluno: string = '';
+    idAluno: number = 0;
 }

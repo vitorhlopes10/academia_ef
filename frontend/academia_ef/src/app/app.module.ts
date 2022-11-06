@@ -34,6 +34,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {InputMaskModule} from 'primeng/inputmask';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FieldsetModule} from 'primeng/fieldset';
+import {DialogModule} from 'primeng/dialog';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AlunosCadastrarComponent } from './alunos/alunos-cadastrar/alunos-cadastrar.component';
@@ -47,15 +49,15 @@ import { TreinosDetalhesComponent } from './treinos/treinos-detalhes/treinos-det
 import { AvaliacoesFisicaDetalhesComponent } from './avaliacoes-fisica/avaliacoes-fisica-detalhes/avaliacoes-fisica-detalhes.component';
 import { AvaliacoesFisicaCadastrarComponent } from './avaliacoes-fisica/avaliacoes-fisica-cadastrar/avaliacoes-fisica-cadastrar.component';
 import { AvaliacoesFisicaEditarComponent } from './avaliacoes-fisica/avaliacoes-fisica-editar/avaliacoes-fisica-editar.component';
-import { PagamentosCadastrarComponent } from './pagamentos/pagamentos-cadastrar/pagamentos-cadastrar.component';
-import { PagamentosEditarComponent } from './pagamentos/pagamentos-editar/pagamentos-editar.component';
-import { PagamentosDetalhesComponent } from './pagamentos/pagamentos-detalhes/pagamentos-detalhes.component';
 import { MeusDadosComponent } from './meus-dados/meus-dados.component';
 import { FuncionariosCadastrarComponent } from './funcionarios/funcionarios-cadastrar/funcionarios-cadastrar.component';
 import { MeusTreinosAlunoComponent } from './meus-treinos-aluno/meus-treinos-aluno.component';
 import { MinhasAvaliacoesFisicaAlunoComponent } from './minhas-avaliacoes-fisica-aluno/minhas-avaliacoes-fisica-aluno.component';
 import { TreinoAtualDetalhesComponent } from './meus-treinos-aluno/treino-atual-detalhes/treino-atual-detalhes.component';
 import { AvaliacaoFisicaAtualDetalhesComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-atual-detalhes/avaliacao-fisica-atual-detalhes.component';
+import { PagamentosDetalhadosComponent } from './pagamentos/pagamentos-detalhados/pagamentos-detalhados.component';
+import { MeusPagamentosAlunoComponent } from './meus-pagamentos-aluno/meus-pagamentos-aluno.component';
+import { PagamentoDetalheComponent } from './meus-pagamentos-aluno/pagamento-detalhe/pagamento-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -86,14 +88,14 @@ import { AvaliacaoFisicaAtualDetalhesComponent } from './minhas-avaliacoes-fisic
     AvaliacoesFisicaDetalhesComponent,
     AvaliacoesFisicaCadastrarComponent,
     AvaliacoesFisicaEditarComponent,
-    PagamentosCadastrarComponent,
-    PagamentosEditarComponent,
-    PagamentosDetalhesComponent,
     MeusDadosComponent,
     MeusTreinosAlunoComponent,
     MinhasAvaliacoesFisicaAlunoComponent,
     TreinoAtualDetalhesComponent,
-    AvaliacaoFisicaAtualDetalhesComponent
+    AvaliacaoFisicaAtualDetalhesComponent,
+    PagamentosDetalhadosComponent,
+    MeusPagamentosAlunoComponent,
+    PagamentoDetalheComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,9 @@ import { AvaliacaoFisicaAtualDetalhesComponent } from './minhas-avaliacoes-fisic
     CalendarModule,
     InputMaskModule,
     CheckboxModule,
-    InputTextareaModule
+    InputTextareaModule,
+    FieldsetModule,
+    DialogModule
     ],
   providers: [
     ConfirmationService,
