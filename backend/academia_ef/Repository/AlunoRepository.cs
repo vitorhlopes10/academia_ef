@@ -1,7 +1,6 @@
 ﻿using academia_ef.Context;
 using academia_ef.Model;
 using academia_ef.Repository.Interfaces;
-using academia_ef.ViewModel.Aluno;
 
 namespace academia_ef.Repository
 {

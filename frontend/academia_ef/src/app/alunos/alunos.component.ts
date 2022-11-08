@@ -35,8 +35,9 @@ export class AlunosComponent implements OnInit {
         this.alunos = list;
         this.loading = false;
       },
-      error => {
+      () => {
         this.loading = false;
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Alunos' });
       },
       () => {
         this.loading = false;
@@ -71,30 +72,58 @@ export class AlunosComponent implements OnInit {
     this.router.navigate([`alunos/editar/${id}`]);
   }
 
-  confirmarDelecao(id: number) {
+  confirmarInativacao(id: number) {
     this.confirmationService.confirm({
-      message: 'Você realmente deseja deletar este item?',
-      header: 'Confirmação de Deleção',
+      message: 'Você realmente deseja inativar esse Aluno?',
+      header: 'Confirmação de Inativação',
       icon: 'pi pi-info-circle',
       accept: () => {
         this.loading = true;
-        this.deletar(id);
+        this.inativar(id);
       },
       reject: () => {
-        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a deleção' });
+        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a inativação' });
       }
     });
   }
 
-  deletar(id: number) {
-    this.alunoService.deletar(id).subscribe(
+  confirmarAtivacao(id: number) {
+    this.confirmationService.confirm({
+      message: 'Você realmente deseja ativar esse Aluno?',
+      header: 'Confirmação de Ativação',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.loading = true;
+        this.ativar(id);
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a ativação' });
+      }
+    });
+  }
+
+  inativar(id: number) {
+    this.alunoService.inativar(id).subscribe(
       () => {
         this.buscarAlunos();
-        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Item deletado com sucesso' });
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Aluno inativado com sucesso' });
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
+        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na inativação do Aluno' });
+      }
+    );
+  }
+
+  ativar(id: number) {
+    this.alunoService.ativar(id).subscribe(
+      () => {
+        this.buscarAlunos();
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Aluno ativado com sucesso' });
+        this.loading = false;
+      },
+      () => {
+        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na ativação do Aluno' });
       }
     );
   }
@@ -122,13 +151,5 @@ export class AlunosComponent implements OnInit {
         this.loading = false;
       }
     );
-  }
-
-  ativar(id: number) {
-
-  }
-
-  inativar(id: number) {
-
   }
 }

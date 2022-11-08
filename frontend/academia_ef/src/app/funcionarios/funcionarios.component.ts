@@ -71,30 +71,58 @@ export class FuncionariosComponent implements OnInit {
     this.router.navigate([`funcionarios/editar/${id}`]);
   }
 
-  confirmarDelecao(id: number) {
+  confirmarAtivacao(id: number) {
     this.confirmationService.confirm({
-      message: 'Você realmente deseja deletar este item?',
-      header: 'Confirmação de Deleção',
+      message: 'Você realmente deseja ativar esse Funcionário?',
+      header: 'Confirmação de Ativação',
       icon: 'pi pi-info-circle',
       accept: () => {
         this.loading = true;
-        this.deletar(id);
+        this.ativar(id);
       },
       reject: () => {
-        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a deleção' });
+        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a ativação' });
       }
     });
   }
 
-  deletar(id: number) {
-    this.funcionarioService.deletar(id).subscribe(
+  confirmarInativacao(id: number) {
+    this.confirmationService.confirm({
+      message: 'Você realmente deseja inativar esse Funcionário?',
+      header: 'Confirmação de Inativação',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.loading = true;
+        this.inativar(id);
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a inativação' });
+      }
+    });
+  }
+
+  ativar(id: number) {
+    this.funcionarioService.ativar(id).subscribe(
       () => {
         this.buscarFuncionarios();
-        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Item deletado com sucesso' });
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Funcionário ativado com sucesso' });
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na ativação do Funcionário' });
+      }
+    );
+  }
+
+  inativar(id: number) {
+    this.funcionarioService.inativar(id).subscribe(
+      () => {
+        this.buscarFuncionarios();
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Funcionário ativado com sucesso' });
+        this.loading = false;
+      },
+      () => {
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na inativação do Funcionário' });
       }
     );
   }
@@ -122,13 +150,5 @@ export class FuncionariosComponent implements OnInit {
         this.loading = false;
       }
     );
-  }
-
-  ativar(id: number) {
-
-  }
-
-  inativar(id: number) {
-
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PatrimonioModel } from 'src/app/models/patrimonio-model';
 import { MenuItem, MessageService } from 'primeng/api';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PatrimonioService } from 'src/app/services/patrimonio.service';
 
 @Component({
@@ -55,12 +55,12 @@ export class PatrimonioCadastrarComponent implements OnInit {
     this.itemProduto.idUsuario = 1;
 
     this.patrimonioService.cadastrar(this.itemProduto).subscribe(
-      success => {
+      () => {
         this.loading = false;
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Produto adicionado ao patrimônio com sucesso!' });
-        this.router.navigate(['patrimonio'])
+        this.router.navigate(['patrimonio']);
       },
-      error => {
+      () => {
         this.loading = false;
         this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o produto' });
       },

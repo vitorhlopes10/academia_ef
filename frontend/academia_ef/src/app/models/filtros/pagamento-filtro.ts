@@ -1,5 +1,5 @@
 export class PagamentoFiltro {
-    dataInicial: Date = new Date();
-    dataFinal: Date = new Date();
+    dataInicial!: Date;
+    dataFinal!: Date;
     idAluno: number = 0;
 }

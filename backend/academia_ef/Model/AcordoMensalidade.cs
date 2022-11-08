@@ -5,10 +5,10 @@
         public int Id { get; set; }
         public int DiaDataVencimento { get; set; }
 
-        public StatusMensalidade StatusMensalidade { get; set; }
-        public Aluno Aluno { get; set; }
+        public virtual StatusMensalidade StatusMensalidade { get; set; }
+        public virtual Aluno Aluno { get; set; }
 
-        public List<PagamentoMensalidade> PagamentosMensalidades { get; set; }
+        public virtual List<PagamentoMensalidade> PagamentosMensalidades { get; set; }
 
         public int IdStatusMensalidade { get; set; }
     }

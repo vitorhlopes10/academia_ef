@@ -19,9 +19,9 @@
         public double Coxa { get; set; }
         public double Imc { get; set; }
 
-        public Biotipo Biotipo { get; set; }
-        public Aluno Aluno { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public virtual Biotipo Biotipo { get; set; }
+        public virtual Aluno Aluno { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
 
         public int IdBiotipo { get; set; }
         public int IdAluno { get; set; }

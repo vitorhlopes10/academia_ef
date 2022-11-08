@@ -20,13 +20,13 @@ export class AlunosEditarComponent implements OnInit {
 
   aluno: AlunoModel = new AlunoModel();
 
-  planos: any[] = [];
-  sexos: any[] = [];
+  planos: PlanoInterface[] = [];
+  sexos: SexoInterface[] = [];
   unidades: any[] = [];
 
-  sexoSelecionado!: SelectItem;
-  planoSelecionado!: SelectItem;
-  unidadeSelecionada!: SelectItem;
+  sexoSelecionado!: SexoInterface;
+  planoSelecionado!: PlanoInterface;
+  unidadeSelecionada!: UnidadeInterface;
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -53,12 +53,19 @@ export class AlunosEditarComponent implements OnInit {
         this.aluno.cpf = obj.cpf;
         this.aluno.email = obj.email;
         this.aluno.telefone = obj.telefone;
-        this.aluno.dataNascimento = obj.dataNascimento;
+        this.aluno.dataNascimento = new Date(obj.dataNascimento);
+        this.aluno.idPlano = obj.idPlano;
+        this.aluno.idSexo= obj.idSexo;
+        this.aluno.idUnidade = obj.idUnidade;
 
         this.aluno.endereco.descricao = obj.endereco.descricao;
         this.aluno.endereco.estado = obj.endereco.estado;
         this.aluno.endereco.cidade = obj.endereco.cidade;
         this.aluno.endereco.cep = obj.endereco.cep;
+
+        this.sexoSelecionado = obj.sexo;
+        this.planoSelecionado = obj.plano;
+        this.unidadeSelecionada = obj.unidade;
         
         this.loading = false;
       },
@@ -75,7 +82,7 @@ export class AlunosEditarComponent implements OnInit {
         this.planos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Planos' });
       }
     )
   }
@@ -86,7 +93,7 @@ export class AlunosEditarComponent implements OnInit {
         this.sexos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
       }
     )
   }
@@ -94,12 +101,18 @@ export class AlunosEditarComponent implements OnInit {
   buscarUnidades() {
     this.unidadeService.buscarTodos().subscribe(
       list => {
-        this.unidades = list;
+        list.forEach(item => {
+          this.unidades.push({ label: item.nome, value: item.id })
+        });
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
       }
     )
+  }
+
+  update(event: any) {
+console.log('teste');
   }
 
   cadastrar() {
@@ -127,11 +140,15 @@ export class AlunosEditarComponent implements OnInit {
     this.aluno.telefone = this.aluno.telefone.trim();
     this.aluno.idUsuario = 1
 
-    this.aluno.idPlano = this.planoSelecionado.value;
-    this.aluno.idSexo = this.sexoSelecionado.value;
+    this.aluno.idPlano = this.planoSelecionado.id;
+    this.aluno.idSexo = this.sexoSelecionado.id;
 
-    this.aluno.idUnidade = this.aluno.idPlano === PlanoEnum.PREMIUN ?
-      this.unidadeSelecionada.value : null;
+    if(this.aluno.idPlano === PlanoEnum.PREMIUN) {
+      this.aluno.idUnidade = 0;
+    }
+    else {
+      this.aluno.idUnidade = this.unidadeSelecionada.id
+    }
   }
 
   voltar() {

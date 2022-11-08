@@ -7,9 +7,9 @@
         public string Cnpj { get; set; }
         public string Telefone { get; set; }
 
-        public Endereco Endereco { get; set; }
-        public Aluno Aluno { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public virtual Endereco Endereco { get; set; }
+        public virtual Aluno Aluno { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
 
         public int IdEndereco { get; set; }
     }

@@ -26,7 +26,11 @@ export class FuncionarioService {
     return this.http.get<FuncionarioInterface[]>(`${this.configUrl}/Funcionarios/Filtro/${filtro}`);
   }
 
-  deletar(id: number): Observable<any> {
+  ativar(id: number): Observable<any> {
+    return this.http.delete<Observable<any>>(`${this.configUrl}/Funcionarios/${id}`);
+  }
+
+  inativar(id: number): Observable<any> {
     return this.http.delete<Observable<any>>(`${this.configUrl}/Funcionarios/${id}`);
   }
 

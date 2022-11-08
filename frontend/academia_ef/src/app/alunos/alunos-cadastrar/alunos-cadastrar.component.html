@@ -37,7 +37,7 @@
                 <div class="col">
                     <label for="float-input">Data de Nascimento</label>
                     <p-calendar [(ngModel)]="novoAluno.dataNascimento" [showIcon]="true" inputId="icon"
-                        dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+                        dateFormat="dd/mm/yy" [readonlyInput]="true" [showButtonBar]="true"></p-calendar>
                 </div>
                 <div class="col">
                     <label for="float-input">Planos</label>
@@ -84,7 +84,8 @@
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CEP</label>
-                    <input type="text" pInputText [(ngModel)]="novoAluno.endereco.cep">
+                    <p-inputMask [(ngModel)]="novoAluno.endereco.cep" mask="99.999-999">
+                    </p-inputMask>
                 </div>
             </div>
         </p-fieldset>

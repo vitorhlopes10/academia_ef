@@ -15,7 +15,7 @@ namespace academia_ef.Repository
 
         public Funcionario Buscar(int id)
         {
-            var obj = _context.Find<Funcionario>(typeof(Aluno), id);
+            var obj = _context.Find<Funcionario>(id);
             return obj;
         }
 

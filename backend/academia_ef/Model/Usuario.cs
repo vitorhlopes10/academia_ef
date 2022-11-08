@@ -6,10 +6,10 @@
         public string Login { get; set; }
         public string Senha { get; set; }
 
-        public Aluno Aluno { get; set; }
-        public Funcionario Funcionario { get; set; }
-        public List<Patrimonio> Patrimonio { get; set; }
-        public StatusUsuario StatusUsuario { get; set; }
+        public virtual Aluno Aluno { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual List<Patrimonio> Patrimonio { get; set; }
+        public virtual StatusUsuario StatusUsuario { get; set; }
 
         public int IdStatusUsuario { get; set; }
     }

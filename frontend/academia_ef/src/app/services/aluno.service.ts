@@ -26,7 +26,11 @@ export class AlunoService {
     return this.http.get<AlunoInterface[]>(`${this.configUrl}/Alunos/Filtro/${filtro}`);
   }
 
-  deletar(id: number): Observable<any> {
+  ativar(id: number): Observable<any> {
+    return this.http.delete<Observable<any>>(`${this.configUrl}/Alunos/${id}`);
+  }
+
+  inativar(id: number): Observable<any> {
     return this.http.delete<Observable<any>>(`${this.configUrl}/Alunos/${id}`);
   }
 

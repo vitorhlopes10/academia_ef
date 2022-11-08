@@ -49,7 +49,7 @@ export class AlunoModel {
     treinos: TreinoModel[];
     avaliacoesFisica: AvaliacaoFisicaModel[];
 
-    idUnidade: number;
+    idUnidade?: number;
     idSexo: number;
     idEndereco: number;
     idPlano: number;

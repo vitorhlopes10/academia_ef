@@ -36,7 +36,7 @@
   </div>
 
   <div class="container container-tabela">
-    <p-table #dt [value]="alunos" [rows]="10" [paginator]="this.alunos.length > 0" dataKey="id"
+    <p-table #dt [value]="alunos" [rows]="3" [paginator]="this.alunos.length > 0" dataKey="id"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [showCurrentPageReport]="this.alunos.length > 0">
       <ng-template pTemplate="header">

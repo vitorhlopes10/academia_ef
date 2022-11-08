@@ -12,7 +12,8 @@
       </div>
       <div class="col-3">
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.cpf" placeholder="999.999.999-99">
+          <p-inputMask [(ngModel)]="filtro.cpf" placeholder="999.999.999-99" mask="999.999.999-99">
+          </p-inputMask>
           <label for="float-input">CPF</label>
         </span>
       </div>
@@ -40,7 +41,7 @@
   </div>
 
   <div class="container container-tabela">
-    <p-table #dt [value]="funcionarios" [rows]="10" [paginator]="this.funcionarios.length > 0" dataKey="id"
+    <p-table #dt [value]="funcionarios" [rows]="3" [paginator]="this.funcionarios.length > 0" dataKey="id"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [showCurrentPageReport]="this.funcionarios.length > 0">
       <ng-template pTemplate="header">
@@ -49,32 +50,27 @@
           <th> Nome </th>
           <th> Cargo </th>
           <th> Status </th>
-          <th style="width:150px"> </th>
+          <th style="width:200px"> </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-funcionario>
         <tr>
           <td>{{funcionario.matricula}}</td>
-          <td>{{funcionario.cargo.nome}}</td>
           <td>{{funcionario.nome}}</td>
+          <td>{{funcionario.cargo.nome.toUpperCase()}}</td>
+          <td> <b> {{funcionario.status ? 'ATIVO' : 'INATIVO'}} </b> </td>
           <td>
-            <span [class]="'funcionario-badge status-' + (funcionario.status ? funcionario.status.toLowerCase() : '')">
-              {{funcionario.status}}
-            </span>
-          </td>
-          <td>
-            <button *ngIf="funcionario.status" pButton pRipple icon="pi-power-off"
-              class="p-button-rounded p-button-success mr-2" (click)="ativar(funcionario.id)"
+            <button pButton pRipple pTooltip="Visualizar" icon="pi pi-search"
+              class="p-button-rounded p-button-help mr-2" (click)="detalhes(funcionario.id)"
               style="margin-right: 6px;"></button>
-            <button *ngIf="!(funcionario.status)" pButton pRipple icon="pi-power-off"
-              class="p-button-rounded p-button-danger mr-2" (click)="inativar(funcionario.id)"
-              style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
-              (click)="detalhes(funcionario.id)" style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+            <button pButton pRipple pTooltip="Editar" icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
               (click)="confirmarEdicao(funcionario.id)" style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-              (click)="confirmarDelecao(funcionario.id)"></button>
+            <button *ngIf="!(funcionario.status)" pButton pRipple pTooltip="Ativar" icon="pi pi-power-off"
+              class="p-button-rounded p-button-success mr-2" (click)="confirmarAtivacao(funcionario.id)"
+              style="margin-right: 6px;"></button>
+            <button *ngIf="funcionario.status" pButton pRipple pTooltip="Inativar" icon="pi pi-power-off"
+              class="p-button-rounded p-button-danger mr-2" (click)="confirmarInativacao(funcionario.id)"
+              style="margin-right: 6px;"></button>
           </td>
         </tr>
       </ng-template>
@@ -87,4 +83,7 @@
       </ng-template>
     </p-table>
   </div>
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+  </p-confirmDialog>
 </div>

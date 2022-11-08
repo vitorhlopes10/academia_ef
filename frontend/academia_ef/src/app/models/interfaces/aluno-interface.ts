@@ -28,7 +28,7 @@ export interface AlunoInterface {
     treinos: TreinoInterface[];
     avaliacoesFisica: AvaliacaoFisicaInterface[];
 
-    idAcademia: number;
+    idUnidade: number;
     idSexo: number;
     idEndereco: number;
     idPlano: number;

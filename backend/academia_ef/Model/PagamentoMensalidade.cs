@@ -6,8 +6,8 @@
         public double ValorPago { get; set; }
         public DateTime DataPagamento { get; set; }
 
-        public Funcionario Funcionario { get; set; }
-        public AcordoMensalidade AcordoMensalidade { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual AcordoMensalidade AcordoMensalidade { get; set; }
 
         public int IdFuncionario { get; set; }
         public int IdAcordoMensalidade { get; set; }

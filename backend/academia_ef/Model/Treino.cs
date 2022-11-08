@@ -6,8 +6,8 @@
         public string Descricao { get; set; }
         public DateTime DataCriacao { get; set; }
 
-        public Aluno Aluno { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public virtual Aluno Aluno { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
 
         public int IdAluno { get; set; }
         public int IdFuncionario { get; set; }

@@ -7,6 +7,6 @@
         public string Nome { get; set; }
         public string DescricaoRegras { get; set; }
 
-        public List<Aluno> Alunos { get; set; }
+        public virtual List<Aluno> Alunos { get; set; }
     }
 }

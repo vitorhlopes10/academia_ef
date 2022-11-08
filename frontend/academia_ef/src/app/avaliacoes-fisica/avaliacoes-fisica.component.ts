@@ -45,11 +45,11 @@ export class AvaliacoesFisicaComponent implements OnInit {
   }
 
   cadastrar() {
-    this.router.navigate(['avaliacoesFisica/cadastrar']);
+    this.router.navigate(['avaliacoes-fisica/cadastrar']);
   }
 
   detalhes(id: number) {
-    this.router.navigate([`avaliacoesFisica/detalhes/${id}`]);
+    this.router.navigate([`avaliacoes-fisica/detalhes/${id}`]);
   }
 
   confirmarEdicao(id: number) {

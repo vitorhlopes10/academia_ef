@@ -7,24 +7,21 @@
       <div class="col-3">
         <span class="p-float-label">
           <label for="float-input">Data Inicial</label>
-          <p-calendar [(ngModel)]="filtro.dataInicial" [showIcon]="true" inputId="icon" dateFormat="dd.mm.yy"
-            [readonlyInput]="true"></p-calendar>
+          <p-calendar [(ngModel)]="filtro.dataInicial" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"
+            [readonlyInput]="true" [showButtonBar]="true"></p-calendar>
         </span>
       </div>
       <div class="col-3">
         <span class="p-float-label">
           <label for="float-input">Data Final</label>
-          <p-calendar [(ngModel)]="filtro.dataFinal" [showIcon]="true" inputId="icon" dateFormat="dd.mm.yy"
-            [readonlyInput]="true"></p-calendar>
+          <p-calendar [(ngModel)]="filtro.dataFinal" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"
+            [readonlyInput]="true" [showButtonBar]="true"></p-calendar>
         </span>
       </div>
-    </div>
-
-    <div class="row p-fluid">
       <div class="col-6">
         <span class="p-float-label">
           <input id="float-input" type="text" pInputText [(ngModel)]="filtro.nomeAluno">
-          <label for="float-input">Nome Aluno</label>
+          <label for="float-input">Aluno</label>
         </span>
       </div>
     </div>
@@ -45,31 +42,33 @@
   </div>
 
   <div class="container container-tabela">
-    <p-table #dt [value]="avaliacoesFisica" [rows]="10" [paginator]="this.avaliacoesFisica.length > 0" dataKey="id"
+    <p-table #dt [value]="avaliacoesFisica" [rows]="3" [paginator]="this.avaliacoesFisica.length > 0" dataKey="id"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [showCurrentPageReport]="this.avaliacoesFisica.length > 0">
       <ng-template pTemplate="header">
         <tr>
           <th> Data de Criação </th>
+          <th> Aluno </th>
           <th style="width:150px"> </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-treino>
+      <ng-template pTemplate="body" let-avalicao>
         <tr>
-          <td>{{treino.dataCriacao}}</td>
+          <td>{{avalicao.dataCriacao}}</td>
+          <td>{{avalicao.aluno.nome}}</td>
           <td>
-            <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
-              (click)="detalhes(treino.id)" style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
-              (click)="confirmarEdicao(treino.id)" style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-              (click)="confirmarDelecao(treino.id)"></button>
+            <button pButton pRipple pTooltip="Visualizar" icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
+              (click)="detalhes(avalicao.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple pTooltip="Editar" icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+              (click)="confirmarEdicao(avalicao.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple pTooltip="Deletar" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+              (click)="confirmarDelecao(avalicao.id)"></button>
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
-          <td [attr.colspan]="2" style="text-align: center;">
+          <td [attr.colspan]="3" style="text-align: center;">
             Não encontrado
           </td>
         </tr>

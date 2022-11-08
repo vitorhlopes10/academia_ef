@@ -1,5 +1,5 @@
 export class AvaliacaoFisicaFiltro {
-    dataInicial: Date = new Date();
-    dataFinal: Date = new Date();
+    dataInicial!: Date;
+    dataFinal!: Date;
     nomeAluno: string = '';
 }

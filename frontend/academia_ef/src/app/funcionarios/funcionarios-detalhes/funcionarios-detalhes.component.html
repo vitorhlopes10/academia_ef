@@ -35,7 +35,7 @@
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Data de Nascimento</label>
-                    <p-calendar [(ngModel)]="funcionario.dataNascimento" [showIcon]="true" inputId="icon"
+                    <p-calendar [(ngModel)]="funcionario.dataNascimento" [showIcon]="true" [showButtonBar]="true" inputId="icon"
                         disabled="true"></p-calendar>
                 </div>
                 <div class="col">
@@ -91,7 +91,8 @@
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CEP</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.endereco.cep" disabled="true">
+                    <p-inputMask [(ngModel)]="funcionario.endereco.cep" mask="99.999-999">
+                    </p-inputMask>
                 </div>
             </div>
         </p-fieldset>

@@ -12,15 +12,15 @@
         public string Telefone { get; set; }
         public bool Status { get; set; }
 
-        public Sexo Sexo { get; set; }
-        public Endereco Endereco { get; set; }
-        public Unidade Unidade { get; set; }
-        public Usuario Usuario { get; set; }
-        public Cargo Cargo { get; set; }
+        public virtual Sexo Sexo { get; set; }
+        public virtual Endereco Endereco { get; set; }
+        public virtual Unidade Unidade { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Cargo Cargo { get; set; }
 
-        public List<Treino> Treinos { get; set; }
-        public List<AvaliacaoFisica> AvaliacoesFisica { get; set; }
-        public List<PagamentoMensalidade> PagamentosMensalidades { get; set; }
+        public virtual List<Treino> Treinos { get; set; }
+        public virtual List<AvaliacaoFisica> AvaliacoesFisica { get; set; }
+        public virtual List<PagamentoMensalidade> PagamentosMensalidades { get; set; }
 
         public int IdSexo { get; set; }
         public int IdEndereco { get; set; }

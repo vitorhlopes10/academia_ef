@@ -36,6 +36,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {FieldsetModule} from 'primeng/fieldset';
 import {DialogModule} from 'primeng/dialog';
+import {TooltipModule} from 'primeng/tooltip';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AlunosCadastrarComponent } from './alunos/alunos-cadastrar/alunos-cadastrar.component';
@@ -117,7 +118,8 @@ import { PagamentoDetalheComponent } from './meus-pagamentos-aluno/pagamento-det
     CheckboxModule,
     InputTextareaModule,
     FieldsetModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
     ],
   providers: [
     ConfirmationService,

@@ -7,14 +7,14 @@
             <div class="col-3">
                 <span class="p-float-label">
                     <label for="float-input">Data Inicial</label>
-                    <p-calendar [(ngModel)]="filtro.dataInicial" [showIcon]="true" inputId="icon" dateFormat="dd.mm.yy"
+                    <p-calendar [(ngModel)]="filtro.dataInicial" [showIcon]="true" inputId="icon" [showButtonBar]="true" dateFormat="dd/mm/yy"
                         [readonlyInput]="true"></p-calendar>
                 </span>
             </div>
             <div class="col-3">
                 <span class="p-float-label">
                     <label for="float-input">Data Final</label>
-                    <p-calendar [(ngModel)]="filtro.dataFinal" [showIcon]="true" inputId="icon" dateFormat="dd.mm.yy"
+                    <p-calendar [(ngModel)]="filtro.dataFinal" [showIcon]="true" inputId="icon" [showButtonBar]="true" dateFormat="dd/mm/yy"
                         [readonlyInput]="true"></p-calendar>
                 </span>
             </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-2">
                 <button id="btnCadastrar" pButton pRipple type="button" label="Registrar Pagamento"
-                    class="p-button-success" (click)="abrirModalRegistroPagamento()"></button>
+                    class="p-button-success" (click)="confirmarRegistroDePagamento()"></button>
             </div>
         </div>
     </div>
@@ -72,20 +72,29 @@
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
     </p-confirmDialog>
 
-    <p-dialog header="Registrar Pagamento" [(visible)]="mostrarModalRegistroPagamento">
-        <ng-template pTemplate="footer">
-            <div class="row justify-content-md-start">
-                <div class="col-10">
-                    <p-button icon="pi pi-check" (click)="fecharModalDeRegistro()" label="Cancelar"
-                        styleClass="p-button-text"></p-button>
-                    <p-button icon="pi pi-check" (click)="confirmarRegistroDePagamento()" label="Confirmar"
-                        styleClass="p-button-text"></p-button>
-                </div>
-            </div>
-        </ng-template>
-    </p-dialog>
-
     <p-dialog header="Detalhes do Pagamento" [(visible)]="mostrarModalVisualizacao">
+        <div class="row p-fluid">
+            <div class="col">
+                <label for="float-input">Quem registrou o Pagamento</label>
+                <input type="text" pInputText [(ngModel)]="pagamentoDetalhado.funcionario.nome" disabled="true">
+            </div>
+        </div>
+
+        <div class="row p-fluid">
+            <div class="col">
+                <label for="stacked">Valor Pago</label>
+                <p-inputNumber [(ngModel)]="pagamentoDetalhado.valorPago" [disabled]="true">
+                </p-inputNumber>
+            </div>
+        </div>
+
+        <div class="row p-fluid">
+            <div class="col">
+                <label for="float-input">Data do Pagamento</label>
+                <p-calendar [(ngModel)]="pagamentoDetalhado.dataPagamento" [showIcon]="true" inputId="icon"
+                    dateFormat="dd/mm/yy" [readonlyInput]="true" [showButtonBar]="true" [disabled]="true"></p-calendar>
+            </div>
+        </div>
         <ng-template pTemplate="footer">
             <div class="row justify-content-md-start">
                 <div class="col-10">

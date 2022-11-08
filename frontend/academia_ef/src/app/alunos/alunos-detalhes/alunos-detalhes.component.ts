@@ -38,6 +38,7 @@ export class AlunosDetalhesComponent implements OnInit {
       obj => {
         this.loading = false;
         this.aluno = obj;
+        this.aluno.dataNascimento = new Date(obj.dataNascimento);
       },
       () => {
         this.loading = false;

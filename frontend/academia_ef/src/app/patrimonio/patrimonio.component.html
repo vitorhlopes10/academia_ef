@@ -28,7 +28,7 @@
   </div>
 
   <div class="container container-tabela">
-    <p-table #dt [value]="patrimonio" [rows]="10" [paginator]="patrimonio.length > 0"
+    <p-table #dt [value]="patrimonio" [rows]="3" [paginator]="patrimonio.length > 0"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [showCurrentPageReport]="patrimonio.length > 0">
       <ng-template pTemplate="header">
@@ -43,11 +43,11 @@
           <td>{{produto.nome}}</td>
           <td>{{produto.valorPago | currency: 'R$'}}</td>
           <td>
-            <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
+            <button pButton pRipple pTooltip="Visualizar" icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
               (click)="detalhes(produto.id)" style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
+            <button pButton pRipple pTooltip="Editar" icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
               (click)="confirmarEdicao(produto.id)" style="margin-right: 6px;"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+            <button pButton pRipple pTooltip="Deletar" icon="pi pi-trash" class="p-button-rounded p-button-danger"
               (click)="confirmarDelecao(produto.id)"></button>
           </td>
         </tr>

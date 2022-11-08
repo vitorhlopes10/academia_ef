@@ -20,8 +20,7 @@
                 <div class="col">
                     <label for="float-input">Unidades</label>
                     <p-dropdown [options]="unidades" [(ngModel)]="unidadeSelecionada" placeholder="Selecione a unidade"
-                        optionLabel="name"
-                        [disabled]="this.planoSelecionado != null && this.planoSelecionado.value === 2">
+                        optionLabel="label" [disabled]="this.planoSelecionado != null && this.planoSelecionado.id === 2">
                     </p-dropdown>
                 </div>
             </div>
@@ -37,12 +36,11 @@
                 <div class="col">
                     <label for="float-input">Data de Nascimento</label>
                     <p-calendar [(ngModel)]="aluno.dataNascimento" [showIcon]="true" inputId="icon"
-                        dateFormat="dd.mm.yy" [readonlyInput]="true"></p-calendar>
+                        dateFormat="dd/mm/yy" [showButtonBar]="true" [readonlyInput]="true"></p-calendar>
                 </div>
                 <div class="col">
                     <label for="float-input">Planos</label>
-                    <p-dropdown [options]="planos" [(ngModel)]="planoSelecionado" placeholder="Selecione o plano"
-                        optionLabel="name">
+                    <p-dropdown [options]="planos" [(ngModel)]="planoSelecionado" optionLabel="nome" dataKey="sexoSelecionado.nome">
                     </p-dropdown>
                 </div>
             </div>
@@ -55,8 +53,7 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Sexos</label>
-                    <p-dropdown [options]="sexos" [(ngModel)]="sexoSelecionado" placeholder="Selecione o sexo"
-                        optionLabel="name">
+                    <p-dropdown [options]="sexos" [(ngModel)]="sexoSelecionado" optionLabel="nome" dataKey="sexoSelecionado">
                     </p-dropdown>
                 </div>
             </div>
@@ -84,7 +81,8 @@
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CEP</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.endereco.cep">
+                    <p-inputMask [(ngModel)]="aluno.endereco.cep" mask="99.999-999">
+                    </p-inputMask>
                 </div>
             </div>
         </p-fieldset>

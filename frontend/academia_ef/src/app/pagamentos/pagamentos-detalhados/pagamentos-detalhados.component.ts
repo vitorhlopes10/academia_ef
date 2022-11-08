@@ -50,17 +50,9 @@ export class PagamentosDetalhadosComponent implements OnInit {
     );
   }
 
-  abrirModalRegistroPagamento() {
-    this.mostrarModalRegistroPagamento = true;
-  }
-
-  fecharModalDeRegistro() {
-    this.mostrarModalRegistroPagamento = false;
-  }
-
   confirmarRegistroDePagamento() {
     this.confirmationService.confirm({
-      message: 'Você realmente confirma esse pagamento?',
+      message: 'Você realmente confirmar o registro de pagamento do mês atual?',
       header: 'Confirmação de Registro de Pagamento',
       icon: 'pi pi-info-circle',
       accept: () => {
@@ -84,11 +76,15 @@ export class PagamentosDetalhadosComponent implements OnInit {
 
   cadastrar() {
     this.loading = true;
+    
+    this.novoPagamento.valorPago = this.pagamentos[0].acordoMensalidade.aluno.plano.valor;
+    this.novoPagamento.idAcordoMensalidade = this.pagamentos[0].acordoMensalidade.id;
+    this.novoPagamento.idFuncionario = 1
 
     this.pagamentoMensalidadeService.cadastrar(this.novoPagamento).subscribe(
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro no registro do Pagamento' });
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'O Pagamento foi registrado com sucesso' });
         this.buscarPagamentos();
       }, 
       () => {
