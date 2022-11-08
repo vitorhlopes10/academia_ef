@@ -21,7 +21,6 @@ export class AlunoModel {
         this.status = true;
         this.treinos = [];
         this.avaliacoesFisica = []
-        this.idUnidade = 0;
         this.idSexo = 0;
         this.idEndereco = 0;
         this.idPlano = 0;
@@ -42,9 +41,9 @@ export class AlunoModel {
     sexo!: SexoModel;
     endereco: EnderecoModel = new EnderecoModel();
     plano!: PlanoModel;
-    unidade!: UnidadeModel;
+    unidade: UnidadeModel = new UnidadeModel();
     acordoMensalidade!: AcordoMensalidadeModel
-    usuario!: UsuarioModel;
+    usuario: UsuarioModel = new UsuarioModel();
 
     treinos: TreinoModel[];
     avaliacoesFisica: AvaliacaoFisicaModel[];

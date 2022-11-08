@@ -1,4 +1,5 @@
-﻿using academia_ef.Model;
+﻿using academia_ef.Enums;
+using academia_ef.Model;
 using academia_ef.Repository.Interfaces;
 using academia_ef.Services.Interfaces;
 using academia_ef.ViewModel.Aluno;
@@ -23,7 +24,7 @@ namespace academia_ef.Services
 
         public List<Aluno> BuscarTodos()
         {
-            return _alunoRepository.BuscarTodos().ToList();
+            return _alunoRepository.BuscarTodos().OrderByDescending(x => x.Id).ToList();
         }
 
         public List<Aluno> Filtrar(AlunoFiltroViewModel filtro)
@@ -56,9 +57,11 @@ namespace academia_ef.Services
         public Aluno Inserir(AlunoViewModel novoAluno)
         {
             var obj = new Aluno();
+            var numeroOrdem = BuscarTodos().FirstOrDefault()?.Id + 1;
 
-            obj.Matricula = $"{DateTime.Now.Year}100";
-            obj.Cpf = novoAluno.Cpf;
+            //Dados do Básicos
+            obj.Matricula = $"{DateTime.Now.Year}20{100 + (numeroOrdem ?? 1)}";
+            obj.Cpf = novoAluno.Cpf.Replace(".", "").Replace("-", "");
             obj.Nome = novoAluno.Nome;
             obj.Email = novoAluno.Email;
             obj.DataNascimento = novoAluno.DataNascimento;
@@ -66,7 +69,24 @@ namespace academia_ef.Services
             obj.DataMatricula = DateTime.Now;
             obj.Status = true;
 
-            obj.IdUnidade = novoAluno.IdUnidade;
+            //Dados de Endereço
+            obj.Endereco.Descricao = novoAluno.Endereco.Descricao;
+            obj.Endereco.Cep = novoAluno.Endereco.Cep;
+            obj.Endereco.Estado = novoAluno.Endereco.Estado;
+            obj.Endereco.Cidade = novoAluno.Endereco.Cidade;
+
+            //Dados de Usuário
+            obj.Usuario.Login = obj.Cpf;
+            obj.Usuario.Senha = novoAluno.Usuario.Senha;
+            obj.Usuario.IdStatusUsuario = (int)StatusUsuarioEnum.ATIVO;
+
+            //Dados de Acordo de Mensalidade
+            obj.AcordoMensalidade.DiaDataVencimento = obj.DataMatricula.Day;
+            obj.AcordoMensalidade.IdStatusMensalidade = (int)StatusMensalidadeEnum.PAGO;
+
+            //FKs
+            obj.IdUnidade = novoAluno.IdPlano == (int)PlanoEnum.ESSENTIAL && novoAluno.IdUnidade != 0 ?
+                novoAluno.IdUnidade : null;
             obj.IdSexo = novoAluno.IdSexo;
             obj.IdPlano = novoAluno.IdPlano;
 
@@ -79,13 +99,24 @@ namespace academia_ef.Services
         {
             var obj = _alunoRepository.Buscar(aluno.Id);
 
+            //Dados do Básicos
+            obj.Id = aluno.Id;
             obj.Cpf = aluno.Cpf;
             obj.Nome = aluno.Nome;
             obj.Email = aluno.Email;
             obj.DataNascimento = aluno.DataNascimento;
             obj.Telefone = aluno.Telefone;
 
-            obj.IdUnidade = aluno.IdUnidade;
+            //Dados de Endereço
+            obj.Endereco.Id = aluno.Endereco.Id;
+            obj.Endereco.Descricao = aluno.Endereco.Descricao;
+            obj.Endereco.Cep = aluno.Endereco.Cep;
+            obj.Endereco.Estado = aluno.Endereco.Estado;
+            obj.Endereco.Cidade = aluno.Endereco.Cidade;
+
+            //FKs
+            obj.IdUnidade = aluno.IdPlano == (int)PlanoEnum.ESSENTIAL && aluno.IdUnidade != 0 ?
+                aluno.IdUnidade : null;
             obj.IdSexo = aluno.IdSexo;
             obj.IdPlano = aluno.IdPlano;
 

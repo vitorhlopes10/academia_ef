@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectItem, MenuItem, MessageService } from 'primeng/api';
 import { FuncionarioModel } from 'src/app/models/funcionario-model';
+import { CargoInterface } from 'src/app/models/interfaces/cargo-interface';
+import { SexoInterface } from 'src/app/models/interfaces/sexo-interface';
+import { UnidadeInterface } from 'src/app/models/interfaces/unidade-interface';
 import { CargoService } from 'src/app/services/cargo.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { SexoService } from 'src/app/services/sexo.service';
 import { UnidadeService } from 'src/app/services/unidade.service';
+import { Estados } from 'src/app/utils/estados-lista';
 
 @Component({
   selector: 'app-funcionarios-editar',
@@ -15,14 +19,14 @@ import { UnidadeService } from 'src/app/services/unidade.service';
 export class FuncionariosEditarComponent implements OnInit {
 
   funcionario: FuncionarioModel = new FuncionarioModel();
+  id: number = 0;
 
-  cargos: any[] = [];
-  sexos: any[] = [];
-  unidades: any[] = [];
+  cargos: CargoInterface[] = [];
+  sexos: SexoInterface[] = [];
+  unidades: UnidadeInterface[] = [];
+  estados: Estados = new Estados();
 
-  sexoSelecionado!: SelectItem;
-  cargoSelecionado!: SelectItem;
-  unidadeSelecionada!: SelectItem;
+  fixo: boolean = false;
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -37,20 +41,29 @@ export class FuncionariosEditarComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.id = Number.parseInt(this.route.snapshot.params["parametro"]);
+
     this.buscarPlanos();
     this.buscarSexos();
     this.buscarUnidades();
+    this.buscarPorId();
+  }
 
-    const id = this.route.snapshot.params["parametro"];
-
-    this.funcionarioService.buscarPorId(Number.parseInt(id)).subscribe(
+  buscarPorId() {
+    this.funcionarioService.buscarPorId(this.id).subscribe(
       obj => {
+        this.funcionario.id = obj.id;
         this.funcionario.nome = obj.nome;
         this.funcionario.cpf = obj.cpf;
         this.funcionario.email = obj.email;
         this.funcionario.telefone = obj.telefone;
-        this.funcionario.dataNascimento = obj.dataNascimento;
+        this.funcionario.dataNascimento = new Date(obj.dataNascimento);
 
+        this.funcionario.idCargo = obj.idCargo;
+        this.funcionario.idSexo = obj.idSexo;
+        this.funcionario.idUnidade = obj.idUnidade;
+
+        this.funcionario.endereco.id = obj.endereco.id;
         this.funcionario.endereco.descricao = obj.endereco.descricao;
         this.funcionario.endereco.estado = obj.endereco.estado;
         this.funcionario.endereco.cidade = obj.endereco.cidade;
@@ -71,7 +84,7 @@ export class FuncionariosEditarComponent implements OnInit {
         this.cargos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
       }
     )
   }
@@ -82,7 +95,7 @@ export class FuncionariosEditarComponent implements OnInit {
         this.sexos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
       }
     )
   }
@@ -93,121 +106,108 @@ export class FuncionariosEditarComponent implements OnInit {
         this.unidades = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
       }
     )
   }
 
-  cadastrar() {
+  atualizar() {
     this.loading = true;
     this.prepararParaEnvio();
 
     this.funcionarioService.editar(this.funcionario).subscribe(
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'funcionario inserido com sucesso!' });
-        this.router.navigate(['funcionarios'])
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Atualização realizada com sucesso!' });
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o funcionario' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro na atualização do Funcionário' });
       },
       () => { }
     )
   }
 
   prepararParaEnvio() {
-    this.funcionario.nome = this.funcionario.nome.trim();
+    this.funcionario.nome = this.funcionario.nome.toUpperCase().trim();
     this.funcionario.cpf = this.funcionario.cpf.trim();
-    this.funcionario.email = this.funcionario.email.trim();
+    this.funcionario.email = this.funcionario.email.toLowerCase().trim();
     this.funcionario.telefone = this.funcionario.telefone.trim();
-    this.funcionario.idUsuario = 1
-
-    this.funcionario.idCargo = this.cargoSelecionado.value;
-    this.funcionario.idSexo = this.sexoSelecionado.value;
-
-    this.funcionario.idUnidade = this ?
-      this.unidadeSelecionada.value : null;
   }
 
   voltar() {
-    this.router.navigate(['alunos']);
+    this.router.navigate(['funcionarios']);
   }
 
-  validarCadastro() {
+  validarAlteracoes() {
     let prosseguir = true;
 
-    //Validação Dados Básicos
-    // if (!(this.funcionario.nome)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    // Validação Dados Básicos
+    if (!(this.funcionario.nome)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Nome' });
+    }
 
-    // if (!(this.funcionario.cpf)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "CPF"' });
-    // }
+    if (!(this.funcionario.cpf)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo CPF' });
+    }
 
-    // if (!(this.funcionario.email)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Email"' });
-    // }
+    if (!(this.funcionario.email)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Email' });
+    }
 
-    // if (!(this.sexoSelecionado)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
-    // }
+    if (!(this.funcionario.dataNascimento)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo de Data de Nascimento' });
+    }
 
-    // if (!(this.cargoSelecionado)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
-    // }
+    if (this.funcionario.idSexo === 0) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
+    }
 
-    // if ((!(this.unidadeSelecionada))) {
-    //   if (this.planoSelecionado && this.planoSelecionado.value == PlanoEnum.ESSENTIAL) {
-    //     prosseguir = false;
-    //     this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
-    //   }
-    // }
+    if (this.funcionario.idCargo === 0) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Cargos' });
+    }
 
-    // if (!(this.funcionario.telefone)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Telefone"' });
-    // }
+    if ((!(this.funcionario.idUnidade))) {
+      if (this.funcionario.fixo) {
+        prosseguir = false;
+        this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher alguma das Unidades' });
+      }
+    }
 
-    //Validação dados de Endereço
-    // if (!(this.funcionario.endereco.descricao)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.funcionario.telefone)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Telefone' });
+    }
 
-    // if (!(this.funcionario.endereco.cidade)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    // Validação dados de Endereço
+    if (!(this.funcionario.endereco.descricao)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Descrição' });
+    }
 
-    // if (!(this.funcionario.endereco.estado)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.funcionario.endereco.cidade)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Cidade' });
+    }
 
-    // if (!(this.funcionario.endereco.cep)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.funcionario.endereco.estado)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Estado' });
+    }
 
-    //Validação de senha
-    // if (!(this.funcionario.usuario)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
-    // if (!(this.funcionario.nome)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.funcionario.endereco.cep)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo CEP' });
+    }
 
     if (prosseguir) {
-      this.cadastrar();
+      this.atualizar();
     }
   }
 

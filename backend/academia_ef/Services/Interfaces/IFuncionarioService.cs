@@ -9,8 +9,8 @@ namespace academia_ef.Services.Interfaces
         Funcionario Buscar(int id);
         List<Funcionario> BuscarTodos();
         List<Funcionario> Filtrar(FuncionarioFiltroViewModel filtro);
-        Funcionario Inserir(Funcionario aluno);
-        Funcionario Atualizar(Funcionario aluno);
+        Funcionario Inserir(FuncionarioViewModel aluno);
+        Funcionario Atualizar(FuncionarioViewModel aluno);
         bool Inativar(int id);
         bool Ativar(int id);
     }

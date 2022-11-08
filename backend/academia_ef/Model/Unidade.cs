@@ -8,8 +8,8 @@
         public string Telefone { get; set; }
 
         public virtual Endereco Endereco { get; set; }
-        public virtual Aluno Aluno { get; set; }
-        public virtual Funcionario Funcionario { get; set; }
+        public virtual List<Aluno> Alunos { get; set; }
+        public virtual List<Funcionario> Funcionarios { get; set; }
 
         public int IdEndereco { get; set; }
     }

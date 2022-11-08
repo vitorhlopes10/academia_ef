@@ -2,6 +2,13 @@
 {
     public class Aluno
     {
+        public Aluno()
+        {
+            Endereco = new Endereco();
+            AcordoMensalidade = new AcordoMensalidade();
+            Usuario = new Usuario();
+        }
+
         public int Id { get; set; }
         public string Matricula { get; set; }
         public string Cpf { get; set; }

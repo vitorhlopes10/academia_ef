@@ -46,8 +46,8 @@ namespace academia_ef.Context.Mapping
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Endereco)
-                .WithOne(s => s.Aluno)
-                .HasForeignKey<Aluno>(s => s.IdEndereco)
+                .WithMany(s => s.Alunos)
+                .HasForeignKey(s => s.IdEndereco)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Plano)
@@ -56,8 +56,8 @@ namespace academia_ef.Context.Mapping
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Unidade)
-               .WithOne(s => s.Aluno)
-               .HasForeignKey<Aluno>(s => s.IdUnidade)
+               .WithMany(s => s.Alunos)
+               .HasForeignKey(s => s.IdUnidade)
                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.AcordoMensalidade)

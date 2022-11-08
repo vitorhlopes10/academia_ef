@@ -2,6 +2,12 @@
 {
     public class Funcionario
     {
+        public Funcionario()
+        {
+            Endereco = new Endereco();
+            Usuario = new Usuario();
+        }
+
         public int Id { get; set; }
         public string Matricula { get; set; }
         public string Cpf { get; set; }

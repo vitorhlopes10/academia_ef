@@ -28,11 +28,11 @@ namespace academia_ef.Context.Mapping
                 .HasColumnType("varchar(10)")
             .IsRequired();
 
-            builder.HasOne(x => x.Funcionario)
+            builder.HasMany(x => x.Funcionarios)
                 .WithOne(s => s.Endereco)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Aluno)
+            builder.HasMany(x => x.Alunos)
                 .WithOne(s => s.Endereco)
                 .OnDelete(DeleteBehavior.Restrict);
 

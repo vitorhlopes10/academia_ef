@@ -42,7 +42,7 @@ export class FuncionarioModel {
     sexo!: SexoModel;
     endereco: EnderecoModel = new EnderecoModel();
     unidade!: UnidadeModel;
-    usuario!: UsuarioModel;
+    usuario: UsuarioModel = new UsuarioModel();
     cargo!: CargoModel;
 
     treinos: TreinoModel[];
@@ -53,5 +53,5 @@ export class FuncionarioModel {
     idEndereco: number;
     idUsuario: number;
     idCargo: number;
-    idUnidade: number;
+    idUnidade?: number;
 }

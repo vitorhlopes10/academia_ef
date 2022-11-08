@@ -57,7 +57,7 @@ namespace academia_ef.Controllers
             return resultado is null ? NotFound("Não foi possível atualizar o cadastro!") : Ok(resultado);
         }
 
-        [HttpPut("Inativar/{id}")]
+        [HttpPost("Inativar/{id}")]
         public ActionResult Inativar(int id)
         {
             if (!(id > 0))
@@ -68,7 +68,7 @@ namespace academia_ef.Controllers
             return resultado ? NoContent() : NotFound("Não foi possível inativar o Aluno!");
         }
 
-        [HttpPut("Ativar/{id}")]
+        [HttpPost("Ativar/{id}")]
         public ActionResult Ativar(int id)
         {
             if (!(id > 0))

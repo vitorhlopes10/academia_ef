@@ -27,11 +27,11 @@ export class FuncionarioService {
   }
 
   ativar(id: number): Observable<any> {
-    return this.http.delete<Observable<any>>(`${this.configUrl}/Funcionarios/${id}`);
+    return this.http.post<Observable<any>>(`${this.configUrl}/Funcionarios/Ativar/${id}`, null);
   }
 
   inativar(id: number): Observable<any> {
-    return this.http.delete<Observable<any>>(`${this.configUrl}/Funcionarios/${id}`);
+    return this.http.post<Observable<any>>(`${this.configUrl}/Funcionarios/Inativar/${id}`, null);
   }
 
   cadastrar(obj: FuncionarioModel) {

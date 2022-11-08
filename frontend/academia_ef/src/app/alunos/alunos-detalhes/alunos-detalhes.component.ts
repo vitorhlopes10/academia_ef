@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem, MessageService, SelectItem } from 'primeng/api';
+import { AlunoModel } from 'src/app/models/aluno-model';
 import { AlunoInterface } from 'src/app/models/interfaces/aluno-interface';
 import { AlunoService } from 'src/app/services/aluno.service';
 
@@ -12,14 +13,6 @@ import { AlunoService } from 'src/app/services/aluno.service';
 export class AlunosDetalhesComponent implements OnInit {
 
   aluno!: AlunoInterface;
-
-  planos: any[] = [];
-  sexos: any[] = [];
-  unidades: any[] = [];
-
-  sexoSelecionado!: SelectItem;
-  planoSelecionado!: SelectItem;
-  unidadeSelecionada!: SelectItem;
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -42,7 +35,7 @@ export class AlunosDetalhesComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Aluno' });
       }
     );
   }

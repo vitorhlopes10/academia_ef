@@ -1,4 +1,4 @@
 export enum PlanoEnum {
-    ESSENTIAL,
+    ESSENTIAL = 1,
     PREMIUN
 }

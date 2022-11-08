@@ -32,6 +32,9 @@ export class AlunosComponent implements OnInit {
     this.loading = true;
     this.alunoService.buscarTodos().subscribe(
       list => {
+        //Setando mascara do CPF
+        list.forEach(x => x.cpf = x.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
+        
         this.alunos = list;
         this.loading = false;
       },

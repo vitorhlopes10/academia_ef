@@ -8,8 +8,8 @@
         public string Estado { get; set; }
         public string Cep { get; set; }
 
-        public virtual Funcionario Funcionario { get; set; }
-        public virtual Aluno Aluno { get; set; }
+        public virtual List<Funcionario> Funcionarios { get; set; }
+        public virtual List<Aluno> Alunos { get; set; }
         public virtual Unidade Unidade { get; set; }
     }
 }

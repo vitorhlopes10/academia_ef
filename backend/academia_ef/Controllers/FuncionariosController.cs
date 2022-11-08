@@ -1,7 +1,5 @@
 using academia_ef.Model;
-using academia_ef.Services;
 using academia_ef.Services.Interfaces;
-using academia_ef.ViewModel.Aluno;
 using academia_ef.ViewModel.Funcionario;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,20 +43,20 @@ namespace academia_ef.Controllers
 
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<Funcionario> Inserir(Funcionario funcionario)
+        public ActionResult<Funcionario> Inserir(FuncionarioViewModel funcionario)
         {
             var resultado = _funcionarioService.Inserir(funcionario);
             return resultado is null ? NotFound("Não foi possível realizar o cadastro!") : resultado;
         }
 
         [HttpPut()]
-        public ActionResult<Funcionario> Atualizar(Funcionario funcionario)
+        public ActionResult<Funcionario> Atualizar(FuncionarioViewModel funcionario)
         {
             var resultado = _funcionarioService.Atualizar(funcionario);
             return resultado is null ? NotFound("Não foi possível atualizar o cadastro!") : Ok(resultado);
         }
 
-        [HttpPut("Inativar/{id}")]
+        [HttpPost("Inativar/{id}")]
         public ActionResult Inativar(int id)
         {
             if (!(id > 0))
@@ -69,7 +67,7 @@ namespace academia_ef.Controllers
             return resultado ? NoContent() : NotFound("Não foi possível inativar o Funcionário!");
         }
 
-        [HttpPut("Ativar/{id}")]
+        [HttpPost("Ativar/{id}")]
         public ActionResult Ativar(int id)
         {
             if (!(id > 0))

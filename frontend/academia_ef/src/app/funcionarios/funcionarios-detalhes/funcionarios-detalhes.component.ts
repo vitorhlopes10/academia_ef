@@ -13,14 +13,6 @@ export class FuncionariosDetalhesComponent implements OnInit {
 
   funcionario!: FuncionarioInterface;
 
-  planos: any[] = [];
-  sexos: any[] = [];
-  unidades: any[] = [];
-
-  sexoSelecionado!: SelectItem;
-  planoSelecionado!: SelectItem;
-  unidadeSelecionada!: SelectItem;
-
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
   items: MenuItem[] = [{ label: 'Funcionarios' }, { label: 'Visualizar Funcionario' }];
@@ -38,6 +30,7 @@ export class FuncionariosDetalhesComponent implements OnInit {
       obj => {
         this.loading = false;
         this.funcionario = obj;
+        this.funcionario.dataNascimento = new Date(obj.dataNascimento);
       },
       () => {
         this.loading = false;

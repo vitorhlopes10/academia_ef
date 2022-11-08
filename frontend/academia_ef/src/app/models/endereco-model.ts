@@ -18,7 +18,7 @@ export class EnderecoModel {
     estado: string;
     cep: string;
 
-    funcionario!: FuncionarioModel;
-    aluno!: AlunoModel;
+    funcionario!: FuncionarioModel[];
+    aluno!: AlunoModel[];
     unidade!: UnidadeModel;
 }

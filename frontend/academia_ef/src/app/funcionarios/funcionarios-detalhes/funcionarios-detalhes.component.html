@@ -7,64 +7,64 @@
             <div class="row p-fluid">
                 <div class="col">
                     <label for="float-input">Nome</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.nome" disabled="true">
+                    <input *ngIf="funcionario?.nome" type="text" pInputText [(ngModel)]="funcionario.nome"
+                        disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CPF</label>
-                    <input type="email" pInputText [(ngModel)]="funcionario.cpf" placeholder="999.999.999-99"
-                        disabled="true">
+                    <input *ngIf="funcionario?.cpf" type="email" pInputText [(ngModel)]="funcionario.cpf"
+                        placeholder="999.999.999-99" disabled="true">
                 </div>
                 <div class="col">
-                    <label for="float-input">Unidades</label>
-                    <p-dropdown [(ngModel)]="funcionario.unidade.nome" placeholder="Selecione a unidade"
-                        optionLabel="nome" [disabled]="true">
-                    </p-dropdown>
+                    <label for="float-input">Unidade</label>
+                    <input *ngIf="funcionario?.unidade?.nome" type="email" pInputText
+                        [(ngModel)]="funcionario.unidade.nome" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Email</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.email" disabled="true">
+                    <input *ngIf="funcionario?.email" type="text" pInputText [(ngModel)]="funcionario.email"
+                        disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Data de Nascimento</label>
-                    <p-calendar [(ngModel)]="funcionario.dataNascimento" [showIcon]="true" [showButtonBar]="true" inputId="icon"
-                        disabled="true"></p-calendar>
+                    <p-calendar *ngIf="funcionario?.dataNascimento" [(ngModel)]="funcionario.dataNascimento"
+                        [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" [showButtonBar]="true" disabled="true">
+                    </p-calendar>
                 </div>
                 <div class="col">
-                    <label for="float-input">Planos</label>
-                    <p-dropdown [(ngModel)]="funcionario.cargo.nome" placeholder="Selecione o plano" optionLabel="name"
-                        [disabled]="true">
-                    </p-dropdown>
+                    <label for="float-input">Cargo</label>
+                    <input *ngIf="funcionario?.cargo?.nome" type="email" pInputText [(ngModel)]="funcionario.cargo.nome"
+                        disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Telefone</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.telefone" placeholder="(99) 99999-9999"
-                        disabled="true">
+                    <input *ngIf="funcionario?.telefone" type="text" pInputText [(ngModel)]="funcionario.telefone"
+                        placeholder="(99) 99999-9999" disabled="true">
                 </div>
                 <div class="col">
-                    <label for="float-input">Sexos</label>
-                    <p-dropdown [(ngModel)]="funcionario.sexo.nome" placeholder="Selecione o sexo" optionLabel="name"
-                        [disabled]="true">
-                    </p-dropdown>
+                    <label for="float-input">Sexo</label>
+                    <input *ngIf="funcionario?.sexo?.nome" type="email" pInputText [(ngModel)]="funcionario.sexo.nome"
+                        disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input" style="margin-right: 5px;">Fixo?</label>
-                    <p-checkbox [(ngModel)]="funcionario.fixo" [binary]="true" style="margin-left: 5px;"
-                        [disabled]="true"></p-checkbox>
+                    <p-checkbox *ngIf="funcionario?.fixo" [(ngModel)]="funcionario.fixo" [binary]="true"
+                        style="margin-left: 5px;" [disabled]="true"></p-checkbox>
                 </div>
             </div>
         </p-fieldset>
@@ -73,31 +73,35 @@
             <div class="row p-fluid">
                 <div class="col">
                     <label for="float-input">Descrição</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.endereco.descricao" disabled="true">
+                    <input *ngIf="funcionario?.endereco?.descricao" type="text" pInputText
+                        [(ngModel)]="funcionario.endereco.descricao" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Cidade</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.endereco.cidade" disabled="true">
+                    <input *ngIf="funcionario?.endereco?.cidade" type="text" pInputText
+                        [(ngModel)]="funcionario.endereco.cidade" disabled="true">
                 </div>
                 <div class="col">
                     <label for="float-input">Estado</label>
-                    <input type="text" pInputText [(ngModel)]="funcionario.endereco.estado" disabled="true">
+                    <input *ngIf="funcionario?.endereco?.estado" type="text" pInputText
+                        [(ngModel)]="funcionario.endereco.estado" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CEP</label>
-                    <p-inputMask [(ngModel)]="funcionario.endereco.cep" mask="99.999-999">
+                    <p-inputMask *ngIf="funcionario?.endereco?.cep" [(ngModel)]="funcionario.endereco.cep"
+                        mask="99.999-999" [disabled]="true">
                     </p-inputMask>
                 </div>
             </div>
         </p-fieldset>
 
-        <div class="row justify-content-md-end">
+        <div class="container-btns-forms row">
             <div class="col-7">
                 <button pButton pRipple type="button" label="Voltar" class="p-button-secondary" (click)="voltar()"
                     style="margin-top: 50px;"></button>

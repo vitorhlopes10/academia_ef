@@ -46,13 +46,13 @@ namespace academia_ef.Context.Mapping
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Endereco)
-                .WithOne(s => s.Funcionario)
-                .HasForeignKey<Funcionario>(s => s.IdEndereco)
+                .WithMany(s => s.Funcionarios)
+                .HasForeignKey(s => s.IdEndereco)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Unidade)
-               .WithOne(s => s.Funcionario)
-               .HasForeignKey<Funcionario>(s => s.IdUnidade)
+               .WithMany(s => s.Funcionarios)
+               .HasForeignKey(s => s.IdUnidade)
                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Usuario)

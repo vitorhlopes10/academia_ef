@@ -53,7 +53,7 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
     this.biotipoService.buscarTodos().subscribe(
       list => {
         list.forEach(item => {
-          this.alunos.push({ name: item.tipo, value: item.id })
+          this.biotipos.push({ name: item.tipo, value: item.id })
         });
       },
       () => {

@@ -31,11 +31,14 @@ export class FuncionariosComponent implements OnInit {
   buscarFuncionarios() {
     this.loading = true;
     this.funcionarioService.buscarTodos().subscribe(
-      success => {
-        this.funcionarios = success;
+      list => {
+        //Setando mascara do CPF
+        list.forEach(x => x.cpf = x.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
+        
+        this.funcionarios = list;
         this.loading = false;
       },
-      error => {
+      () => {
         this.loading = false;
       },
       () => {

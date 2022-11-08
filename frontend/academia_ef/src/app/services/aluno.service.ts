@@ -27,11 +27,11 @@ export class AlunoService {
   }
 
   ativar(id: number): Observable<any> {
-    return this.http.delete<Observable<any>>(`${this.configUrl}/Alunos/${id}`);
+    return this.http.post<Observable<any>>(`${this.configUrl}/Alunos/Ativar/${id}`, null);
   }
 
   inativar(id: number): Observable<any> {
-    return this.http.delete<Observable<any>>(`${this.configUrl}/Alunos/${id}`);
+    return this.http.post<Observable<any>>(`${this.configUrl}/Alunos/Inativar/${id}`, null);
   }
 
   cadastrar(obj: AlunoModel) {

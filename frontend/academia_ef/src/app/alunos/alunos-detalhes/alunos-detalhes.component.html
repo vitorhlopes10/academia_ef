@@ -7,56 +7,53 @@
             <div class="row p-fluid">
                 <div class="col">
                     <label for="float-input">Nome</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.nome" disabled="true">
+                    <input *ngIf="aluno?.nome" type="text" pInputText [(ngModel)]="aluno.nome" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CPF</label>
-                    <input type="email" pInputText [(ngModel)]="aluno.cpf" placeholder="999.999.999-99" disabled="true">
+                    <input *ngIf="aluno?.cpf" type="text" pInputText [(ngModel)]="aluno.cpf" placeholder="999.999.999-99" disabled="true">
                 </div>
                 <div class="col">
-                    <label for="float-input">Unidades</label>
-                    <p-dropdown [(ngModel)]="aluno.unidade.nome" placeholder="Selecione a unidade" optionLabel="nome"
-                        [disabled]="true">
-                    </p-dropdown>
+                    <label for="float-input">Unidade</label>
+                    <span *ngIf="!(aluno?.unidade?.nome)">
+                        <input type="text" pInputText disabled="true">
+                    </span>
+                    <input *ngIf="aluno?.unidade?.nome" type="text" pInputText [(ngModel)]="aluno.unidade.nome" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Email</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.email" disabled="true">
+                    <input *ngIf="aluno?.email" type="text" pInputText [(ngModel)]="aluno.email" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Data de Nascimento</label>
-                    <p-calendar [(ngModel)]="aluno.dataNascimento" [showIcon]="true" inputId="icon"
+                    <p-calendar *ngIf="aluno?.dataNascimento" [(ngModel)]="aluno.dataNascimento" [showIcon]="true" inputId="icon"
                         dateFormat="dd/mm/yy" [showButtonBar]="true" disabled="true">
                     </p-calendar>
                 </div>
                 <div class="col">
-                    <label for="float-input">Planos</label>
-                    <p-dropdown [(ngModel)]="aluno.plano.nome" placeholder="Selecione o plano" optionLabel="name"
-                        [disabled]="true">
-                    </p-dropdown>
+                    <label for="float-input">Plano</label>
+                    <input *ngIf="aluno?.plano?.nome" type="text" pInputText [(ngModel)]="aluno.plano.nome" disabled="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Telefone</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.telefone" placeholder="(99) 99999-9999"
+                    <input *ngIf="aluno?.telefone" type="text" pInputText [(ngModel)]="aluno.telefone" placeholder="(99) 99999-9999"
                         disabled="true">
                 </div>
                 <div class="col">
-                    <label for="float-input">Sexos</label>
-                    <p-dropdown [(ngModel)]="aluno.sexo.nome" placeholder="Selecione o sexo" optionLabel="name"
-                        [disabled]="true">
-                    </p-dropdown>
+                    <label for="float-input">Sexo</label>
+                    <input *ngIf="aluno?.sexo?.nome" type="text" pInputText [(ngModel)]="aluno.sexo.nome" disabled="true">
                 </div>
             </div>
         </p-fieldset>
@@ -65,32 +62,32 @@
             <div class="row p-fluid">
                 <div class="col">
                     <label for="float-input">Descrição</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.endereco.descricao" [disabled]="true">
+                    <input *ngIf="aluno?.endereco?.descricao" type="text" pInputText [(ngModel)]="aluno.endereco.descricao" [disabled]="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Cidade</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.endereco.cidade" [disabled]="true">
+                    <input *ngIf="aluno?.endereco?.cidade" type="text" pInputText [(ngModel)]="aluno.endereco.cidade" [disabled]="true">
                 </div>
                 <div class="col">
                     <label for="float-input">Estado</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.endereco.estado" [disabled]="true">
+                    <input *ngIf="aluno?.endereco?.estado" type="text" pInputText [(ngModel)]="aluno.endereco.estado" [disabled]="true">
                 </div>
             </div>
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">CEP</label>
-                    <p-inputMask [(ngModel)]="aluno.endereco.cep" mask="99.999-999">
+                    <p-inputMask *ngIf="aluno?.endereco?.cep" [(ngModel)]="aluno.endereco.cep" mask="99.999-999" [disabled]="true">
                     </p-inputMask>
                 </div>
             </div>
         </p-fieldset>
 
-        <div class="row justify-content-md-end">
-            <div class="col-7">
+        <div class="container-btns-forms row">
+            <div class="col-12">
                 <button pButton pRipple type="button" label="Voltar" class="p-button-secondary" (click)="voltar()"
                     style="margin-top: 50px;"></button>
             </div>

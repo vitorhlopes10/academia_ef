@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuItem, MessageService, SelectItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { PlanoEnum } from 'src/app/enums/planos-enum';
 import { AlunoModel } from 'src/app/models/aluno-model';
 import { PlanoInterface } from 'src/app/models/interfaces/plano-interface';
@@ -10,6 +10,7 @@ import { AlunoService } from 'src/app/services/aluno.service';
 import { PlanoService } from 'src/app/services/plano.service';
 import { SexoService } from 'src/app/services/sexo.service';
 import { UnidadeService } from 'src/app/services/unidade.service';
+import { Estados } from 'src/app/utils/estados-lista';
 
 @Component({
   selector: 'app-alunos-editar',
@@ -19,14 +20,12 @@ import { UnidadeService } from 'src/app/services/unidade.service';
 export class AlunosEditarComponent implements OnInit {
 
   aluno: AlunoModel = new AlunoModel();
+  id: number = 0;
 
   planos: PlanoInterface[] = [];
   sexos: SexoInterface[] = [];
-  unidades: any[] = [];
-
-  sexoSelecionado!: SexoInterface;
-  planoSelecionado!: PlanoInterface;
-  unidadeSelecionada!: UnidadeInterface;
+  unidades: UnidadeInterface[] = [];
+  estados: Estados = new Estados();
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -38,35 +37,37 @@ export class AlunosEditarComponent implements OnInit {
     private planoService: PlanoService,
     private router: Router,
     private messageService: MessageService,
-    private route:ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.id = Number.parseInt(this.route.snapshot.params["parametro"]);
+
     this.buscarPlanos();
     this.buscarSexos();
     this.buscarUnidades();
+    this.buscarPorId();
+  }
 
-    const id = this.route.snapshot.params["parametro"];
-
-    this.alunoService.buscarPorId(Number.parseInt(id)).subscribe(
+  buscarPorId() {
+    this.alunoService.buscarPorId(this.id).subscribe(
       obj => {
+        this.aluno.id = obj.id;
         this.aluno.nome = obj.nome;
         this.aluno.cpf = obj.cpf;
         this.aluno.email = obj.email;
         this.aluno.telefone = obj.telefone;
         this.aluno.dataNascimento = new Date(obj.dataNascimento);
+
         this.aluno.idPlano = obj.idPlano;
-        this.aluno.idSexo= obj.idSexo;
+        this.aluno.idSexo = obj.idSexo;
         this.aluno.idUnidade = obj.idUnidade;
 
+        this.aluno.endereco.id = obj.endereco.id;
         this.aluno.endereco.descricao = obj.endereco.descricao;
         this.aluno.endereco.estado = obj.endereco.estado;
         this.aluno.endereco.cidade = obj.endereco.cidade;
         this.aluno.endereco.cep = obj.endereco.cep;
 
-        this.sexoSelecionado = obj.sexo;
-        this.planoSelecionado = obj.plano;
-        this.unidadeSelecionada = obj.unidade;
-        
         this.loading = false;
       },
       () => {
@@ -101,9 +102,7 @@ export class AlunosEditarComponent implements OnInit {
   buscarUnidades() {
     this.unidadeService.buscarTodos().subscribe(
       list => {
-        list.forEach(item => {
-          this.unidades.push({ label: item.nome, value: item.id })
-        });
+        this.unidades = list;
       },
       () => {
         this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
@@ -111,124 +110,104 @@ export class AlunosEditarComponent implements OnInit {
     )
   }
 
-  update(event: any) {
-console.log('teste');
-  }
-
-  cadastrar() {
+  atualizar() {
     this.loading = true;
     this.prepararParaEnvio();
 
     this.alunoService.editar(this.aluno).subscribe(
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Aluno inserido com sucesso!' });
-        this.router.navigate(['alunos'])
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Atualização realizada com sucesso!' });
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o aluno' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar atualizar o cadastro' });
       },
       () => { }
     )
   }
 
   prepararParaEnvio() {
-    this.aluno.nome = this.aluno.nome.trim();
+    this.aluno.nome = this.aluno.nome.toUpperCase().trim();
     this.aluno.cpf = this.aluno.cpf.trim();
-    this.aluno.email = this.aluno.email.trim();
+    this.aluno.email = this.aluno.email.toLocaleLowerCase().trim();
     this.aluno.telefone = this.aluno.telefone.trim();
     this.aluno.idUsuario = 1
-
-    this.aluno.idPlano = this.planoSelecionado.id;
-    this.aluno.idSexo = this.sexoSelecionado.id;
-
-    if(this.aluno.idPlano === PlanoEnum.PREMIUN) {
-      this.aluno.idUnidade = 0;
-    }
-    else {
-      this.aluno.idUnidade = this.unidadeSelecionada.id
-    }
   }
 
   voltar() {
     this.router.navigate(['alunos']);
   }
 
-  validarCadastro() {
+  validarAlteracoes() {
     let prosseguir = true;
 
-        //Validação Dados Básicos
-    // if (!(this.novoAluno.nome)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    // Validação Dados Básicos
+    if (!(this.aluno.nome)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Nome' });
+    }
 
-    // if (!(this.novoAluno.cpf)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "CPF"' });
-    // }
+    if (!(this.aluno.cpf)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo CPF' });
+    }
 
-    // if (!(this.novoAluno.email)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Email"' });
-    // }
+    if (!(this.aluno.email)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Email' });
+    }
 
-    // if (!(this.sexoSelecionado)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
-    // }
+    if (!(this.aluno.dataNascimento)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo de Data de Nascimento' });
+    }
 
-    // if (!(this.planoSelecionado)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
-    // }
+    if (this.aluno.idSexo === 0) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
+    }
 
-    // if ((!(this.unidadeSelecionada))) {
-    //   if (this.planoSelecionado && this.planoSelecionado.value == PlanoEnum.ESSENTIAL) {
-    //     prosseguir = false;
-    //     this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
-    //   }
-    // }
+    if (this.aluno.idPlano === 0) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
+    }
 
-    // if (!(this.novoAluno.telefone)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Telefone"' });
-    // }
+    if ((!(this.aluno.idUnidade))) {
+      if (this.aluno.idPlano == PlanoEnum.ESSENTIAL) {
+        prosseguir = false;
+        this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher alguma das Unidades' });
+      }
+    }
 
-    //Validação dados de Endereço
-    // if (!(this.novoAluno.endereco.descricao)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.aluno.telefone)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Telefone' });
+    }
 
-    // if (!(this.novoAluno.endereco.cidade)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    // Validação dados de Endereço
+    if (!(this.aluno.endereco.descricao)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Descrição' });
+    }
 
-    // if (!(this.novoAluno.endereco.estado)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.aluno.endereco.cidade)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Cidade' });
+    }
 
-    // if (!(this.novoAluno.endereco.cep)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.aluno.endereco.estado)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Estado' });
+    }
 
-    //Validação de senha
-    // if (!(this.novoAluno.usuario)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
-    // if (!(this.novoAluno.nome)) {
-    //   prosseguir = false;
-    //   this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
-    // }
+    if (!(this.aluno.endereco.cep)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo CEP' });
+    }
 
     if (prosseguir) {
-      this.cadastrar();
+      this.atualizar();
     }
   }
 }

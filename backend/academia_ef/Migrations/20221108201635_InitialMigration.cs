@@ -499,8 +499,7 @@ namespace academia_ef.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdEndereco",
                 table: "Aluno",
-                column: "IdEndereco",
-                unique: true);
+                column: "IdEndereco");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdPlano",
@@ -515,9 +514,7 @@ namespace academia_ef.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdUnidade",
                 table: "Aluno",
-                column: "IdUnidade",
-                unique: true,
-                filter: "[IdUnidade] IS NOT NULL");
+                column: "IdUnidade");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aluno_IdUsuario",
@@ -548,8 +545,7 @@ namespace academia_ef.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdEndereco",
                 table: "Funcionario",
-                column: "IdEndereco",
-                unique: true);
+                column: "IdEndereco");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdSexo",
@@ -559,9 +555,7 @@ namespace academia_ef.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdUnidade",
                 table: "Funcionario",
-                column: "IdUnidade",
-                unique: true,
-                filter: "[IdUnidade] IS NOT NULL");
+                column: "IdUnidade");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionario_IdUsuario",

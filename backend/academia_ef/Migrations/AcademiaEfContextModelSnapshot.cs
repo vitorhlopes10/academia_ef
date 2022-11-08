@@ -103,16 +103,13 @@ namespace academia_ef.Migrations
                     b.HasIndex("IdAcordoMensalidade")
                         .IsUnique();
 
-                    b.HasIndex("IdEndereco")
-                        .IsUnique();
+                    b.HasIndex("IdEndereco");
 
                     b.HasIndex("IdPlano");
 
                     b.HasIndex("IdSexo");
 
-                    b.HasIndex("IdUnidade")
-                        .IsUnique()
-                        .HasFilter("[IdUnidade] IS NOT NULL");
+                    b.HasIndex("IdUnidade");
 
                     b.HasIndex("IdUsuario")
                         .IsUnique();
@@ -359,14 +356,11 @@ namespace academia_ef.Migrations
 
                     b.HasIndex("IdCargo");
 
-                    b.HasIndex("IdEndereco")
-                        .IsUnique();
+                    b.HasIndex("IdEndereco");
 
                     b.HasIndex("IdSexo");
 
-                    b.HasIndex("IdUnidade")
-                        .IsUnique()
-                        .HasFilter("[IdUnidade] IS NOT NULL");
+                    b.HasIndex("IdUnidade");
 
                     b.HasIndex("IdUsuario")
                         .IsUnique();
@@ -685,8 +679,8 @@ namespace academia_ef.Migrations
                         .IsRequired();
 
                     b.HasOne("academia_ef.Model.Endereco", "Endereco")
-                        .WithOne("Aluno")
-                        .HasForeignKey("academia_ef.Model.Aluno", "IdEndereco")
+                        .WithMany("Alunos")
+                        .HasForeignKey("IdEndereco")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -703,8 +697,8 @@ namespace academia_ef.Migrations
                         .IsRequired();
 
                     b.HasOne("academia_ef.Model.Unidade", "Unidade")
-                        .WithOne("Aluno")
-                        .HasForeignKey("academia_ef.Model.Aluno", "IdUnidade")
+                        .WithMany("Alunos")
+                        .HasForeignKey("IdUnidade")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("academia_ef.Model.Usuario", "Usuario")
@@ -762,8 +756,8 @@ namespace academia_ef.Migrations
                         .IsRequired();
 
                     b.HasOne("academia_ef.Model.Endereco", "Endereco")
-                        .WithOne("Funcionario")
-                        .HasForeignKey("academia_ef.Model.Funcionario", "IdEndereco")
+                        .WithMany("Funcionarios")
+                        .HasForeignKey("IdEndereco")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -774,8 +768,8 @@ namespace academia_ef.Migrations
                         .IsRequired();
 
                     b.HasOne("academia_ef.Model.Unidade", "Unidade")
-                        .WithOne("Funcionario")
-                        .HasForeignKey("academia_ef.Model.Funcionario", "IdUnidade")
+                        .WithMany("Funcionarios")
+                        .HasForeignKey("IdUnidade")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("academia_ef.Model.Usuario", "Usuario")
@@ -893,11 +887,9 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Endereco", b =>
                 {
-                    b.Navigation("Aluno")
-                        .IsRequired();
+                    b.Navigation("Alunos");
 
-                    b.Navigation("Funcionario")
-                        .IsRequired();
+                    b.Navigation("Funcionarios");
 
                     b.Navigation("Unidade")
                         .IsRequired();
@@ -936,11 +928,9 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Unidade", b =>
                 {
-                    b.Navigation("Aluno")
-                        .IsRequired();
+                    b.Navigation("Alunos");
 
-                    b.Navigation("Funcionario")
-                        .IsRequired();
+                    b.Navigation("Funcionarios");
                 });
 
             modelBuilder.Entity("academia_ef.Model.Usuario", b =>

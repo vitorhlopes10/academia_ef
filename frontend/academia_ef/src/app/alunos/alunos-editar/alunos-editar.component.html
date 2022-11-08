@@ -19,8 +19,8 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Unidades</label>
-                    <p-dropdown [options]="unidades" [(ngModel)]="unidadeSelecionada" placeholder="Selecione a unidade"
-                        optionLabel="label" [disabled]="this.planoSelecionado != null && this.planoSelecionado.id === 2">
+                    <p-dropdown [options]="unidades" [(ngModel)]="aluno.idUnidade" placeholder="Selecione a Unidade"
+                        optionLabel="nome" optionValue="id" [disabled]="aluno.idPlano === 2">
                     </p-dropdown>
                 </div>
             </div>
@@ -40,7 +40,8 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Planos</label>
-                    <p-dropdown [options]="planos" [(ngModel)]="planoSelecionado" optionLabel="nome" dataKey="sexoSelecionado.nome">
+                    <p-dropdown [options]="planos" [(ngModel)]="aluno.idPlano" placeholder="Selecione o Plano"
+                        optionLabel="nome" optionValue="id">
                     </p-dropdown>
                 </div>
             </div>
@@ -53,7 +54,8 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Sexos</label>
-                    <p-dropdown [options]="sexos" [(ngModel)]="sexoSelecionado" optionLabel="nome" dataKey="sexoSelecionado">
+                    <p-dropdown [options]="sexos" [(ngModel)]="aluno.idSexo" placeholder="Selecione o Sexo"
+                        optionLabel="nome" optionValue="id">
                     </p-dropdown>
                 </div>
             </div>
@@ -73,8 +75,10 @@
                     <input type="text" pInputText [(ngModel)]="aluno.endereco.cidade">
                 </div>
                 <div class="col">
-                    <label for="float-input">Estado</label>
-                    <input type="text" pInputText [(ngModel)]="aluno.endereco.estado">
+                    <label for="float-input">Estados</label>
+                    <p-dropdown [options]="estados.list" [(ngModel)]="this.aluno.endereco.estado"
+                        placeholder="Selecione o estado" optionLabel="nome" optionValue="nome">
+                    </p-dropdown>
                 </div>
             </div>
 
@@ -87,12 +91,12 @@
             </div>
         </p-fieldset>
 
-        <div class="row justify-content-md-end">
+        <div class="container-btns-forms row justify-content-md-end">
             <div class="col-3">
                 <button id="btnVoltar" pButton pRipple type="button" label="Voltar" class="p-button-secondary"
                     (click)="voltar()" style="margin-top: 50px; margin-left: 20px;"></button>
-                <button id="btnSalvar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
-                    (click)="validarCadastro()" style="margin-top: 50px; margin-left: 5px;"></button>
+                <button id="btnSalvar" pButton pRipple type="button" label="Atualizar" class="p-button-success"
+                    (click)="validarAlteracoes()" style="margin-top: 50px; margin-left: 5px;"></button>
             </div>
         </div>
     </div>

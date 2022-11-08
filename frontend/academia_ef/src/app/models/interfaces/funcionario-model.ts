@@ -32,5 +32,5 @@ export interface FuncionarioInterface {
     idEndereco: number;
     idUsuario: number;
     idCargo: number;
-    idAcademia: number;
+    idUnidade: number;
 }

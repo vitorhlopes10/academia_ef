@@ -29,11 +29,11 @@ namespace academia_ef.Context.Mapping
                 .HasForeignKey<Unidade>(s => s.IdEndereco)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Aluno)
+            builder.HasMany(x => x.Alunos)
                 .WithOne(s => s.Unidade)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Funcionario)
+            builder.HasMany(x => x.Funcionarios)
                 .WithOne(s => s.Unidade)
                 .OnDelete(DeleteBehavior.Restrict);
 
