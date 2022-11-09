@@ -49,6 +49,8 @@ export class AlunosEditarComponent implements OnInit {
   }
 
   buscarPorId() {
+    this.loading = true;
+
     this.alunoService.buscarPorId(this.id).subscribe(
       obj => {
         this.aluno.id = obj.id;

@@ -13,6 +13,7 @@ import { AlunoService } from 'src/app/services/aluno.service';
 export class AlunosDetalhesComponent implements OnInit {
 
   aluno!: AlunoInterface;
+  id: number = 0;
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -24,14 +25,18 @@ export class AlunosDetalhesComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loading = true;
-    const id = this.route.snapshot.params["parametro"];
+    this.id = Number.parseInt(this.route.snapshot.params["parametro"]);
+  }
 
-    this.alunoService.buscarPorId(Number.parseInt(id)).subscribe(
+  buscarPorId() {
+    this.loading = true;
+
+    this.alunoService.buscarPorId(this.id).subscribe(
       obj => {
-        this.loading = false;
         this.aluno = obj;
         this.aluno.dataNascimento = new Date(obj.dataNascimento);
+
+        this.loading = false;
       },
       () => {
         this.loading = false;

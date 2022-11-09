@@ -1,5 +1,5 @@
 export class TreinoFiltro {
-    dataInicial!: Date;
-    dataFinal!: Date ;
     nomeAluno: string = '';
+    dataInicial: Date = new Date();
+    dataFinal: Date = new Date();
 }

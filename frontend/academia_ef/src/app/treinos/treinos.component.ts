@@ -31,16 +31,15 @@ export class TreinosComponent implements OnInit {
   buscarTreinos() {
     this.loading = true;
     this.treinoService.buscarTodos().subscribe(
-      success => {
-        this.treinos = success;
-        this.loading = false;
-      },
-      error => {
+      list => {
+        this.treinos = list;
         this.loading = false;
       },
       () => {
         this.loading = false;
-      }
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
+      },
+      () => {}
     );
   }
 
@@ -62,6 +61,7 @@ export class TreinosComponent implements OnInit {
         this.editar(id);
       },
       reject: () => {
+        this.loading = false;
         this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a edição' });
       }
     });
@@ -81,6 +81,7 @@ export class TreinosComponent implements OnInit {
         this.deletar(id);
       },
       reject: () => {
+        this.loading = false;
         this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a deleção' });
       }
     });
@@ -94,26 +95,34 @@ export class TreinosComponent implements OnInit {
         this.loading = false;
       },
       () => {
+        this.loading = false;
         this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
       }
     );
   }
 
   limpar() {
-    this.filtro.dataInicial = new Date();
-    this.filtro.dataFinal = new Date();
+    this.filtro.dataInicial;
+    this.filtro.dataFinal;
+    this.filtro.nomeAluno = '';
   }
 
   buscar() {
     this.loading = true;
+
+    if (!(this.filtro.nomeAluno) && !(this.filtro.dataInicial) && !(this.filtro.dataFinal)) {
+      this.buscarTreinos();
+      return;
+    }
+
     this.treinoService.filtro(this.filtro).subscribe(
       list => {
         this.treinos = list;
         this.loading = false;
       },
       () => {
-        this.treinos = [];
         this.loading = false;
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
       }
     );
   }

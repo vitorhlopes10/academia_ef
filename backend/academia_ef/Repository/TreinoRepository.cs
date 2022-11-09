@@ -19,9 +19,9 @@ namespace academia_ef.Repository
             return obj;
         }
 
-        public List<Treino> BuscarTodosPorAluno(int idAluno)
+        public IQueryable<Treino> BuscarTodos()
         {
-            var obj = _context.Treino.Where(x => x.IdAluno == idAluno).ToList();
+            var obj = _context.Treino.AsQueryable();
             return obj;
         }
 

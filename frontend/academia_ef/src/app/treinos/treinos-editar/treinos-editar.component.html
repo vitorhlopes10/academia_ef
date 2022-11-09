@@ -6,13 +6,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="float-input">Alunos</label>
-                <p-dropdown [options]="alunos" [(ngModel)]="alunoSelecionado" placeholder="Selecione o Aluno"
-                    optionLabel="name">
+                <p-dropdown [options]="alunos" [(ngModel)]="treino.idAluno" placeholder="Selecione o Aluno"
+                    optionLabel="nome" optionValue="id">
                 </p-dropdown>
-            </div>ks
+            </div>
         </div>
 
-        <div class="row p-fluid">
+        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-8">
                 <label for="float-input">Descrição</label>
                 <textarea pInputTextarea [(ngModel)]="treino.descricao"></textarea>
@@ -23,7 +23,7 @@
             <div class="col-7">
                 <button id="btnVoltar" pButton pRipple type="button" label="Voltar" class="p-button-secondary"
                     (click)="voltar()" style="margin-top: 50px; margin-left: 20px;"></button>
-                <button id="btnSalvar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"
+                <button id="btnSalvar" pButton pRipple type="button" label="Atualizar" class="p-button-success"
                     (click)="validarCadastro()" style="margin-top: 50px; margin-left: 5px;"></button>
             </div>
         </div>

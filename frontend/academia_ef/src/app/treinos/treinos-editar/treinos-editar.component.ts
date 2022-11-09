@@ -13,11 +13,9 @@ import { TreinoService } from 'src/app/services/treino.service';
 export class TreinosEditarComponent implements OnInit {
 
   treino: TreinoModel = new TreinoModel();
+  id: number = 0;
 
   alunos: any[] = [];
-
-  alunoSelecionado!: SelectItem;
-  fixo: boolean = false;
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -31,11 +29,16 @@ export class TreinosEditarComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.id = Number.parseInt(this.route.snapshot.params["parametro"]);
+
     this.buscarAlunos();
+    this.buscarPorId();
+  }
 
-    const id = this.route.snapshot.params["parametro"];
+  buscarPorId() {
+    this.loading = true;
 
-    this.treinoServico.buscarPorId(Number.parseInt(id)).subscribe(
+    this.treinoServico.buscarPorId(this.id).subscribe(
       obj => {
         this.treino.descricao = obj.descricao;
         this.treino.idAluno = obj.idAluno;
@@ -44,50 +47,67 @@ export class TreinosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Treino' });
       }
     );
   }
 
   buscarAlunos() {
+    this.loading = true;
+    this.prepararParaEnvio();
+
     this.alunoService.buscarTodos().subscribe(
       list => {
-        list.forEach(item => {
-          this.alunos.push({ name: item.nome, value: item.id });
-        });
+        this.alunos = list;
+        this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
+        this.loading = false;
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
       }
     )
   }
 
-  cadastrar() {
+  atualizar() {
     this.loading = true;
 
     this.treinoServico.editar(this.treino).subscribe(
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'funcionario inserido com sucesso!' });
-        this.router.navigate(['funcionarios'])
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Treino inserido com sucesso!' });
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o funcionario' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Treino' });
       },
       () => { }
     )
   }
 
+  prepararParaEnvio() {
+    this.treino.id = this.id;
+    this.treino.idFuncionario = 1;
+  }
+
   voltar() {
-    this.router.navigate(['alunos']);
+    this.router.navigate(['treinos']);
   }
 
   validarCadastro() {
     let prosseguir = true;
 
+    if (!(this.treino.descricao)) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Descrição' });
+    }
+
+    if (this.treino.idAluno == 0) {
+      prosseguir = false;
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher um Aluno' });
+    }
+
     if (prosseguir) {
-      this.cadastrar();
+      this.atualizar();
     }
   }
 }

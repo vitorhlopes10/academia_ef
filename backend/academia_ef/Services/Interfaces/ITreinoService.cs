@@ -1,13 +1,15 @@
 ﻿using academia_ef.Model;
+using academia_ef.ViewModel.Treino;
 
 namespace academia_ef.Services.Interfaces
 {
     public interface ITreinoService
     {
         Treino Buscar(int id);
-        List<Treino> BuscarTodosPorAluno(int idAluno);
-        Treino Inserir(Treino treino);
-        Treino Atualizar(Treino treino);
+        List<Treino> Filtrar(TreinoFiltroViewModel filtro);
+        List<Treino> BuscarTodos();
+        Treino Inserir(TreinoViewModel treino);
+        Treino Atualizar(TreinoViewModel treino);
         bool Deletar(int id);
     }
 }

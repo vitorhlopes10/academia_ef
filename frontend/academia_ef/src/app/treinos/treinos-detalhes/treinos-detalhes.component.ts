@@ -12,10 +12,9 @@ import { TreinoService } from 'src/app/services/treino.service';
 export class TreinosDetalhesComponent implements OnInit {
 
   treino!: TreinoInterface;
+  id: number = 0;
 
   alunos: any[] = [];
-
-  alunoSelecionado!: SelectItem;
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -27,17 +26,22 @@ export class TreinosDetalhesComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loading = true;
-    const id = this.route.snapshot.params["parametro"];
+    this.id = Number.parseInt(this.route.snapshot.params["parametro"]);
 
-    this.treinoService.buscarPorId(Number.parseInt(id)).subscribe(
+    this.buscarPorId();
+  }
+
+  buscarPorId() {
+    this.loading = true;
+
+    this.treinoService.buscarPorId(this.id).subscribe(
       obj => {
         this.loading = false;
         this.treino = obj;
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o funcionario' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Treino' });
       }
     );
   }

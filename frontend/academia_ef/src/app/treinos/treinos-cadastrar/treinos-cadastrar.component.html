@@ -6,13 +6,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="float-input">Alunos</label>
-                <p-dropdown [options]="alunos" [(ngModel)]="alunoSelecionado" placeholder="Selecione o Aluno"
-                    optionLabel="name">
+                <p-dropdown [options]="alunos" [(ngModel)]="novoTreino.idAluno" placeholder="Selecione o Aluno"
+                    optionLabel="nome" optionValue="id">
                 </p-dropdown>
             </div>
         </div>
 
-        <div class="row p-fluid">
+        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-8">
                 <label for="float-input">Descrição</label>
                 <textarea pInputTextarea [(ngModel)]="novoTreino.descricao"></textarea>

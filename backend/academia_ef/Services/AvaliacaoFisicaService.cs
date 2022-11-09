@@ -18,9 +18,9 @@ namespace academia_ef.Services
             return _avaliacaoFisicaRepository.Buscar(id);
         }
 
-        public List<AvaliacaoFisica> BuscarTodosPorAluno(int idAluno)
+        public List<AvaliacaoFisica> BuscarTodos()
         {
-            return _avaliacaoFisicaRepository.BuscarTodosPorAluno(idAluno);
+            return _avaliacaoFisicaRepository.BuscarTodos().OrderByDescending(x => x.Id).ToList();
         }
 
         public AvaliacaoFisica Inserir(AvaliacaoFisica avaliacaoFisica)

@@ -19,9 +19,9 @@ namespace academia_ef.Repository
             return obj;
         }
 
-        public List<AvaliacaoFisica> BuscarTodosPorAluno(int idAluno)
+        public IQueryable<AvaliacaoFisica> BuscarTodos()
         {
-            var obj = _context.AvaliacaoFisica.Where(x => x.IdAluno == idAluno).ToList();
+            var obj = _context.AvaliacaoFisica.AsQueryable();
             return obj;
         }
 
