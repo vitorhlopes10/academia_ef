@@ -6,15 +6,15 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="float-input">Alunos</label>
-                <p-dropdown [options]="alunos" [(ngModel)]="alunoSelecionado" placeholder="Selecione o Aluno"
-                    optionLabel="name">
+                <p-dropdown [options]="alunos" [(ngModel)]="novaAvaliacaoFisica.idAluno" placeholder="Selecione o Aluno"
+                    optionLabel="nome" optionValue="id">
                 </p-dropdown>
             </div>
 
             <div class="col-4">
                 <label for="float-input">Biotipos</label>
-                <p-dropdown [options]="biotipos" [(ngModel)]="biotipoSelecionado" placeholder="Selecione o Biotipo"
-                    optionLabel="name">
+                <p-dropdown [options]="biotipos" [(ngModel)]="novaAvaliacaoFisica.idBiotipo"
+                    placeholder="Selecione o Biotipo" optionLabel="tipo" optionValue="id">
                 </p-dropdown>
             </div>
         </div>
@@ -22,13 +22,14 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Abdômen</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.abdomen" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.abdomen" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Idade</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.idade" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.idade" [min]="0" [showButtons]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -36,13 +37,14 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Peso</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.peso" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.peso" [min]="0" [showButtons]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Altura</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.altura" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.altura" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
         </div>
@@ -50,13 +52,15 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Largura entre os Ombros</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraEntreOmbros" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraEntreOmbros" [min]="0" [showButtons]="true"
+                    [maxFractionDigits]="2" mode="decimal" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Largura braço relaxado</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraBracoRelaxado" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraBracoRelaxado" [min]="0" [showButtons]="true"
+                    [maxFractionDigits]="2" mode="decimal" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
         </div>
@@ -64,13 +68,15 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Largura braço contraído</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraBracoContraido" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraBracoContraido" [min]="0" [showButtons]="true"
+                    [maxFractionDigits]="2" mode="decimal" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Antebraço</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.antebraco" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.antebraco" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
         </div>
@@ -78,13 +84,15 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Torax</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.torax" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.torax" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Panturrilha</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.panturrilha" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.panturrilha" [min]="0" [showButtons]="true"
+                    [maxFractionDigits]="2" mode="decimal" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
         </div>
@@ -92,13 +100,15 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Cintura</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.cintura" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.cintura" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Quadril</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.quadril" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.quadril" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
         </div>
@@ -106,7 +116,8 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Coxa</label>
-                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.coxa" [min]="0">
+                <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.coxa" [min]="0" [showButtons]="true" mode="decimal"
+                    [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
         </div>

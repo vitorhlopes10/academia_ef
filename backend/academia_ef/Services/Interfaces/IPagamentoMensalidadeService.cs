@@ -1,4 +1,5 @@
 ﻿using academia_ef.Model;
+using academia_ef.ViewModel.Pagamento;
 
 namespace academia_ef.Services.Interfaces
 {
@@ -6,8 +7,7 @@ namespace academia_ef.Services.Interfaces
     {
         PagamentoMensalidade Buscar(int id);
         List<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno);
-        PagamentoMensalidade Inserir(PagamentoMensalidade pagamentoMensalidade);
-        PagamentoMensalidade Atualizar(PagamentoMensalidade pagamentoMensalidade);
+        PagamentoMensalidade RegistrarPagamento(PagamentoViewModel pagamentoMensalidade);
         bool Deletar(int id);
     }
 }

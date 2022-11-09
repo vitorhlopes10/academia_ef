@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { AlunoInterface } from 'src/app/models/interfaces/aluno-interface';
 import { TreinoModel } from 'src/app/models/treino-model';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { TreinoService } from 'src/app/services/treino.service';
@@ -14,7 +15,7 @@ export class TreinosCadastrarComponent implements OnInit {
 
   novoTreino: TreinoModel = new TreinoModel();
 
-  alunos: any[] = [];
+  alunos: AlunoInterface[] = [];
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };

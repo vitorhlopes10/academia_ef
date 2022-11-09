@@ -25,16 +25,9 @@ namespace academia_ef.Repository
             return obj;
         }
 
-        public PagamentoMensalidade Inserir(PagamentoMensalidade pagamentoMensalidade)
+        public PagamentoMensalidade RegistrarPagamento(PagamentoMensalidade pagamentoMensalidade)
         {
             var obj = _context.Add(pagamentoMensalidade);
-            _context.SaveChanges();
-            return obj.Entity;
-        }
-
-        public PagamentoMensalidade Atualizar(PagamentoMensalidade pagamentoMensalidade)
-        {
-            var obj = _context.Update(pagamentoMensalidade);
             _context.SaveChanges();
             return obj.Entity;
         }

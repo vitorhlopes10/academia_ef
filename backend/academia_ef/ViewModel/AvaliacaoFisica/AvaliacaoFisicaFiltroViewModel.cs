@@ -1,6 +1,6 @@
-﻿namespace academia_ef.ViewModel.Treino
+﻿namespace academia_ef.ViewModel.AvaliacaoFisica
 {
-    public class TreinoFiltroViewModel
+    public class AvaliacaoFisicaFiltroViewModel
     {
         public string NomeAluno { get; set; }
         public DateTime DataInicial { get; set; }

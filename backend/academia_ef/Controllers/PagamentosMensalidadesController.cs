@@ -1,5 +1,6 @@
 using academia_ef.Model;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Pagamento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace academia_ef.Controllers
@@ -26,7 +27,7 @@ namespace academia_ef.Controllers
             return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
-        [HttpGet("{idAluno}")]
+        [HttpGet("PorAluno/{idAluno}")]
         public ActionResult<List<PagamentoMensalidade>> BuscarTodosPorAluno(int idAluno)
         {
             if (!(idAluno > 0))
@@ -34,22 +35,15 @@ namespace academia_ef.Controllers
 
             var resultado = _pagamentoMensalidadeService.BuscarTodosPorAluno(idAluno);
 
-            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<PagamentoMensalidade> Inserir(PagamentoMensalidade pagamentoMensalidade)
+        public ActionResult<PagamentoMensalidade> RegistrarPagamento(PagamentoViewModel novoPagamento)
         {
-            var resultado = _pagamentoMensalidadeService.Inserir(pagamentoMensalidade);
+            var resultado = _pagamentoMensalidadeService.RegistrarPagamento(novoPagamento);
             return resultado is null ? NotFound("Não foi possível realizar o cadastro!") : resultado;
-        }
-
-        [HttpPut()]
-        public ActionResult<PagamentoMensalidade> Atualizar(PagamentoMensalidade pagamentoMensalidade)
-        {
-            var resultado = _pagamentoMensalidadeService.Atualizar(pagamentoMensalidade);
-            return resultado is null ? NotFound("Não foi possível atualizar o cadastro!") : Ok(resultado);
         }
 
         [HttpDelete("{id}")]

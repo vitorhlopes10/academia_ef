@@ -18,7 +18,7 @@ export class PagamentosComponent implements OnInit {
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
-  items: MenuItem[] = [{ label: 'Alunos' }];
+  items: MenuItem[] = [{ label: 'Pagamentos' }];
 
   constructor(private alunoService: AlunoService,
     private router: Router,

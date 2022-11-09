@@ -4,6 +4,7 @@ import { MenuItem, ConfirmationService, MessageService } from 'primeng/api';
 import { PagamentoFiltro } from 'src/app/models/filtros/pagamento-filtro';
 import { PagamentoMensalidadeInterface } from 'src/app/models/interfaces/pagamento-mensalidade-interface';
 import { PagamentoMensalidadeModel } from 'src/app/models/pagamento-mensalidade-model';
+import { AlunoService } from 'src/app/services/aluno.service';
 import { PagamentoMensalidadeService } from 'src/app/services/pagamento-mensalidade.service';
 
 @Component({
@@ -13,27 +14,43 @@ import { PagamentoMensalidadeService } from 'src/app/services/pagamento-mensalid
 })
 export class PagamentosDetalhadosComponent implements OnInit {
 
-  pagamentoDetalhado!: PagamentoMensalidadeInterface;
   novoPagamento: PagamentoMensalidadeModel = new PagamentoMensalidadeModel();
   pagamentos: PagamentoMensalidadeInterface[] = [];
+
   filtro: PagamentoFiltro = new PagamentoFiltro();
 
   idAluno: number = 0;
+  nomeAluno: string = '';
+  idAcordoMensalidade: number = 0;
+  valorPlano: number = 0;
 
-  mostrarModalVisualizacao: boolean = false;
-  mostrarModalRegistroPagamento: boolean = false;
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
   items: MenuItem[] = [{ label: 'Alunos' }, { label: 'Pagamentos por Aluno' }];
 
   constructor(private pagamentoMensalidadeService: PagamentoMensalidadeService,
+    private alunoService: AlunoService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.idAluno = this.route.snapshot.params["parametro"];
+    this.idAluno = Number.parseInt(this.route.snapshot.params["parametro"]);
     this.buscarPagamentos();
+    this.buscarAluno();
+  }
+
+  buscarAluno() {
+    this.alunoService.buscarPorId(this.idAluno).subscribe(
+      obj => {
+        this.nomeAluno = obj.nome;
+        this.valorPlano = obj.plano.valor;
+        this.idAcordoMensalidade = obj.idAcordoMensalidade;
+      },
+      () => {
+        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos pagamentos' });
+      }
+    );
   }
 
   buscarPagamentos() {
@@ -52,12 +69,12 @@ export class PagamentosDetalhadosComponent implements OnInit {
 
   confirmarRegistroDePagamento() {
     this.confirmationService.confirm({
-      message: 'Você realmente confirmar o registro de pagamento do mês atual?',
+      message: `Deseja confirmar o Registro de Pagamento do mês atual do(a) aluno(a): ${this.nomeAluno}`,
       header: 'Confirmação de Registro de Pagamento',
       icon: 'pi pi-info-circle',
       accept: () => {
         this.loading = true;
-        this.cadastrar();
+        this.registrarPagamento();
       },
       reject: () => {
         this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com o registro de pagamento' });
@@ -65,28 +82,20 @@ export class PagamentosDetalhadosComponent implements OnInit {
     });
   }
 
-  abrirModalDetalhesDoPagamento(id: number) {
-    this.mostrarModalVisualizacao = true;
-    this.buscarPorId(id);
-  }
-
-  fecharModalDeVisualizacao() {
-    this.mostrarModalVisualizacao = false;
-  }
-
-  cadastrar() {
+  registrarPagamento() {
     this.loading = true;
-    
-    this.novoPagamento.valorPago = this.pagamentos[0].acordoMensalidade.aluno.plano.valor;
-    this.novoPagamento.idAcordoMensalidade = this.pagamentos[0].acordoMensalidade.id;
+
+    this.novoPagamento.valorPago = this.valorPlano;
+
+    this.novoPagamento.idAcordoMensalidade = this.idAcordoMensalidade;
     this.novoPagamento.idFuncionario = 1
 
-    this.pagamentoMensalidadeService.cadastrar(this.novoPagamento).subscribe(
+    this.pagamentoMensalidadeService.registrarPagamento(this.novoPagamento).subscribe(
       () => {
         this.loading = false;
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'O Pagamento foi registrado com sucesso' });
         this.buscarPagamentos();
-      }, 
+      },
       () => {
         this.loading = false;
         this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro no registro do Pagamento' });
@@ -135,21 +144,6 @@ export class PagamentosDetalhadosComponent implements OnInit {
     this.pagamentoMensalidadeService.filtro(this.filtro).subscribe(
       list => {
         this.pagamentos = list;
-        this.loading = false;
-      },
-      () => {
-        this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelo Pagamento' });
-      }
-    );
-  }
-
-  buscarPorId(id: number) {
-    this.loading = true;
-
-    this.pagamentoMensalidadeService.buscarPorId(id).subscribe(
-      obj => {
-        this.pagamentoDetalhado = obj;
         this.loading = false;
       },
       () => {

@@ -1,6 +1,8 @@
 ﻿using academia_ef.Model;
+using academia_ef.Repository;
 using academia_ef.Repository.Interfaces;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Pagamento;
 
 namespace academia_ef.Services
 {
@@ -23,16 +25,19 @@ namespace academia_ef.Services
             return _pagamentoMensalidadeRepository.BuscarTodosPorAluno(idAluno);
         }
 
-        public PagamentoMensalidade Inserir(PagamentoMensalidade pagamentoMensalidade)
+        public PagamentoMensalidade RegistrarPagamento(PagamentoViewModel novoPagamento)
         {
-            var obj = _pagamentoMensalidadeRepository.Inserir(pagamentoMensalidade);
-            return obj;
-        }
+            var obj = new PagamentoMensalidade();
 
-        public PagamentoMensalidade Atualizar(PagamentoMensalidade pagamentoMensalidade)
-        {
-            var obj = _pagamentoMensalidadeRepository.Atualizar(pagamentoMensalidade);
-            return obj;
+            obj.ValorPago = novoPagamento.ValorPago;
+            obj.DataPagamento = DateTime.Now;
+
+            obj.IdAcordoMensalidade = novoPagamento.IdAcordoMensalidade;
+            obj.IdFuncionario = novoPagamento.IdFuncionario;
+
+            var retorno = _pagamentoMensalidadeRepository.RegistrarPagamento(obj);
+
+            return retorno;
         }
 
         public bool Deletar(int id)

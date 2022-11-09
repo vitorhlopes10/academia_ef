@@ -42,23 +42,24 @@
   </div>
 
   <div class="container container-tabela">
-    <p-table #dt [value]="avaliacoesFisica" [rows]="3" [paginator]="this.avaliacoesFisica.length > 0" dataKey="id"
+    <p-table #dt [value]="avaliacoesFisica" [rows]="3" [paginator]="this.avaliacoesFisica.length > 0"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [showCurrentPageReport]="this.avaliacoesFisica.length > 0">
       <ng-template pTemplate="header">
         <tr>
           <th> Data de Criação </th>
           <th> Aluno </th>
-          <th style="width:150px"> </th>
+          <th style="width:190px"> </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-avalicao>
         <tr>
-          <td>{{avalicao.dataCriacao}}</td>
+          <td>{{avalicao.dataCriacao | date: 'dd/MM/yyyy'}}</td>
           <td>{{avalicao.aluno.nome}}</td>
           <td>
-            <button pButton pRipple pTooltip="Visualizar" icon="pi pi-search" class="p-button-rounded p-button-help mr-2"
-              (click)="detalhes(avalicao.id)" style="margin-right: 6px;"></button>
+            <button pButton pRipple pTooltip="Visualizar" icon="pi pi-search"
+              class="p-button-rounded p-button-help mr-2" (click)="detalhes(avalicao.id)"
+              style="margin-right: 6px;"></button>
             <button pButton pRipple pTooltip="Editar" icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
               (click)="confirmarEdicao(avalicao.id)" style="margin-right: 6px;"></button>
             <button pButton pRipple pTooltip="Deletar" icon="pi pi-trash" class="p-button-rounded p-button-danger"
@@ -75,4 +76,7 @@
       </ng-template>
     </p-table>
   </div>
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+  </p-confirmDialog>
 </div>

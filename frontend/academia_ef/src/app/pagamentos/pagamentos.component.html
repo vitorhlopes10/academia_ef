@@ -12,7 +12,8 @@
       </div>
       <div class="col-3">
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.cpf" placeholder="999.999.999-99">
+          <p-inputMask [(ngModel)]="filtro.cpf" placeholder="999.999.999-99" mask="999.999.999-99">
+          </p-inputMask>
           <label for="float-input">CPF</label>
         </span>
       </div>
@@ -36,20 +37,20 @@
   </div>
 
   <div class="container container-tabela">
-    <p-table #dt [value]="alunos" [rows]="3" [paginator]="this.alunos.length > 0" dataKey="id"
+    <p-table #dt [value]="alunos" [rows]="3" [paginator]="this.alunos.length > 0"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
       [showCurrentPageReport]="this.alunos.length > 0">
       <ng-template pTemplate="header">
         <tr>
           <th> Aluno </th>
           <th> Status de Mensalidade </th>
-          <th style="width:150px"> </th>
+          <th style="width:20px"> </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-aluno>
         <tr>
           <td>{{aluno.nome}}</td>
-          <td>{{aluno.acordoMensalidade.statusMensalidade.descricao}}</td>
+          <td> <b> {{aluno.acordoMensalidade.statusMensalidade.descricao.toUpperCase()}} </b> </td>
           <td>
             <button pButton pRipple icon="pi pi-arrow-right" class="p-button-rounded p-button-help mr-2"
               (click)="verificar(aluno.id)" style="margin-right: 6px;"></button>

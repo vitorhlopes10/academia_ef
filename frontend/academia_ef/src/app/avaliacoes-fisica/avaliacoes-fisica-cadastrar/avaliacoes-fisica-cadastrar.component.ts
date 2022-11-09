@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectItem, MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { AvaliacaoFisicaModel } from 'src/app/models/avaliacao-fisica-model';
+import { AlunoInterface } from 'src/app/models/interfaces/aluno-interface';
+import { BiotipoInterface } from 'src/app/models/interfaces/biotipo-interface';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { AvaliacaoFisicaService } from 'src/app/services/avaliacao-fisica.service';
 import { BiotipoService } from 'src/app/services/biotipo.service';
@@ -15,11 +17,8 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
 
   novaAvaliacaoFisica: AvaliacaoFisicaModel = new AvaliacaoFisicaModel();
 
-  alunos: any[] = [];
-  biotipos: any[] = [];
-
-  alunoSelecionado!: SelectItem;
-  biotipoSelecionado!: SelectItem;
+  alunos: AlunoInterface[] = [];
+  biotipos: BiotipoInterface[] = [];
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -39,12 +38,10 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
   buscarAlunos() {
     this.alunoService.buscarTodos().subscribe(
       list => {
-        list.forEach(item => {
-          this.alunos.push({ name: item.nome, value: item.id })
-        });
+        this.alunos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
       }
     )
   }
@@ -52,35 +49,38 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
   buscarBiotipos() {
     this.biotipoService.buscarTodos().subscribe(
       list => {
-        list.forEach(item => {
-          this.biotipos.push({ name: item.tipo, value: item.id })
-        });
+        this.biotipos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Biotipos' });
       }
     )
   }
 
   cadastrar() {
     this.loading = true;
+    this.prepararParaEnvio();
 
     this.avaliacaoFisicaService.cadastrar(this.novaAvaliacaoFisica).subscribe(
-      success => {
+      () => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Funcionario inserido com sucesso!' });
-        this.router.navigate(['funcionarios'])
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Avaliação Física inserida com sucesso!' });
+        this.router.navigate(['avaliacoes-fisicas']);
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Funcionario' });
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir a Avaliação Física' });
       },
       () => { }
     )
   }
 
+  prepararParaEnvio() {
+    this.novaAvaliacaoFisica.idFuncionario = 1;
+  }
+
   voltar() {
-    this.router.navigate(['treinos']);
+    this.router.navigate(['avaliacoes-fisicas']);
   }
 
   validarCadastro() {
@@ -88,77 +88,77 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
 
     if (!(this.novaAvaliacaoFisica.abdomen)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Abdômen' });
     }
 
     if (!(this.novaAvaliacaoFisica.altura)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Altura' });
     }
 
     if (!(this.novaAvaliacaoFisica.antebraco)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Antebraço' });
     }
 
     if (!(this.novaAvaliacaoFisica.cintura)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Cintura' });
     }
 
     if (!(this.novaAvaliacaoFisica.coxa)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Coxa' });
     }
 
     if (!(this.novaAvaliacaoFisica.idade)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Idade' });
     }
 
     if (!(this.novaAvaliacaoFisica.larguraBracoContraido)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Lagura braço contraído' });
     }
 
     if (!(this.novaAvaliacaoFisica.larguraBracoRelaxado)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Largura braço relaxado' });
     }
 
     if (!(this.novaAvaliacaoFisica.larguraEntreOmbros)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Largura entre os ombros' });
     }
 
     if (!(this.novaAvaliacaoFisica.panturrilha)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Panturrilha' });
     }
 
     if (!(this.novaAvaliacaoFisica.peso)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Peso' });
     }
 
     if (!(this.novaAvaliacaoFisica.quadril)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Quadril' });
     }
 
     if (!(this.novaAvaliacaoFisica.torax)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo "Nome"' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo Torax' });
     }
 
-    if (!(this.alunoSelecionado)) {
+    if (!(this.novaAvaliacaoFisica.idAluno)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher um Aluno' });
     }
 
-    if (!(this.biotipoSelecionado)) {
+    if (!(this.novaAvaliacaoFisica.idBiotipo)) {
       prosseguir = false;
-      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
+      this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher um Biotipo' });
     }
 
     if (prosseguir) {

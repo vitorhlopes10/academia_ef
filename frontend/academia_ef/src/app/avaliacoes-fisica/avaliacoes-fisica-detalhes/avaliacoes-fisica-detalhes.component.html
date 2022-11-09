@@ -5,32 +5,28 @@
     <div class="container">
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
-                <label for="float-input">Alunos</label>
-                <p-dropdown [options]="alunos" [(ngModel)]="alunoSelecionado" placeholder="Selecione o Aluno"
-                    optionLabel="name">
-                </p-dropdown>
+                <label for="float-input">Aluno</label>
+                <input *ngIf="avaliacaoFisica?.aluno?.nome" type="text" pInputText
+                    [(ngModel)]="avaliacaoFisica.aluno.nome" disabled="true">
             </div>
 
             <div class="col-4">
-                <label for="float-input">Biotipos</label>
-                <p-dropdown [options]="biotipos" [(ngModel)]="biotipoSelecionado" placeholder="Selecione o Biotipo"
-                    optionLabel="name">
-                </p-dropdown>
+                <label for="float-input">Biotipo</label>
+                <input *ngIf="avaliacaoFisica?.biotipo?.tipo" type="text" pInputText
+                    [(ngModel)]="avaliacaoFisica.biotipo.tipo" disabled="true">
             </div>
         </div>
 
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Abdômen</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.abdomen" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.abdomen" [(ngModel)]="avaliacaoFisica.abdomen" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Idade</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.idade" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.idade" [(ngModel)]="avaliacaoFisica.idade" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -38,15 +34,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Peso</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.peso" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.peso" [(ngModel)]="avaliacaoFisica.peso" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Altura</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.altura" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.altura" [(ngModel)]="avaliacaoFisica.altura" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -54,15 +48,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Largura entre os Ombros</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.larguraEntreOmbros" inputId="valorPago" [min]="0"
-                    mode="currency" currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.larguraEntreOmbros" [(ngModel)]="avaliacaoFisica.larguraEntreOmbros" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Largura braço relaxado</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.larguraBracoRelaxado" inputId="valorPago" [min]="0"
-                    mode="currency" currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.larguraBracoRelaxado" [(ngModel)]="avaliacaoFisica.larguraBracoRelaxado" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -70,15 +62,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Largura braço contraído</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.larguraBracoContraido" inputId="valorPago" [min]="0"
-                    mode="currency" currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.larguraBracoContraido" [(ngModel)]="avaliacaoFisica.larguraBracoContraido" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Antebraço</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.antebraco" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.antebraco" [(ngModel)]="avaliacaoFisica.antebraco" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -86,15 +76,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Torax</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.torax" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.torax" [(ngModel)]="avaliacaoFisica.torax" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Panturrilha</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.panturrilha" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.panturrilha" [(ngModel)]="avaliacaoFisica.panturrilha" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -102,15 +90,13 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Cintura</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.cintura" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.cintura" [(ngModel)]="avaliacaoFisica.cintura" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
 
             <div class="col-4">
                 <label for="stacked">Quadril</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.quadril" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.quadril" [(ngModel)]="avaliacaoFisica.quadril" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>
@@ -118,8 +104,7 @@
         <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Coxa</label>
-                <p-inputNumber [(ngModel)]="avaliacaoFisica.coxa" inputId="valorPago" [min]="0" mode="currency"
-                    currency="BRL" [disabled]="true">
+                <p-inputNumber *ngIf="avaliacaoFisica?.coxa" [(ngModel)]="avaliacaoFisica.coxa" [min]="0" [disabled]="true">
                 </p-inputNumber>
             </div>
         </div>

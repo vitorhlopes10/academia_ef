@@ -31,14 +31,14 @@ namespace academia_ef.Controllers
         public ActionResult<List<Funcionario>> BuscarTodos()
         {
             var resultado = _funcionarioService.BuscarTodos();
-            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
         [HttpGet("Filtro")]
         public ActionResult<List<Funcionario>> Filtro([FromQuery] FuncionarioFiltroViewModel filtro)
         {
             var resultado = _funcionarioService.Filtrar(filtro);
-            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
         [HttpPost()]

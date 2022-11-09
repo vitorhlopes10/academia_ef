@@ -44,7 +44,6 @@ namespace academia_ef.Services
             }
 
             return result.ToList();
-
         }
 
         public List<Treino> BuscarTodos()

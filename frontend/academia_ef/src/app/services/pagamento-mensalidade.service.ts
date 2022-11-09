@@ -34,7 +34,7 @@ export class PagamentoMensalidadeService {
     return this.http.delete<Observable<any>>(`${this.configUrl}/PagamentosMensalidades/${id}`);
   }
 
-  cadastrar(obj: PagamentoMensalidadeModel) {
+  registrarPagamento(obj: PagamentoMensalidadeModel) {
     return this.http.post<Observable<PagamentoMensalidadeModel>>(`${this.configUrl}/PagamentosMensalidades`, obj)
   }
 

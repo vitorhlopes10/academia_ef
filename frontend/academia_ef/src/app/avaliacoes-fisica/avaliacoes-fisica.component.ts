@@ -35,12 +35,11 @@ export class AvaliacoesFisicaComponent implements OnInit {
         this.avaliacoesFisica = list;
         this.loading = false;
       },
-      error => {
-        this.loading = false;
-      },
       () => {
         this.loading = false;
-      }
+        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Avaliações Fisica' });
+      },
+      () => { }
     );
   }
 
@@ -58,17 +57,17 @@ export class AvaliacoesFisicaComponent implements OnInit {
       header: 'Confirmação de Edição',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.loading = true;
         this.editar(id);
       },
       reject: () => {
+        this.loading = false;
         this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a edição' });
       }
     });
   }
 
   editar(id: number) {
-    this.router.navigate([`avaliacoesFisica/editar/${id}`]);
+    this.router.navigate([`avaliacoes-fisica/editar/${id}`]);
   }
 
   confirmarDelecao(id: number) {
@@ -81,6 +80,7 @@ export class AvaliacoesFisicaComponent implements OnInit {
         this.deletar(id);
       },
       reject: () => {
+        this.loading = false;
         this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a deleção' });
       }
     });
@@ -90,11 +90,11 @@ export class AvaliacoesFisicaComponent implements OnInit {
     this.avaliacaoFisicaService.deletar(id).subscribe(
       () => {
         this.buscarAvaliacoesFisica();
-        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Item deletado com sucesso' });
-        this.loading = false;
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Avaliação Física deletado com sucesso' });
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
+        this.loading = false;
+        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção da Avaliação Física' });
       }
     );
   }

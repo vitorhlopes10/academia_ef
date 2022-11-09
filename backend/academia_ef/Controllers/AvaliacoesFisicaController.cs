@@ -1,5 +1,8 @@
 using academia_ef.Model;
+using academia_ef.Services;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.AvaliacaoFisica;
+using academia_ef.ViewModel.Treino;
 using Microsoft.AspNetCore.Mvc;
 
 namespace academia_ef.Controllers
@@ -26,23 +29,30 @@ namespace academia_ef.Controllers
             return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
+        [HttpGet("Filtro")]
+        public ActionResult<List<AvaliacaoFisica>> Filtro([FromQuery] AvaliacaoFisicaFiltroViewModel filtro)
+        {
+            var resultado = _avaliacaoFisicaService.Filtrar(filtro);
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
+        }
+
         [HttpGet()]
         public ActionResult<List<AvaliacaoFisica>> BuscarTodos()
         {
             var resultado = _avaliacaoFisicaService.BuscarTodos();
-            return resultado is null || !(resultado.Any()) ? NotFound("Não Encontrado!") : Ok(resultado);
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<AvaliacaoFisica> Inserir(AvaliacaoFisica avaliacaoFisica)
+        public ActionResult<AvaliacaoFisica> Inserir(AvaliacaoFisicaViewModel avaliacaoFisica)
         {
             var resultado = _avaliacaoFisicaService.Inserir(avaliacaoFisica);
             return resultado is null ? NotFound("Não foi possível realizar o cadastro!") : resultado;
         }
 
         [HttpPut()]
-        public ActionResult<AvaliacaoFisica> Atualizar(AvaliacaoFisica avaliacaoFisica)
+        public ActionResult<AvaliacaoFisica> Atualizar(AvaliacaoFisicaViewModel avaliacaoFisica)
         {
             var resultado = _avaliacaoFisicaService.Atualizar(avaliacaoFisica);
             return resultado is null ? NotFound("Não foi possível atualizar o cadastro!") : Ok(resultado);

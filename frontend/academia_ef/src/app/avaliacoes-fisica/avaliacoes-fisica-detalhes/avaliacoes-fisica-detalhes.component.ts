@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SelectItem, MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { AlunoInterface } from 'src/app/models/interfaces/aluno-interface';
 import { AvaliacaoFisicaInterface } from 'src/app/models/interfaces/avaliacao-fisica-interface';
+import { BiotipoInterface } from 'src/app/models/interfaces/biotipo-interface';
 import { AvaliacaoFisicaService } from 'src/app/services/avaliacao-fisica.service';
-import { TreinoService } from 'src/app/services/treino.service';
 
 @Component({
   selector: 'app-avaliacoes-fisica-detalhes',
@@ -13,12 +14,10 @@ import { TreinoService } from 'src/app/services/treino.service';
 export class AvaliacoesFisicaDetalhesComponent implements OnInit {
 
   avaliacaoFisica!: AvaliacaoFisicaInterface;
+  id: number = 0;
 
-  alunos: any[] = [];
-  biotipos: any[] = [];
-
-  alunoSelecionado!: SelectItem;
-  biotipoSelecionado!: SelectItem;
+  alunos: AlunoInterface[] = [];
+  biotipos: BiotipoInterface[] = [];
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
@@ -30,13 +29,18 @@ export class AvaliacoesFisicaDetalhesComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loading = true;
-    const id = this.route.snapshot.params["parametro"];
+    this.id = this.route.snapshot.params["parametro"];
 
-    this.avaliacaoFisicaService.buscarPorId(Number.parseInt(id)).subscribe(
+    this.buscarPorId();
+  }
+
+  buscarPorId() {
+    this.loading = true;
+
+    this.avaliacaoFisicaService.buscarPorId(this.id).subscribe(
       obj => {
-        this.loading = false;
         this.avaliacaoFisica = obj;
+        this.loading = false;
       },
       () => {
         this.loading = false;
@@ -46,6 +50,6 @@ export class AvaliacoesFisicaDetalhesComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['treinos']);
+    this.router.navigate(['avaliacoes-fisica']);
   }
 }

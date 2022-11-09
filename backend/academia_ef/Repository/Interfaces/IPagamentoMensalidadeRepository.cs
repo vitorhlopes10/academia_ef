@@ -6,8 +6,7 @@ namespace academia_ef.Repository.Interfaces
     {
         PagamentoMensalidade Buscar(int id);
         List<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno);
-        PagamentoMensalidade Inserir(PagamentoMensalidade pagamentoMensalidade);
-        PagamentoMensalidade Atualizar(PagamentoMensalidade pagamentoMensalidade);
+        PagamentoMensalidade RegistrarPagamento(PagamentoMensalidade pagamentoMensalidade);
         bool Deletar(int id);
     }
 }

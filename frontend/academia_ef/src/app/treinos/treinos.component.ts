@@ -57,7 +57,6 @@ export class TreinosComponent implements OnInit {
       header: 'Confirmação de Edição',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.loading = true;
         this.editar(id);
       },
       reject: () => {
@@ -91,12 +90,11 @@ export class TreinosComponent implements OnInit {
     this.treinoService.deletar(id).subscribe(
       () => {
         this.buscarTreinos();
-        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Item deletado com sucesso' });
-        this.loading = false;
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Treino deletado com sucesso' });
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
+        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do Treino' });
       }
     );
   }
