@@ -23,7 +23,11 @@ export class FuncionarioService {
   }
 
   filtro(filtro: FuncionarioFiltro): Observable<FuncionarioInterface[]> {
-    return this.http.get<FuncionarioInterface[]>(`${this.configUrl}/Funcionarios/Filtro/${filtro}`);
+    const cpf = filtro.cpf.replace('.', '').replace('.', '').replace('-', '');
+    const nome = filtro.nome.trim();
+    const matricula = filtro.matricula.trim();
+ 
+    return this.http.get<FuncionarioInterface[]>(`${this.configUrl}/Funcionarios/Filtro?cpf=${cpf}&nome=${nome}&matricula=${matricula}`);
   }
 
   ativar(id: number): Observable<any> {

@@ -54,11 +54,10 @@ import { MeusDadosComponent } from './meus-dados/meus-dados.component';
 import { FuncionariosCadastrarComponent } from './funcionarios/funcionarios-cadastrar/funcionarios-cadastrar.component';
 import { MeusTreinosAlunoComponent } from './meus-treinos-aluno/meus-treinos-aluno.component';
 import { MinhasAvaliacoesFisicaAlunoComponent } from './minhas-avaliacoes-fisica-aluno/minhas-avaliacoes-fisica-aluno.component';
-import { TreinoAtualDetalhesComponent } from './meus-treinos-aluno/treino-atual-detalhes/treino-atual-detalhes.component';
-import { AvaliacaoFisicaAtualDetalhesComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-atual-detalhes/avaliacao-fisica-atual-detalhes.component';
 import { PagamentosDetalhadosComponent } from './pagamentos/pagamentos-detalhados/pagamentos-detalhados.component';
 import { MeusPagamentosAlunoComponent } from './meus-pagamentos-aluno/meus-pagamentos-aluno.component';
-import { PagamentoDetalheComponent } from './meus-pagamentos-aluno/pagamento-detalhe/pagamento-detalhe.component';
+import { TreinoDetalhadoComponent } from './meus-treinos-aluno/treino-detalhado/treino-detalhado.component';
+import { AvaliacaoFisicaDetalhadaComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-detalhada/avaliacao-fisica-detalhada.component';
 
 @NgModule({
   declarations: [
@@ -92,11 +91,10 @@ import { PagamentoDetalheComponent } from './meus-pagamentos-aluno/pagamento-det
     MeusDadosComponent,
     MeusTreinosAlunoComponent,
     MinhasAvaliacoesFisicaAlunoComponent,
-    TreinoAtualDetalhesComponent,
-    AvaliacaoFisicaAtualDetalhesComponent,
     PagamentosDetalhadosComponent,
     MeusPagamentosAlunoComponent,
-    PagamentoDetalheComponent
+    TreinoDetalhadoComponent,
+    AvaliacaoFisicaDetalhadaComponent,
   ],
   imports: [
     BrowserModule,

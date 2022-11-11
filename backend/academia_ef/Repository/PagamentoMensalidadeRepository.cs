@@ -19,9 +19,15 @@ namespace academia_ef.Repository
             return obj;
         }
 
-        public List<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno)
+        public IQueryable<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno)
         {
-            var obj = _context.PagamentoMensalidade.Where(x => x.AcordoMensalidade.Aluno.Id == idAluno).ToList();
+            var obj = _context.PagamentoMensalidade.Where(x => x.AcordoMensalidade.Aluno.Id == idAluno);
+            return obj;
+        }
+
+        public IQueryable<PagamentoMensalidade> BuscarTodos()
+        {
+            var obj = _context.PagamentoMensalidade.AsQueryable();
             return obj;
         }
 

@@ -65,7 +65,7 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
       () => {
         this.loading = false;
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Avaliação Física inserida com sucesso!' });
-        this.router.navigate(['avaliacoes-fisicas']);
+        this.router.navigate(['avaliacoes-fisica']);
       },
       () => {
         this.loading = false;
@@ -80,7 +80,7 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['avaliacoes-fisicas']);
+    this.router.navigate(['avaliacoes-fisica']);
   }
 
   validarCadastro() {

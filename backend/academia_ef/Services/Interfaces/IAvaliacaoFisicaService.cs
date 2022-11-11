@@ -7,6 +7,7 @@ namespace academia_ef.Services.Interfaces
     {
         AvaliacaoFisica Buscar(int id);
         List<AvaliacaoFisica> Filtrar(AvaliacaoFisicaFiltroViewModel filtro);
+        List<AvaliacaoFisica> BuscarTodosPorAluno(int idAluno);
         List<AvaliacaoFisica> BuscarTodos();
         AvaliacaoFisica Inserir(AvaliacaoFisicaViewModel avaliacaoFisica);
         AvaliacaoFisica Atualizar(AvaliacaoFisicaViewModel avaliacaoFisica);

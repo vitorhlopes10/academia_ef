@@ -17,24 +17,22 @@
                     placeholder="Selecione o Biotipo" optionLabel="tipo" optionValue="id">
                 </p-dropdown>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Abdômen</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.abdomen" [min]="0" [showButtons]="true" mode="decimal"
                     [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
+        </div>
 
+        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Idade</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.idade" [min]="0" [showButtons]="true">
                 </p-inputNumber>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Peso</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.peso" [min]="0" [showButtons]="true">
@@ -63,25 +61,23 @@
                     [maxFractionDigits]="2" mode="decimal" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Largura braço contraído</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.larguraBracoContraido" [min]="0" [showButtons]="true"
                     [maxFractionDigits]="2" mode="decimal" [minFractionDigits]="2">
                 </p-inputNumber>
-            </div>
+            </div>          
+        </div>
 
+        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Antebraço</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.antebraco" [min]="0" [showButtons]="true" mode="decimal"
                     [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
-            </div>
-        </div>
+            </div>  
 
-        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Torax</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.torax" [min]="0" [showButtons]="true" mode="decimal"
@@ -104,16 +100,14 @@
                     [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
-
+            
             <div class="col-4">
                 <label for="stacked">Quadril</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.quadril" [min]="0" [showButtons]="true" mode="decimal"
                     [maxFractionDigits]="2" [minFractionDigits]="2">
                 </p-inputNumber>
             </div>
-        </div>
 
-        <div class="row p-fluid" style="margin-top: 15px;">
             <div class="col-4">
                 <label for="stacked">Coxa</label>
                 <p-inputNumber [(ngModel)]="novaAvaliacaoFisica.coxa" [min]="0" [showButtons]="true" mode="decimal"
@@ -123,7 +117,7 @@
         </div>
 
         <div class="container-btns-forms row justify-content-md-end">
-            <div class="col-7">
+            <div class="col-3">
                 <button id="btnVoltar" pButton pRipple type="button" label="Voltar" class="p-button-secondary"
                     (click)="voltar()" style="margin-top: 50px; margin-left: 20px;"></button>
                 <button id="btnSalvar" pButton pRipple type="button" label="Cadastrar" class="p-button-success"

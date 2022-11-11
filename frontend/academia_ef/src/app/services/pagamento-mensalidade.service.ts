@@ -27,7 +27,12 @@ export class PagamentoMensalidadeService {
   }
 
   filtro(filtro: PagamentoFiltro): Observable<PagamentoMensalidadeInterface[]> {
-    return this.http.get<PagamentoMensalidadeInterface[]>(`${this.configUrl}/PagamentosMensalidades/Filtro/${filtro}`);
+    const dateInicial = filtro.dataInicial ? `${filtro.dataInicial.getDate()}-${filtro.dataInicial.getMonth() + 1}-${filtro.dataInicial.getFullYear()}` : '';
+    const dateFinal = filtro.dataFinal ? `${filtro.dataFinal.getDate()}-${filtro.dataFinal.getMonth() + 1}-${filtro.dataFinal.getFullYear()}` : '';
+
+    return this.http
+      .get<PagamentoMensalidadeInterface[]>(
+        `${this.configUrl}/PagamentosMensalidades/Filtro?idAluno=${filtro.idAluno}&dataInicial=${dateInicial}&dataFinal=${dateFinal}`);
   }
 
   deletar(id: number): Observable<any> {

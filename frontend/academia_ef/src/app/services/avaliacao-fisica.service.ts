@@ -22,8 +22,19 @@ export class AvaliacaoFisicaService {
     return this.http.get<AvaliacaoFisicaInterface[]>(`${this.configUrl}/AvaliacoesFisica`);
   }
 
+  buscarTodosPorAluno(idAluno: number): Observable<AvaliacaoFisicaInterface[]> {
+    return this.http.get<AvaliacaoFisicaInterface[]>(`${this.configUrl}/AvaliacoesFisica/PorAluno/${idAluno}`);
+  }
+
   filtro(filtro: AvaliacaoFisicaFiltro): Observable<AvaliacaoFisicaInterface[]> {
-    return this.http.get<AvaliacaoFisicaInterface[]>(`${this.configUrl}/AvaliacoesFisica/Filtro/${filtro}`);
+    const dateInicial = filtro.dataInicial ? `${filtro.dataInicial.getDate()}-${filtro.dataInicial.getMonth() + 1}-${filtro.dataInicial.getFullYear()}` : '';
+    const dateFinal = filtro.dataFinal ? `${filtro.dataFinal.getDate()}-${filtro.dataFinal.getMonth() + 1}-${filtro.dataFinal.getFullYear()}` : '';
+    const nomeAluno = filtro.nomeAluno ? filtro.nomeAluno?.trim() : '';
+    const idAluno = filtro.idAluno;
+
+    return this.http
+      .get<AvaliacaoFisicaInterface[]>(
+        `${this.configUrl}/AvaliacoesFisica/Filtro?nomeAluno=${nomeAluno}&dataInicial=${dateInicial}&dataFinal=${dateFinal}`);
   }
 
   deletar(id: number): Observable<any> {

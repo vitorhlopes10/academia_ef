@@ -100,9 +100,7 @@ export class TreinosComponent implements OnInit {
   }
 
   limpar() {
-    this.filtro.dataInicial;
-    this.filtro.dataFinal;
-    this.filtro.nomeAluno = '';
+    this.filtro = new TreinoFiltro();
   }
 
   buscar() {

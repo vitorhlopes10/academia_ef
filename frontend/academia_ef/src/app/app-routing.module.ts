@@ -17,10 +17,9 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { MeusDadosComponent } from './meus-dados/meus-dados.component';
 import { MeusPagamentosAlunoComponent } from './meus-pagamentos-aluno/meus-pagamentos-aluno.component';
-import { PagamentoDetalheComponent } from './meus-pagamentos-aluno/pagamento-detalhe/pagamento-detalhe.component';
 import { MeusTreinosAlunoComponent } from './meus-treinos-aluno/meus-treinos-aluno.component';
-import { TreinoAtualDetalhesComponent } from './meus-treinos-aluno/treino-atual-detalhes/treino-atual-detalhes.component';
-import { AvaliacaoFisicaAtualDetalhesComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-atual-detalhes/avaliacao-fisica-atual-detalhes.component';
+import { TreinoDetalhadoComponent } from './meus-treinos-aluno/treino-detalhado/treino-detalhado.component';
+import { AvaliacaoFisicaDetalhadaComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-detalhada/avaliacao-fisica-detalhada.component';
 import { MinhasAvaliacoesFisicaAlunoComponent } from './minhas-avaliacoes-fisica-aluno/minhas-avaliacoes-fisica-aluno.component';
 import { PagamentosDetalhadosComponent } from './pagamentos/pagamentos-detalhados/pagamentos-detalhados.component';
 import { PagamentosComponent } from './pagamentos/pagamentos.component';
@@ -36,22 +35,21 @@ import { TreinosEditarComponent } from './treinos/treinos-editar/treinos-editar.
 import { TreinosComponent } from './treinos/treinos.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'rodape', component: RodapeComponent },
-  
+
   { path: 'meus-dados', component: MeusDadosComponent },
 
   { path: 'meus-treinos', component: MeusTreinosAlunoComponent },
-  { path: 'meus-treinos/treino-atual-detalhes/:parametro', component: TreinoAtualDetalhesComponent },
+  { path: 'meus-treinos/treino-detalhado/:parametro', component: TreinoDetalhadoComponent },
 
   { path: 'minhas-avaliacoes-fisica', component: MinhasAvaliacoesFisicaAlunoComponent },
-  { path: 'minhas-avaliacoes-fisica/avaliacao-fisica-atual-detalhes/:parametro', component: AvaliacaoFisicaAtualDetalhesComponent },
+  { path: 'minhas-avaliacoes-fisica/avaliacao-detalhada/:parametro', component: AvaliacaoFisicaDetalhadaComponent },
 
   { path: 'meus-pagamentos', component: MeusPagamentosAlunoComponent },
-  { path: 'meus-pagamentos/meus-pagamentos-detalhes/:parametro', component: PagamentoDetalheComponent },
 
   { path: 'alunos', component: AlunosComponent },
   { path: 'alunos/cadastrar', component: AlunosCadastrarComponent },

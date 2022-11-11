@@ -100,12 +100,17 @@ export class AvaliacoesFisicaComponent implements OnInit {
   }
 
   limpar() {
-    this.filtro.dataInicial = new Date();
-    this.filtro.dataFinal = new Date();
+    this.filtro = new AvaliacaoFisicaFiltro();
   }
 
   buscar() {
     this.loading = true;
+
+    if (!(this.filtro.nomeAluno) && !(this.filtro.dataInicial) && !(this.filtro.dataFinal)) {
+      this.buscarAvaliacoesFisica();
+      return
+    }
+
     this.avaliacaoFisicaService.filtro(this.filtro).subscribe(
       list => {
         this.avaliacoesFisica = list;

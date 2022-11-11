@@ -6,8 +6,8 @@ export interface AcordoMensalidadeInterface {
     id: number;
     diaDataVencimento: number;
 
-    statusMensalidade: StatusMensalidadeInterface;
     aluno: AlunoInterface;
+    statusMensalidade: StatusMensalidadeInterface;
 
     pagamentosMensalidades: PagamentoMensalidadeInterface[];
 

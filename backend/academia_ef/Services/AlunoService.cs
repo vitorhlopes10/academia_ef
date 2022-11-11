@@ -36,17 +36,17 @@ namespace academia_ef.Services
                 return null;
             }
 
-            if (filtro.Matricula != null && filtro.Matricula != String.Empty)
+            if (!string.IsNullOrEmpty(filtro.Matricula))
             {
                 result = result.Where(x => x.Matricula.Equals(filtro.Matricula));
             }
 
-            if (filtro.Cpf != null && filtro.Cpf != String.Empty)
+            if (!string.IsNullOrEmpty(filtro.Cpf))
             {
                 result = result.Where(x => x.Cpf.Equals(filtro.Cpf));
             }
 
-            if (filtro.Nome != null && filtro.Nome != String.Empty)
+            if (!string.IsNullOrEmpty(filtro.Nome))
             {
                 result = result.Where(x => x.Nome.Equals(filtro.Nome));
             }

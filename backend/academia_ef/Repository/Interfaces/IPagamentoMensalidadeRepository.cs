@@ -5,7 +5,8 @@ namespace academia_ef.Repository.Interfaces
     public interface IPagamentoMensalidadeRepository
     {
         PagamentoMensalidade Buscar(int id);
-        List<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno);
+        IQueryable<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno);
+        IQueryable<PagamentoMensalidade> BuscarTodos();
         PagamentoMensalidade RegistrarPagamento(PagamentoMensalidade pagamentoMensalidade);
         bool Deletar(int id);
     }

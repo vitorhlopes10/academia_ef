@@ -25,6 +25,12 @@ namespace academia_ef.Repository
             return obj;
         }
 
+        public IQueryable<Treino> BuscarTodosPorAluno(int id)
+        {
+            var obj = _context.Treino.Where(x => x.IdAluno == id);
+            return obj;
+        }
+
         public Treino Inserir(Treino treino)
         {
             var obj = _context.Add(treino);

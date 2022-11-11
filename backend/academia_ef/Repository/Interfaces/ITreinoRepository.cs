@@ -6,6 +6,7 @@ namespace academia_ef.Repository.Interfaces
     {
         Treino Buscar(int id);
         IQueryable<Treino> BuscarTodos();
+        IQueryable<Treino> BuscarTodosPorAluno(int id);
         Treino Inserir(Treino treino);
         Treino Atualizar(Treino treino);
         bool Deletar(int id);

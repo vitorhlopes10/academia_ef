@@ -133,13 +133,17 @@ export class PagamentosDetalhadosComponent implements OnInit {
   }
 
   limpar() {
-    this.filtro.dataInicial = new Date();
-    this.filtro.dataFinal = new Date();
+    this.filtro = new PagamentoFiltro;
   }
 
   buscar() {
     this.loading = true;
     this.filtro.idAluno = this.idAluno;
+
+    if (!(this.filtro.dataFinal) && !(this.filtro.dataInicial)) {
+      this.buscarPagamentos();
+      return
+    }
 
     this.pagamentoMensalidadeService.filtro(this.filtro).subscribe(
       list => {

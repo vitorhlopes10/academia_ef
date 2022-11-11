@@ -132,9 +132,7 @@ export class AlunosComponent implements OnInit {
   }
 
   limpar() {
-    this.filtro.cpf = '';
-    this.filtro.nome = '';
-    this.filtro.matricula = '';
+    this.filtro = new AlunoFiltro();
   }
 
   buscar() {
@@ -146,11 +144,9 @@ export class AlunosComponent implements OnInit {
     this.loading = true;
     this.alunoService.filtro(this.filtro).subscribe(
       list => {
+        list.forEach(x => x.cpf = x.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
+
         this.alunos = list;
-        this.loading = false;
-      },
-      () => {
-        this.alunos = [];
         this.loading = false;
       }
     );

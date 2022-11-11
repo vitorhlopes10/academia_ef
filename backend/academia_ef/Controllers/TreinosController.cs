@@ -36,6 +36,17 @@ namespace academia_ef.Controllers
             return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
+        [HttpGet("PorAluno/{idAluno}")]
+        public ActionResult<List<PagamentoMensalidade>> BuscarTodosPorAluno(int idAluno)
+        {
+            if (!(idAluno > 0))
+                return BadRequest("É necessário informar um ID maior que 0!");
+
+            var resultado = _treinoService.BuscarTodosPorAluno(idAluno);
+
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
+        }
+
         [HttpGet()]
         public ActionResult<List<Treino>> BuscarTodos()
         {

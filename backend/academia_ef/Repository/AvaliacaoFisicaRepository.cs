@@ -25,6 +25,12 @@ namespace academia_ef.Repository
             return obj;
         }
 
+        public IQueryable<AvaliacaoFisica> BuscarTodosPorAluno(int id)
+        {
+            var obj = _context.AvaliacaoFisica.Where(x => x.IdAluno == id);
+            return obj;
+        }
+
         public AvaliacaoFisica Inserir(AvaliacaoFisica avaliacaoFisica)
         {
             var obj = _context.Add(avaliacaoFisica);

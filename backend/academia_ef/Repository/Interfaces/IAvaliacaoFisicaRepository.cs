@@ -6,6 +6,8 @@ namespace academia_ef.Repository.Interfaces
     {
         AvaliacaoFisica Buscar(int id);
         IQueryable<AvaliacaoFisica> BuscarTodos();
+        IQueryable<AvaliacaoFisica> BuscarTodosPorAluno(int id);
+
         AvaliacaoFisica Inserir(AvaliacaoFisica avaliacaoFisica);
         AvaliacaoFisica Atualizar(AvaliacaoFisica avaliacaoFisica);
         bool Deletar(int id);

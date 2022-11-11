@@ -7,6 +7,7 @@ namespace academia_ef.Services.Interfaces
     {
         Treino Buscar(int id);
         List<Treino> Filtrar(TreinoFiltroViewModel filtro);
+        List<Treino> BuscarTodosPorAluno(int idAluno);
         List<Treino> BuscarTodos();
         Treino Inserir(TreinoViewModel treino);
         Treino Atualizar(TreinoViewModel treino);

@@ -1,1 +1,125 @@
-<p>meus-dados works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-toast position="top-right"></p-toast>
+
+<div class="container-principal">
+    <div class="container">
+        <p-fieldset legend="Dados Básicos" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Nome</label>
+                    <input *ngIf="meusDados?.nome" type="text" pInputText [(ngModel)]="meusDados.nome" disabled="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">CPF</label>
+                    <input *ngIf="meusDados?.cpf" type="text" pInputText [(ngModel)]="meusDados.cpf"
+                        placeholder="999.999.999-99" disabled="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Unidade</label>
+                    <span *ngIf="!(meusDados?.unidade?.nome)">
+                        <input type="text" pInputText disabled="true">
+                    </span>
+                    <input *ngIf="meusDados?.unidade?.nome" type="text" pInputText [(ngModel)]="meusDados.unidade.nome"
+                        disabled="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Email</label>
+                    <input *ngIf="meusDados?.email" type="email" pInputText [(ngModel)]="meusDados.email"
+                        disabled="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Data de Nascimento</label>
+                    <p-calendar *ngIf="meusDados?.dataNascimento" [(ngModel)]="meusDados.dataNascimento"
+                        [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" [showButtonBar]="true" disabled="true">
+                    </p-calendar>
+                </div>
+                <div class="col" *ngIf="isAluno">
+                    <label for="float-input">Plano</label>
+                    <input *ngIf="meusDados?.plano?.nome" type="text" pInputText [(ngModel)]="meusDados.plano.nome"
+                        disabled="true">
+                </div>
+                <div class="col" *ngIf="isFuncionario">
+                    <label for="float-input">Cargo</label>
+                    <input *ngIf="meusDados?.cargo?.nome" type="text" pInputText [(ngModel)]="meusDados.cargo.nome"
+                        disabled="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Telefone</label>
+                    <input *ngIf="meusDados?.telefone" type="text" pInputText [(ngModel)]="meusDados.telefone"
+                        placeholder="(99) 99999-9999" disabled="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Sexo</label>
+                    <input *ngIf="meusDados?.sexo?.nome" type="text" pInputText [(ngModel)]="meusDados.sexo.nome"
+                        disabled="true">
+                </div>
+            </div>
+        </p-fieldset>
+
+        <p-fieldset legend="Endereço" [toggleable]="true">
+            <div class="row p-fluid">
+                <div class="col">
+                    <label for="float-input">Descrição</label>
+                    <input *ngIf="meusDados?.endereco?.descricao" type="text" pInputText
+                        [(ngModel)]="meusDados.endereco.descricao" [disabled]="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Cidade</label>
+                    <input *ngIf="meusDados?.endereco?.cidade" type="text" pInputText
+                        [(ngModel)]="meusDados.endereco.cidade" [disabled]="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Estado</label>
+                    <input *ngIf="meusDados?.endereco?.estado" type="text" pInputText
+                        [(ngModel)]="meusDados.endereco.estado" [disabled]="true">
+                </div>
+            </div>
+
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">CEP</label>
+                    <p-inputMask *ngIf="meusDados?.endereco?.cep" [(ngModel)]="meusDados.endereco.cep" mask="99.999-999"
+                        [disabled]="true">
+                    </p-inputMask>
+                </div>
+            </div>
+        </p-fieldset>
+
+        <p-fieldset legend="Usuário" [toggleable]="true">
+            <div class="row p-fluid" style="margin-top: 15px;">
+                <div class="col">
+                    <label for="float-input">Login</label>
+                    <input *ngIf="meusDados?.usuario?.login" type="text" pInputText
+                        [(ngModel)]="meusDados.usuario.login" [disabled]="true">
+                </div>
+                <div class="col">
+                    <label for="float-input">Status</label>
+                    <input *ngIf="meusDados?.usuario?.statusUsuario?.descricao" type="text" pInputText
+                        [(ngModel)]="meusDados.usuario.statusUsuario.descricao" [disabled]="true">
+                </div>
+            </div>
+        </p-fieldset>
+
+        <div class="container-btns-forms row">
+            <div class="col-12">
+                <button pButton pRipple type="button" label="Voltar" class="p-button-secondary" (click)="voltar()"
+                    style="margin-top: 50px;"></button>
+            </div>
+        </div>
+    </div>
+</div>

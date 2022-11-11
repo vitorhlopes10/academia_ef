@@ -28,22 +28,35 @@ namespace academia_ef.Services
                 return null;
             }
 
-            if (filtro.NomeAluno != null && filtro.NomeAluno != String.Empty)
+            if (!string.IsNullOrEmpty(filtro.NomeAluno))
             {
                 result = result.Where(x => x.Aluno.Nome.Equals(filtro.NomeAluno));
             }
 
-            if (filtro.DataInicial != null)
+            if (filtro.idAluno != null && filtro.idAluno > 0)
             {
-                result = result.Where(x => x.DataCriacao > filtro.DataInicial);
+                result = result.Where(x => x.Aluno.Nome.Equals(filtro.NomeAluno));
             }
 
-            if (filtro.DataInicial != null)
+            if (!string.IsNullOrEmpty(filtro.DataInicial))
             {
-                result = result.Where(x => x.DataCriacao < filtro.DataFinal);
+                var dataInicial = DateTime.Parse(filtro.DataInicial);
+                result = result.Where(x => x.DataCriacao > dataInicial);
+            }
+
+            if (!string.IsNullOrEmpty(filtro.DataFinal))
+            {
+                var dataFinal = DateTime.Parse(filtro.DataFinal);
+                result = result.Where(x => x.DataCriacao < dataFinal);
             }
 
             return result.ToList();
+        }
+
+
+        public List<Treino> BuscarTodosPorAluno(int idAluno)
+        {
+            return _treinoRepository.BuscarTodosPorAluno(idAluno).OrderByDescending(x => x.Id).ToList();
         }
 
         public List<Treino> BuscarTodos()

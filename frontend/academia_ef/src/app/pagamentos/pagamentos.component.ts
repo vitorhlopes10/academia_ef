@@ -33,7 +33,25 @@ export class PagamentosComponent implements OnInit {
     this.alunoService.buscarTodos().subscribe(
       list => {
         this.alunos = list;
-        this.loading = false;
+
+        this.alunos.forEach(x => {
+          const hoje = new Date();
+          const diaDataVencimento = x.acordoMensalidade.diaDataVencimento;
+
+          const ocorreuPagamentoDoMes = x.acordoMensalidade
+            .pagamentosMensalidades
+            .some(x =>
+              new Date(x.dataPagamento).getMonth() == hoje.getDate() &&
+              new Date(x.dataPagamento).getFullYear() && hoje.getFullYear());
+
+          if (ocorreuPagamentoDoMes) {
+            x.acordoMensalidade.statusMensalidade.descricao = 'PAGAMENTO DO MÊS ATUAL EM DIA';
+          } else if (!(ocorreuPagamentoDoMes) && hoje.getDate() > diaDataVencimento) {
+            x.acordoMensalidade.statusMensalidade.descricao = 'PAGAMENTO DO MÊS ATUAL EM DÉBITO';
+          } else {
+            x.acordoMensalidade.statusMensalidade.descricao = 'PAGAMENTO DO MÊS ATUAL PENDENTE';
+          }
+        })
       },
       () => {
         this.loading = false;
@@ -43,12 +61,13 @@ export class PagamentosComponent implements OnInit {
   }
 
   buscar() {
+    this.loading = true;
+
     if (!(this.filtro.cpf) && !(this.filtro.nome) && !(this.filtro.matricula)) {
       this.buscarAlunos();
       return
     }
-
-    this.loading = true;
+        
     this.alunoService.filtro(this.filtro).subscribe(
       list => {
         this.alunos = list;
@@ -62,9 +81,7 @@ export class PagamentosComponent implements OnInit {
   }
 
   limpar() {
-    this.filtro.cpf = '';
-    this.filtro.nome = '';
-    this.filtro.matricula = '';
+    this.filtro = new AlunoFiltro();
   }
 
   verificar(id: number) {

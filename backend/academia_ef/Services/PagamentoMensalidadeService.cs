@@ -20,9 +20,38 @@ namespace academia_ef.Services
             return _pagamentoMensalidadeRepository.Buscar(id);
         }
 
+        public List<PagamentoMensalidade> Filtrar(PagamentoFiltroViewModel filtro)
+        {
+            var result = _pagamentoMensalidadeRepository.BuscarTodos();
+
+            if (result is null)
+            {
+                return null;
+            }
+
+            if (filtro.IdAluno != null && filtro.IdAluno > 0)
+            {
+                result = result.Where(x => x.AcordoMensalidade.Aluno.Id == (int) filtro.IdAluno);
+            }
+
+            if (!string.IsNullOrEmpty(filtro.DataInicial))
+            {
+                var dataInicial = DateTime.Parse(filtro.DataInicial);
+                result = result.Where(x => x.DataPagamento > dataInicial);
+            }
+
+            if (!string.IsNullOrEmpty(filtro.DataFinal))
+            {
+                var dataFinal = DateTime.Parse(filtro.DataFinal);
+                result = result.Where(x => x.DataPagamento < dataFinal);
+            }
+
+            return result.ToList();
+        }
+
         public List<PagamentoMensalidade> BuscarTodosPorAluno(int idAluno)
         {
-            return _pagamentoMensalidadeRepository.BuscarTodosPorAluno(idAluno);
+            return _pagamentoMensalidadeRepository.BuscarTodosPorAluno(idAluno).OrderByDescending(x => x.Id).ToList();
         }
 
         public PagamentoMensalidade RegistrarPagamento(PagamentoViewModel novoPagamento)

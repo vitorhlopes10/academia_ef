@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AlunoModel } from '../models/aluno-model';
@@ -23,7 +23,11 @@ export class AlunoService {
   }
 
   filtro(filtro: AlunoFiltro): Observable<AlunoInterface[]> {
-    return this.http.get<AlunoInterface[]>(`${this.configUrl}/Alunos/Filtro/${filtro}`);
+    const cpf = filtro.cpf.replace('.', '').replace('.', '').replace('-', '');
+    const nome = filtro.nome.trim();
+    const matricula = filtro.matricula.trim();
+
+    return this.http.get<AlunoInterface[]>(`${this.configUrl}/Alunos/Filtro?cpf=${cpf}&nome=${nome}&matricula=${matricula}`);
   }
 
   ativar(id: number): Observable<any> {

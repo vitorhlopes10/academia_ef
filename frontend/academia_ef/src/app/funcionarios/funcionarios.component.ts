@@ -131,9 +131,7 @@ export class FuncionariosComponent implements OnInit {
   }
 
   limpar() {
-    this.filtro.cpf = '';
-    this.filtro.nome = '';
-    this.filtro.matricula = '';
+    this.filtro = new FuncionarioFiltro();
   }
 
   buscar() {
@@ -145,6 +143,8 @@ export class FuncionariosComponent implements OnInit {
     this.loading = true;
     this.funcionarioService.filtro(this.filtro).subscribe(
       list => {
+        list.forEach(x => x.cpf = x.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
+
         this.funcionarios = list;
         this.loading = false;
       },

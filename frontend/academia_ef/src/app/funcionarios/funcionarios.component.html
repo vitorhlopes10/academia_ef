@@ -6,7 +6,7 @@
     <div class="row p-fluid">
       <div class="col-3">
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText [(ngModel)]="filtro.matricula">
+          <p-inputMask [(ngModel)]="filtro.matricula" mask="999999999"> </p-inputMask>
           <label for="float-input">Matrícula</label>
         </span>
       </div>

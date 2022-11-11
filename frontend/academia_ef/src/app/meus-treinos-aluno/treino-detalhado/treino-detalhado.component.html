@@ -4,16 +4,8 @@
 <div class="container-principal">
     <div class="container">
         <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-4">
-                <label for="float-input">Aluno</label>
-                <input *ngIf="treino?.aluno?.nome" type="text" pInputText [(ngModel)]="treino.aluno.nome"
-                    disabled="true">
-            </div>
-        </div>
-
-        <div class="row p-fluid" style="margin-top: 15px;">
-            <div class="col-8">
-                <label for="float-input">Descrição</label>
+            <div class="col-12">
+                <label for="float-input">TREINO - {{ dataTreino }}</label>
                 <textarea *ngIf="treino?.descricao" pInputTextarea [(ngModel)]="treino.descricao"
                     disabled="true"></textarea>
             </div>

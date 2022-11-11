@@ -22,8 +22,17 @@ export class TreinoService {
     return this.http.get<TreinoInterface[]>(`${this.configUrl}/Treinos`);
   }
 
+  buscarTodosPorAluno(idAluno: number): Observable<TreinoInterface[]> {
+    return this.http.get<TreinoInterface[]>(`${this.configUrl}/Treinos/PorAluno/${idAluno}`);
+  }
+
   filtro(filtro: TreinoFiltro): Observable<TreinoInterface[]> {
-    return this.http.get<TreinoInterface[]>(`${this.configUrl}/Treinos/Filtro/${filtro}`);
+    const dateInicial = filtro.dataInicial ? `${filtro.dataInicial.getDate()}-${filtro.dataInicial.getMonth() + 1}-${filtro.dataInicial.getFullYear()}` : '';
+    const dateFinal = filtro.dataFinal ? `${filtro.dataFinal.getDate()}-${filtro.dataFinal.getMonth() + 1}-${filtro.dataFinal.getFullYear()}` : '';
+    const nomeAluno = filtro.nomeAluno ? filtro.nomeAluno?.trim() : '';
+    const idAluno = filtro.idAluno;
+
+    return this.http.get<TreinoInterface[]>(`${this.configUrl}/Treinos/Filtro?nomeAluno=${nomeAluno}&dataInicial=${dateInicial}&dataFinal=${dateFinal}`);
   }
 
   deletar(id: number): Observable<any> {

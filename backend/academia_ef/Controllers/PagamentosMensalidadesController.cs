@@ -1,5 +1,7 @@
 using academia_ef.Model;
+using academia_ef.Services;
 using academia_ef.Services.Interfaces;
+using academia_ef.ViewModel.Aluno;
 using academia_ef.ViewModel.Pagamento;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +26,14 @@ namespace academia_ef.Controllers
 
             var resultado = _pagamentoMensalidadeService.Buscar(id);
 
+            return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
+        }
+
+
+        [HttpGet("Filtro")]
+        public ActionResult<List<PagamentoMensalidade>> Filtro([FromQuery] PagamentoFiltroViewModel filtro)
+        {
+            var resultado = _pagamentoMensalidadeService.Filtrar(filtro);
             return resultado is null ? NotFound("Não Encontrado!") : Ok(resultado);
         }
 
