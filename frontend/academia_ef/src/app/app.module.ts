@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { MenuComponent } from './menu/menu.component';
-import { RodapeComponent } from './rodape/rodape.component';
+import { MenuComponent } from './navegacao/menu/menu.component';
+import { RodapeComponent } from './navegacao/rodape/rodape.component';
 import { SobreComponent } from './sobre/sobre.component';
 import { AlunosComponent } from './alunos/alunos.component';
 import { FuncionariosComponent } from './funcionarios/funcionarios.component';
@@ -37,6 +37,9 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {FieldsetModule} from 'primeng/fieldset';
 import {DialogModule} from 'primeng/dialog';
 import {TooltipModule} from 'primeng/tooltip';
+import {CardModule} from 'primeng/card';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AlunosCadastrarComponent } from './alunos/alunos-cadastrar/alunos-cadastrar.component';
@@ -58,6 +61,8 @@ import { PagamentosDetalhadosComponent } from './pagamentos/pagamentos-detalhado
 import { MeusPagamentosAlunoComponent } from './meus-pagamentos-aluno/meus-pagamentos-aluno.component';
 import { TreinoDetalhadoComponent } from './meus-treinos-aluno/treino-detalhado/treino-detalhado.component';
 import { AvaliacaoFisicaDetalhadaComponent } from './minhas-avaliacoes-fisica-aluno/avaliacao-fisica-detalhada/avaliacao-fisica-detalhada.component';
+import { AuthGuard } from './auth.guard';
+import { NotFoundComponent } from './navegacao/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +100,7 @@ import { AvaliacaoFisicaDetalhadaComponent } from './minhas-avaliacoes-fisica-al
     MeusPagamentosAlunoComponent,
     TreinoDetalhadoComponent,
     AvaliacaoFisicaDetalhadaComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +123,10 @@ import { AvaliacaoFisicaDetalhadaComponent } from './minhas-avaliacoes-fisica-al
     InputTextareaModule,
     FieldsetModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    CardModule,
+    MessagesModule,
+    MessageModule
     ],
   providers: [
     ConfirmationService,

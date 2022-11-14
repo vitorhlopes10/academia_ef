@@ -8,8 +8,7 @@ import { AvaliacaoFisicaService } from 'src/app/services/avaliacao-fisica.servic
 
 @Component({
   selector: 'app-avaliacoes-fisica-detalhes',
-  templateUrl: './avaliacoes-fisica-detalhes.component.html',
-  styleUrls: ['./avaliacoes-fisica-detalhes.component.css']
+  templateUrl: './avaliacoes-fisica-detalhes.component.html'
 })
 export class AvaliacoesFisicaDetalhesComponent implements OnInit {
 
@@ -44,7 +43,7 @@ export class AvaliacoesFisicaDetalhesComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Avaliação Física' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Avaliação Física' });
       }
     );
   }

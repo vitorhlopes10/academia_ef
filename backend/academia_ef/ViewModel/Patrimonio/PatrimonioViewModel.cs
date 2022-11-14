@@ -7,6 +7,6 @@
         public string Descricao { get; set; }
         public double ValorPago { get; set; }
 
-        public int IdUsuario { get; set; }
+        public int IdFuncionario { get; set; }
     }
 }

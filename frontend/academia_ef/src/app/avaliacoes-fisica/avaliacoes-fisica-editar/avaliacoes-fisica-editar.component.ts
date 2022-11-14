@@ -7,11 +7,11 @@ import { BiotipoInterface } from 'src/app/models/interfaces/biotipo-interface';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { AvaliacaoFisicaService } from 'src/app/services/avaliacao-fisica.service';
 import { BiotipoService } from 'src/app/services/biotipo.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-avaliacoes-fisica-editar',
-  templateUrl: './avaliacoes-fisica-editar.component.html',
-  styleUrls: ['./avaliacoes-fisica-editar.component.css']
+  templateUrl: './avaliacoes-fisica-editar.component.html'
 })
 export class AvaliacoesFisicaEditarComponent implements OnInit {
   
@@ -28,6 +28,7 @@ export class AvaliacoesFisicaEditarComponent implements OnInit {
   constructor(private avaliacaoFisicaService: AvaliacaoFisicaService,
     private alunoService: AlunoService,
     private biotipoService: BiotipoService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService,
     private route: ActivatedRoute) { }
@@ -67,7 +68,7 @@ export class AvaliacoesFisicaEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar a Avaliação Física' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar a Avaliação Física' });
       }
     );
   }
@@ -78,7 +79,7 @@ export class AvaliacoesFisicaEditarComponent implements OnInit {
         this.alunos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
       }
     )
   }
@@ -89,7 +90,7 @@ export class AvaliacoesFisicaEditarComponent implements OnInit {
         this.biotipos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Biotipos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Biotipos' });
       }
     )
   }
@@ -102,18 +103,17 @@ export class AvaliacoesFisicaEditarComponent implements OnInit {
       () => {
         this.loading = false;
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Avaliação Física atualizada com sucesso' });
-        this.router.navigate(['avaliacoes-fisicas'])
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro na edição da Avaliação Física' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro na edição da Avaliação Física' });
       },
       () => { }
     )
   }
 
   prepararParaEnvio() {
-    this.avaliacaoFisica.idFuncionario = 1;
+    this.avaliacaoFisica.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
   }
 
   voltar() {

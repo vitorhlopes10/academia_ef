@@ -7,8 +7,7 @@ import { PatrimonioInterface } from '../models/interfaces/patrimonio-interface';
 
 @Component({
   selector: 'app-patrimonio',
-  templateUrl: './patrimonio.component.html',
-  styleUrls: ['./patrimonio.component.css']
+  templateUrl: './patrimonio.component.html'
 })
 export class PatrimonioComponent implements OnInit {
 
@@ -99,7 +98,7 @@ export class PatrimonioComponent implements OnInit {
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do item' });
       }
     );
   }

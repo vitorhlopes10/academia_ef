@@ -3,11 +3,11 @@ import { PatrimonioModel } from 'src/app/models/patrimonio-model';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { PatrimonioService } from 'src/app/services/patrimonio.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-patrimonio-cadastrar',
-  templateUrl: './patrimonio-cadastrar.component.html',
-  styleUrls: ['./patrimonio-cadastrar.component.css']
+  templateUrl: './patrimonio-cadastrar.component.html'
 })
 export class PatrimonioCadastrarComponent implements OnInit {
 
@@ -18,6 +18,7 @@ export class PatrimonioCadastrarComponent implements OnInit {
   items: MenuItem[] = [{ label: 'Patrimônio' }, { label: 'Cadastrar Item Patrimônio' }];
 
   constructor(private patrimonioService: PatrimonioService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService) { }
 
@@ -52,7 +53,7 @@ export class PatrimonioCadastrarComponent implements OnInit {
 
     this.itemProduto.nome = this.itemProduto.nome.trim().toUpperCase(); 
     this.itemProduto.descricao = this.itemProduto.descricao.trim().toUpperCase(); 
-    this.itemProduto.idUsuario = 1;
+    this.itemProduto.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
 
     this.patrimonioService.cadastrar(this.itemProduto).subscribe(
       () => {
@@ -62,7 +63,7 @@ export class PatrimonioCadastrarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o produto' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o produto' });
       },
       () => { }
     )

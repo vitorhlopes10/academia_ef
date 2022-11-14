@@ -6,8 +6,7 @@ import { TreinoService } from 'src/app/services/treino.service';
 
 @Component({
   selector: 'app-treino-detalhado',
-  templateUrl: './treino-detalhado.component.html',
-  styleUrls: ['./treino-detalhado.component.css']
+  templateUrl: './treino-detalhado.component.html'
 })
 export class TreinoDetalhadoComponent implements OnInit {
 
@@ -46,7 +45,7 @@ export class TreinoDetalhadoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Treino' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Treino' });
       }
     );
   }

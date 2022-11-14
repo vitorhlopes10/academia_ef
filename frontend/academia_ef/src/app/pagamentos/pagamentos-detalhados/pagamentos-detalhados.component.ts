@@ -6,11 +6,11 @@ import { PagamentoMensalidadeInterface } from 'src/app/models/interfaces/pagamen
 import { PagamentoMensalidadeModel } from 'src/app/models/pagamento-mensalidade-model';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { PagamentoMensalidadeService } from 'src/app/services/pagamento-mensalidade.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-pagamentos-detalhados',
-  templateUrl: './pagamentos-detalhados.component.html',
-  styleUrls: ['./pagamentos-detalhados.component.css']
+  templateUrl: './pagamentos-detalhados.component.html'
 })
 export class PagamentosDetalhadosComponent implements OnInit {
 
@@ -30,6 +30,7 @@ export class PagamentosDetalhadosComponent implements OnInit {
 
   constructor(private pagamentoMensalidadeService: PagamentoMensalidadeService,
     private alunoService: AlunoService,
+    private usuarioService: UsuarioService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private route: ActivatedRoute) { }
@@ -48,7 +49,7 @@ export class PagamentosDetalhadosComponent implements OnInit {
         this.idAcordoMensalidade = obj.idAcordoMensalidade;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos pagamentos' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos pagamentos' });
       }
     );
   }
@@ -62,7 +63,7 @@ export class PagamentosDetalhadosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos pagamentos' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos pagamentos' });
       }
     );
   }
@@ -86,9 +87,8 @@ export class PagamentosDetalhadosComponent implements OnInit {
     this.loading = true;
 
     this.novoPagamento.valorPago = this.valorPlano;
-
     this.novoPagamento.idAcordoMensalidade = this.idAcordoMensalidade;
-    this.novoPagamento.idFuncionario = 1
+    this.novoPagamento.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
 
     this.pagamentoMensalidadeService.registrarPagamento(this.novoPagamento).subscribe(
       () => {
@@ -98,7 +98,7 @@ export class PagamentosDetalhadosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro no registro do Pagamento' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro no registro do Pagamento' });
       }
     )
   }
@@ -127,7 +127,7 @@ export class PagamentosDetalhadosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na deleção do Pagamento' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na deleção do Pagamento' });
       }
     );
   }
@@ -152,7 +152,7 @@ export class PagamentosDetalhadosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelo Pagamento' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelo Pagamento' });
       }
     );
   }

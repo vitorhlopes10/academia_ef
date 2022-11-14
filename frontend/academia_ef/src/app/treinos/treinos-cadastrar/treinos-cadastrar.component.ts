@@ -5,11 +5,11 @@ import { AlunoInterface } from 'src/app/models/interfaces/aluno-interface';
 import { TreinoModel } from 'src/app/models/treino-model';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { TreinoService } from 'src/app/services/treino.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-treinos-cadastrar',
-  templateUrl: './treinos-cadastrar.component.html',
-  styleUrls: ['./treinos-cadastrar.component.css']
+  templateUrl: './treinos-cadastrar.component.html'
 })
 export class TreinosCadastrarComponent implements OnInit {
 
@@ -23,6 +23,7 @@ export class TreinosCadastrarComponent implements OnInit {
 
   constructor(private treinoServico: TreinoService,
     private alunoService: AlunoService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService) { }
 
@@ -40,7 +41,7 @@ export class TreinosCadastrarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro ao tentar buscar os Alunos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao tentar buscar os Alunos' });
       }
     )
   }
@@ -57,14 +58,14 @@ export class TreinosCadastrarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro ao tentar inserir o Treino' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao tentar inserir o Treino' });
       },
       () => { }
     )
   }
 
   prepararParaEnvio() {
-    this.novoTreino.idFuncionario = 1;
+    this.novoTreino.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
   }
 
   voltar() {

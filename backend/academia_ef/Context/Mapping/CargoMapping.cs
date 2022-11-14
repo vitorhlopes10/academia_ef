@@ -23,7 +23,7 @@ namespace academia_ef.Context.Mapping
 
             builder.HasData(
                 new Cargo() { Id = 1, Nome = "Instrutor" },
-                new Cargo() { Id = 2, Nome = "Atendente" }
+                new Cargo() { Id = 2, Nome = "Gerente" }
                 );
         }
     }

@@ -13,8 +13,7 @@ import { Estados } from 'src/app/utils/estados-lista';
 
 @Component({
   selector: 'app-funcionarios-cadastrar',
-  templateUrl: './funcionarios-cadastrar.component.html',
-  styleUrls: ['./funcionarios-cadastrar.component.css']
+  templateUrl: './funcionarios-cadastrar.component.html'
 })
 export class FuncionariosCadastrarComponent implements OnInit {
 
@@ -52,7 +51,7 @@ export class FuncionariosCadastrarComponent implements OnInit {
         this.cargos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
       }
     )
   }
@@ -63,7 +62,7 @@ export class FuncionariosCadastrarComponent implements OnInit {
         this.sexos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
       }
     )
   }
@@ -74,7 +73,7 @@ export class FuncionariosCadastrarComponent implements OnInit {
         this.unidades = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
       }
     )
   }
@@ -91,7 +90,7 @@ export class FuncionariosCadastrarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Funcionário' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Funcionário' });
       },
       () => { }
     )
@@ -136,12 +135,12 @@ export class FuncionariosCadastrarComponent implements OnInit {
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo de Data de Nascimento' });
     }
 
-    if (this.novoFuncionario.idSexo === 0) {
+    if (!(this.novoFuncionario.idSexo)) {
       prosseguir = false;
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
     }
 
-    if (this.novoFuncionario.idCargo === 0) {
+    if (!(this.novoFuncionario.idCargo)) {
       prosseguir = false;
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Cargo' });
     }

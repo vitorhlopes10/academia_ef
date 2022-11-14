@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SelectItem, MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { FuncionarioInterface } from 'src/app/models/interfaces/funcionario-model';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 
 @Component({
   selector: 'app-funcionarios-detalhes',
-  templateUrl: './funcionarios-detalhes.component.html',
-  styleUrls: ['./funcionarios-detalhes.component.css']
+  templateUrl: './funcionarios-detalhes.component.html'
 })
 export class FuncionariosDetalhesComponent implements OnInit {
 
@@ -34,7 +33,7 @@ export class FuncionariosDetalhesComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o funcionario' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o funcionario' });
       }
     );
   }

@@ -249,7 +249,7 @@ namespace academia_ef.Migrations
                         new
                         {
                             Id = 2,
-                            Nome = "Atendente"
+                            Nome = "Gerente"
                         });
                 });
 
@@ -410,7 +410,7 @@ namespace academia_ef.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("IdFuncionario")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -422,7 +422,7 @@ namespace academia_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("IdFuncionario");
 
                     b.ToTable("Patrimonio", (string)null);
                 });
@@ -810,13 +810,13 @@ namespace academia_ef.Migrations
 
             modelBuilder.Entity("academia_ef.Model.Patrimonio", b =>
                 {
-                    b.HasOne("academia_ef.Model.Usuario", "Usuario")
+                    b.HasOne("academia_ef.Model.Funcionario", "Funcionario")
                         .WithMany("Patrimonio")
-                        .HasForeignKey("IdUsuario")
+                        .HasForeignKey("IdFuncionario")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Funcionario");
                 });
 
             modelBuilder.Entity("academia_ef.Model.Treino", b =>
@@ -901,6 +901,8 @@ namespace academia_ef.Migrations
 
                     b.Navigation("PagamentosMensalidades");
 
+                    b.Navigation("Patrimonio");
+
                     b.Navigation("Treinos");
                 });
 
@@ -940,8 +942,6 @@ namespace academia_ef.Migrations
 
                     b.Navigation("Funcionario")
                         .IsRequired();
-
-                    b.Navigation("Patrimonio");
                 });
 #pragma warning restore 612, 618
         }

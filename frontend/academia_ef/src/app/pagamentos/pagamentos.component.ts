@@ -8,8 +8,7 @@ import { AlunoService } from '../services/aluno.service';
 
 @Component({
   selector: 'app-pagamentos',
-  templateUrl: './pagamentos.component.html',
-  styleUrls: ['./pagamentos.component.css']
+  templateUrl: './pagamentos.component.html'
 })
 export class PagamentosComponent implements OnInit {
 

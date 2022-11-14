@@ -36,7 +36,7 @@ namespace academia_ef.Services
             obj.Nome = novoItem.Nome;
             obj.Descricao = novoItem.Descricao;
             obj.ValorPago = novoItem.ValorPago;
-            obj.IdUsuario = novoItem.IdUsuario;
+            obj.IdFuncionario = novoItem.IdFuncionario;
 
             var retorno = _patrimonioRepository.Inserir(obj);
 
@@ -51,7 +51,7 @@ namespace academia_ef.Services
             obj.Nome = item.Nome;
             obj.Descricao = item.Descricao;
             obj.ValorPago = item.ValorPago;
-            obj.IdUsuario = item.IdUsuario;
+            obj.IdFuncionario = item.IdFuncionario;
 
             var retorno = _patrimonioRepository.Atualizar(obj);
 

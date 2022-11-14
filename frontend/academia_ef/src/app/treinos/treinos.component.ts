@@ -7,8 +7,7 @@ import { TreinoService } from '../services/treino.service';
 
 @Component({
   selector: 'app-treinos',
-  templateUrl: './treinos.component.html',
-  styleUrls: ['./treinos.component.css']
+  templateUrl: './treinos.component.html'
 })
 export class TreinosComponent implements OnInit {
 
@@ -37,7 +36,7 @@ export class TreinosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
       },
       () => {}
     );
@@ -94,7 +93,7 @@ export class TreinosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do Treino' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na deleção do Treino' });
       }
     );
   }
@@ -118,7 +117,7 @@ export class TreinosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
       }
     );
   }

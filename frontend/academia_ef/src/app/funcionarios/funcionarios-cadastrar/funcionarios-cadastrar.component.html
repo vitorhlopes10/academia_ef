@@ -1,3 +1,4 @@
+<app-menu></app-menu>
 <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
 <p-toast position="top-right"></p-toast>
 
@@ -21,7 +22,7 @@
                     <label for="float-input">Unidades</label>
                     <p-dropdown [options]="unidades" [(ngModel)]="novoFuncionario.idUnidade"
                         placeholder="Selecione a unidade" optionLabel="nome" optionValue="id"
-                        [disabled]="this.novoFuncionario.fixo">
+                        [disabled]="!(this.novoFuncionario.fixo)">
                     </p-dropdown>
                 </div>
             </div>

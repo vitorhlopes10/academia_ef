@@ -1,4 +1,4 @@
-import { UsuarioModel } from "./usuario-model";
+import { FuncionarioModel } from "./funcionario-model";
 
 export class PatrimonioModel {
     
@@ -7,7 +7,7 @@ export class PatrimonioModel {
         this.nome = '';
         this.descricao = '';
         this.valorPago = 0;
-        this.idUsuario = 0;
+        this.idFuncionario = 0;
     }
 
     id: number;
@@ -15,7 +15,7 @@ export class PatrimonioModel {
     descricao: string;
     valorPago: number;
 
-    usuario!: UsuarioModel;
+    funcionario!: FuncionarioModel;
 
-    idUsuario: number;
+    idFuncionario: number;
 }

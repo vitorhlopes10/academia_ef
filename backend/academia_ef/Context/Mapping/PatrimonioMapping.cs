@@ -24,9 +24,9 @@ namespace academia_ef.Context.Mapping
                 .HasColumnType("float")
             .IsRequired();
 
-            builder.HasOne(x => x.Usuario)
+            builder.HasOne(x => x.Funcionario)
                 .WithMany(s => s.Patrimonio)
-                .HasForeignKey(s => s.IdUsuario)
+                .HasForeignKey(s => s.IdFuncionario)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         }

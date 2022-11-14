@@ -2,6 +2,7 @@ import { AvaliacaoFisicaInterface } from "./avaliacao-fisica-interface";
 import { CargoInterface } from "./cargo-interface";
 import { EnderecoInterface } from "./endereco-interface";
 import { PagamentoMensalidadeInterface } from "./pagamento-mensalidade-interface";
+import { PatrimonioInterface } from "./patrimonio-interface";
 import { SexoInterface } from "./sexo-interface";
 import { TreinoInterface } from "./treino-interface";
 import { UnidadeInterface } from "./unidade-interface";
@@ -27,6 +28,7 @@ export interface FuncionarioInterface {
     treinos: TreinoInterface[];
     avaliacoesFisica: AvaliacaoFisicaInterface[];
     pagamentosMensalidades: PagamentoMensalidadeInterface[];
+    patrimonio: PatrimonioInterface[];
 
     idSexo: number;
     idEndereco: number;

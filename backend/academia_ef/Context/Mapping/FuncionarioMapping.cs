@@ -1,4 +1,5 @@
-﻿using academia_ef.Model;
+﻿using academia_ef.Enums;
+using academia_ef.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -74,6 +75,11 @@ namespace academia_ef.Context.Mapping
                .WithOne(s => s.Funcionario)
                .HasForeignKey(s => s.IdFuncionario)
                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(x => x.Patrimonio)
+                .WithOne(s => s.Funcionario)
+                .HasForeignKey(s => s.IdFuncionario)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

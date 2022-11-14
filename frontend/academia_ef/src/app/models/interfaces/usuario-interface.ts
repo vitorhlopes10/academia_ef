@@ -10,7 +10,6 @@ export interface UsuarioInterface {
 
     aluno: AlunoModel;
     funcionario: FuncionarioModel;
-    patrimonio: PatrimonioModel;
     statusUsuario: StatusUsuarioModel;
 
     idStatusUsuario: number;

@@ -3,11 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { AlunoService } from '../services/aluno.service';
 import { FuncionarioService } from '../services/funcionario.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-meus-dados',
-  templateUrl: './meus-dados.component.html',
-  styleUrls: ['./meus-dados.component.css']
+  templateUrl: './meus-dados.component.html'
 })
 export class MeusDadosComponent implements OnInit {
 
@@ -23,13 +23,15 @@ export class MeusDadosComponent implements OnInit {
 
   constructor(private alunoService: AlunoService,
     private funcionarioService: FuncionarioService,
+    private usuarioService: UsuarioService,
     private messageService: MessageService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.id = 1
-
-    if (true) {
+    this.id = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
+    const tipoDeUsuario = this.usuarioService.getUsuarioSessao().tipoDeUsuario.toString();
+    
+    if (tipoDeUsuario === 'ALUNO') {
       this.buscarAluno();
     } else {
       this.buscarFuncionario();
@@ -48,7 +50,7 @@ export class MeusDadosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar seus Dados Pessoais' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar busar seus Dados Pessoais' });
       }
     );
   }
@@ -65,7 +67,7 @@ export class MeusDadosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar seus Dados Pessoais' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar seus Dados Pessoais' });
       }
     );
   }

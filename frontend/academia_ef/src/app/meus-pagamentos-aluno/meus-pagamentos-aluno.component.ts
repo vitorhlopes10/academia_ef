@@ -6,8 +6,7 @@ import { PagamentoMensalidadeService } from '../services/pagamento-mensalidade.s
 
 @Component({
   selector: 'app-meus-pagamentos-aluno',
-  templateUrl: './meus-pagamentos-aluno.component.html',
-  styleUrls: ['./meus-pagamentos-aluno.component.css']
+  templateUrl: './meus-pagamentos-aluno.component.html'
 })
 export class MeusPagamentosAlunoComponent implements OnInit {
 
@@ -54,7 +53,7 @@ export class MeusPagamentosAlunoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos Pagamentos' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na busca pelos Pagamentos' });
       }
     );
   }
@@ -79,7 +78,7 @@ export class MeusPagamentosAlunoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelo Pagamento' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelo Pagamento' });
       }
     );
   }

@@ -1,4 +1,4 @@
-import { UsuarioInterface } from "./usuario-interface";
+import { FuncionarioInterface } from "./funcionario-model";
 
 export interface PatrimonioInterface {
     id: number;
@@ -6,7 +6,7 @@ export interface PatrimonioInterface {
     descricao: string;
     valorPago: number;
 
-    usuario: UsuarioInterface;
+    funcionario: FuncionarioInterface;
 
-    idUsuario: number;
+    idFuncionario: number;
 }

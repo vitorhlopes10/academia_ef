@@ -5,11 +5,11 @@ import { AlunoInterface } from 'src/app/models/interfaces/aluno-interface';
 import { TreinoModel } from 'src/app/models/treino-model';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { TreinoService } from 'src/app/services/treino.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-treinos-editar',
-  templateUrl: './treinos-editar.component.html',
-  styleUrls: ['./treinos-editar.component.css']
+  templateUrl: './treinos-editar.component.html'
 })
 export class TreinosEditarComponent implements OnInit {
 
@@ -25,6 +25,7 @@ export class TreinosEditarComponent implements OnInit {
 
   constructor(private treinoServico: TreinoService,
     private alunoService: AlunoService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService,
     private route: ActivatedRoute) { }
@@ -48,7 +49,7 @@ export class TreinosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Treino' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Treino' });
       }
     );
   }
@@ -64,7 +65,7 @@ export class TreinosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
       }
     )
   }
@@ -79,7 +80,7 @@ export class TreinosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Treino' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Treino' });
       },
       () => { }
     )
@@ -87,7 +88,7 @@ export class TreinosEditarComponent implements OnInit {
 
   prepararParaEnvio() {
     this.treino.id = this.id;
-    this.treino.idFuncionario = 1;
+    this.treino.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
   }
 
   voltar() {

@@ -7,8 +7,7 @@ import { AlunoInterface } from '../models/interfaces/aluno-interface';
 
 @Component({
   selector: 'app-alunos',
-  templateUrl: './alunos.component.html',
-  styleUrls: ['./alunos.component.css']
+  templateUrl: './alunos.component.html'
 })
 export class AlunosComponent implements OnInit {
 
@@ -40,7 +39,7 @@ export class AlunosComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Alunos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Alunos' });
       },
       () => {
         this.loading = false;
@@ -85,7 +84,7 @@ export class AlunosComponent implements OnInit {
         this.inativar(id);
       },
       reject: () => {
-        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a inativação' });
+        // this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você optou por não prosseguir com a inativação' });
       }
     });
   }
@@ -113,7 +112,7 @@ export class AlunosComponent implements OnInit {
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na inativação do Aluno' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na inativação do Aluno' });
       }
     );
   }
@@ -126,7 +125,7 @@ export class AlunosComponent implements OnInit {
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Cancelado', detail: 'Ocorreu um erro na ativação do Aluno' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Ocorreu um erro na ativação do Aluno' });
       }
     );
   }

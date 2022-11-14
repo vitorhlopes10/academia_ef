@@ -4,11 +4,11 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { FuncionarioFiltro } from '../models/filtros/funcionario-filtro';
 import { Router } from '@angular/router';
 import { FuncionarioInterface } from '../models/interfaces/funcionario-model';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-funcionarios',
-  templateUrl: './funcionarios.component.html',
-  styleUrls: ['./funcionarios.component.css']
+  templateUrl: './funcionarios.component.html'
 })
 export class FuncionariosComponent implements OnInit {
 
@@ -20,6 +20,7 @@ export class FuncionariosComponent implements OnInit {
   items: MenuItem[] = [{ label: 'Funcionarios' }];
 
   constructor(private funcionarioService: FuncionarioService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService) { }
@@ -34,8 +35,9 @@ export class FuncionariosComponent implements OnInit {
       list => {
         //Setando mascara do CPF
         list.forEach(x => x.cpf = x.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
-        
-        this.funcionarios = list;
+        const idUsuarioSessao = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
+
+        this.funcionarios = list.filter(x => !(x.id === idUsuarioSessao));
         this.loading = false;
       },
       () => {
@@ -112,7 +114,7 @@ export class FuncionariosComponent implements OnInit {
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na ativação do Funcionário' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na ativação do Funcionário' });
       }
     );
   }
@@ -121,11 +123,11 @@ export class FuncionariosComponent implements OnInit {
     this.funcionarioService.inativar(id).subscribe(
       () => {
         this.buscarFuncionarios();
-        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Funcionário ativado com sucesso' });
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'Funcionário inativado com sucesso' });
         this.loading = false;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na inativação do Funcionário' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na inativação do Funcionário' });
       }
     );
   }

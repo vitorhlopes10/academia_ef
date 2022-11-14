@@ -1,4 +1,5 @@
 ﻿using academia_ef.Context;
+using academia_ef.Enums;
 using academia_ef.Model;
 using academia_ef.Repository.Interfaces;
 
@@ -46,6 +47,7 @@ namespace academia_ef.Repository
             if (obj != null)
             {
                 obj.Status = false;
+                obj.Usuario.IdStatusUsuario = (int)StatusUsuarioEnum.INATIVO;
 
                 obj = _context.Update(obj).Entity;
 
@@ -62,6 +64,7 @@ namespace academia_ef.Repository
             if (obj != null)
             {
                 obj.Status = true;
+                obj.Usuario.IdStatusUsuario = (int)StatusUsuarioEnum.ATIVO;
 
                 obj = _context.Update(obj).Entity;
 

@@ -4,11 +4,11 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { AvaliacaoFisicaFiltro } from '../models/filtros/avaliacao-fisica-filtro';
 import { AvaliacaoFisicaInterface } from '../models/interfaces/avaliacao-fisica-interface';
 import { AvaliacaoFisicaService } from '../services/avaliacao-fisica.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-minhas-avaliacoes-fisica-aluno',
-  templateUrl: './minhas-avaliacoes-fisica-aluno.component.html',
-  styleUrls: ['./minhas-avaliacoes-fisica-aluno.component.css']
+  templateUrl: './minhas-avaliacoes-fisica-aluno.component.html'
 })
 export class MinhasAvaliacoesFisicaAlunoComponent implements OnInit {
 
@@ -21,11 +21,12 @@ export class MinhasAvaliacoesFisicaAlunoComponent implements OnInit {
   items: MenuItem[] = [{ label: 'Minhas Avaliacões Física' }];
 
   constructor(private avaliacaoFisicaService: AvaliacaoFisicaService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.idAluno = 1;
+    this.idAluno = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
     this.buscarAvaliacoesFisica();
   }
 
@@ -39,7 +40,7 @@ export class MinhasAvaliacoesFisicaAlunoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelas Avaliações Fisica' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelas Avaliações Fisica' });
       },
       () => { }
     );
@@ -69,7 +70,7 @@ export class MinhasAvaliacoesFisicaAlunoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelas Avaliações Fisica' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelas Avaliações Fisica' });
       }
     );
   }

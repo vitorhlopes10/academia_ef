@@ -7,11 +7,11 @@ import { BiotipoInterface } from 'src/app/models/interfaces/biotipo-interface';
 import { AlunoService } from 'src/app/services/aluno.service';
 import { AvaliacaoFisicaService } from 'src/app/services/avaliacao-fisica.service';
 import { BiotipoService } from 'src/app/services/biotipo.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-avaliacoes-fisica-cadastrar',
-  templateUrl: './avaliacoes-fisica-cadastrar.component.html',
-  styleUrls: ['./avaliacoes-fisica-cadastrar.component.css']
+  templateUrl: './avaliacoes-fisica-cadastrar.component.html'
 })
 export class AvaliacoesFisicaCadastrarComponent implements OnInit {
 
@@ -27,6 +27,7 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
   constructor(private avaliacaoFisicaService: AvaliacaoFisicaService,
     private alunoService: AlunoService,
     private biotipoService: BiotipoService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService) { }
 
@@ -41,7 +42,7 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
         this.alunos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Alunos' });
       }
     )
   }
@@ -52,7 +53,7 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
         this.biotipos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Biotipos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Biotipos' });
       }
     )
   }
@@ -69,14 +70,15 @@ export class AvaliacoesFisicaCadastrarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir a Avaliação Física' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir a Avaliação Física' });
       },
       () => { }
     )
   }
 
   prepararParaEnvio() {
-    this.novaAvaliacaoFisica.idFuncionario = 1;
+    this.novaAvaliacaoFisica.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
+
   }
 
   voltar() {

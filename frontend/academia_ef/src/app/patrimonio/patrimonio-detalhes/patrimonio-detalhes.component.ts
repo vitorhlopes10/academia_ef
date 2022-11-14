@@ -6,8 +6,7 @@ import { PatrimonioService } from 'src/app/services/patrimonio.service';
 
 @Component({
   selector: 'app-patrimonio-detalhes',
-  templateUrl: './patrimonio-detalhes.component.html',
-  styleUrls: ['./patrimonio-detalhes.component.css']
+  templateUrl: './patrimonio-detalhes.component.html'
 })
 export class PatrimonioDetalhesComponent implements OnInit {
 
@@ -36,7 +35,7 @@ export class PatrimonioDetalhesComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
       }
     );
   }

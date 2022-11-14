@@ -27,6 +27,7 @@
         public virtual List<Treino> Treinos { get; set; }
         public virtual List<AvaliacaoFisica> AvaliacoesFisica { get; set; }
         public virtual List<PagamentoMensalidade> PagamentosMensalidades { get; set; }
+        public virtual List<Patrimonio> Patrimonio { get; set; }
 
         public int IdSexo { get; set; }
         public int IdEndereco { get; set; }

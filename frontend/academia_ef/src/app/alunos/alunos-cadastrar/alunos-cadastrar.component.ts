@@ -14,8 +14,7 @@ import { Estados } from 'src/app/utils/estados-lista';
 
 @Component({
   selector: 'app-alunos-cadastrar',
-  templateUrl: './alunos-cadastrar.component.html',
-  styleUrls: ['./alunos-cadastrar.component.css']
+  templateUrl: './alunos-cadastrar.component.html'
 })
 export class AlunosCadastrarComponent implements OnInit {
 
@@ -31,7 +30,7 @@ export class AlunosCadastrarComponent implements OnInit {
 
   loading: boolean = false;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
-  items: MenuItem[] = [{ label: 'Alunos' }, { label: 'Cadastrar Aluno' }];
+  items: MenuItem[] = [{ label: 'Alunos', routerLink: '/alunos' }, { label: 'Cadastrar Aluno' }];
 
   constructor(private alunoService: AlunoService,
     private unidadeService: UnidadeService,
@@ -52,7 +51,7 @@ export class AlunosCadastrarComponent implements OnInit {
         this.planos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Planos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Planos' });
       }
     )
   }
@@ -63,7 +62,7 @@ export class AlunosCadastrarComponent implements OnInit {
         this.sexos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
       }
     )
   }
@@ -74,7 +73,7 @@ export class AlunosCadastrarComponent implements OnInit {
         this.unidades = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
       }
     )
   }
@@ -91,7 +90,7 @@ export class AlunosCadastrarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o aluno' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o aluno' });
       },
       () => { }
     )
@@ -136,12 +135,12 @@ export class AlunosCadastrarComponent implements OnInit {
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo de Data de Nascimento' });
     }
 
-    if (this.novoAluno.idSexo === 0) {
+    if (!(this.novoAluno.idSexo)) {
       prosseguir = false;
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
     }
 
-    if (!(this.novoAluno.idPlano === 0)) {
+    if (!(this.novoAluno.idPlano)) {
       prosseguir = false;
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
     }

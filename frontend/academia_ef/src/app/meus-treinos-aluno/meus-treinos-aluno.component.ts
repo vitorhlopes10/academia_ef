@@ -4,11 +4,11 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { TreinoFiltro } from '../models/filtros/treino-filtro';
 import { TreinoInterface } from '../models/interfaces/treino-interface';
 import { TreinoService } from '../services/treino.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-meus-treinos-aluno',
-  templateUrl: './meus-treinos-aluno.component.html',
-  styleUrls: ['./meus-treinos-aluno.component.css']
+  templateUrl: './meus-treinos-aluno.component.html'
 })
 export class MeusTreinosAlunoComponent implements OnInit {
 
@@ -21,11 +21,12 @@ export class MeusTreinosAlunoComponent implements OnInit {
   items: MenuItem[] = [{ label: 'Meus Treinos' }];
 
   constructor(private treinoService: TreinoService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.idAluno = 1;
+    this.idAluno = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
     this.buscarTreinos();
   }
 
@@ -38,7 +39,7 @@ export class MeusTreinosAlunoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
       },
       () => {}
     );
@@ -68,7 +69,7 @@ export class MeusTreinosAlunoComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro na busca pelos Treinos' });
       }
     );
   }

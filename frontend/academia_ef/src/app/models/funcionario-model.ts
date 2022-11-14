@@ -2,6 +2,7 @@ import { AvaliacaoFisicaModel } from "./avaliacao-fisica-model";
 import { CargoModel } from "./cargo-model";
 import { EnderecoModel } from "./endereco-model";
 import { PagamentoMensalidadeModel } from "./pagamento-mensalidade-model";
+import { PatrimonioModel } from "./patrimonio-model";
 import { SexoModel } from "./sexo-model";
 import { TreinoModel } from "./treino-model";
 import { UnidadeModel } from "./unidade-model";
@@ -22,6 +23,7 @@ export class FuncionarioModel {
         this.treinos = [];
         this.avaliacoesFisica = [];
         this.pagamentosMensalidades = [];
+        this.patrimonio = [];
         this.idSexo = 0;
         this.idEndereco = 0;
         this.idUsuario = 0;
@@ -48,6 +50,7 @@ export class FuncionarioModel {
     treinos: TreinoModel[];
     avaliacoesFisica: AvaliacaoFisicaModel[];
     pagamentosMensalidades: PagamentoMensalidadeModel[];
+    patrimonio: PatrimonioModel[];
 
     idSexo: number;
     idEndereco: number;

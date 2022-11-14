@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectItem, MenuItem, MessageService } from 'primeng/api';
@@ -13,8 +14,7 @@ import { Estados } from 'src/app/utils/estados-lista';
 
 @Component({
   selector: 'app-funcionarios-editar',
-  templateUrl: './funcionarios-editar.component.html',
-  styleUrls: ['./funcionarios-editar.component.css']
+  templateUrl: './funcionarios-editar.component.html'
 })
 export class FuncionariosEditarComponent implements OnInit {
 
@@ -58,6 +58,7 @@ export class FuncionariosEditarComponent implements OnInit {
         this.funcionario.email = obj.email;
         this.funcionario.telefone = obj.telefone;
         this.funcionario.dataNascimento = new Date(obj.dataNascimento);
+        this.funcionario.fixo = obj.fixo;
 
         this.funcionario.idCargo = obj.idCargo;
         this.funcionario.idSexo = obj.idSexo;
@@ -73,7 +74,7 @@ export class FuncionariosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
       }
     );
   }
@@ -84,7 +85,7 @@ export class FuncionariosEditarComponent implements OnInit {
         this.cargos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Cargos' });
       }
     )
   }
@@ -95,7 +96,7 @@ export class FuncionariosEditarComponent implements OnInit {
         this.sexos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
       }
     )
   }
@@ -106,7 +107,7 @@ export class FuncionariosEditarComponent implements OnInit {
         this.unidades = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
       }
     )
   }
@@ -122,7 +123,7 @@ export class FuncionariosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro na atualização do Funcionário' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro na atualização do Funcionário' });
       },
       () => { }
     )

@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { PatrimonioModel } from 'src/app/models/patrimonio-model';
 import { PatrimonioService } from 'src/app/services/patrimonio.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-patrimonio-editar',
-  templateUrl: './patrimonio-editar.component.html',
-  styleUrls: ['./patrimonio-editar.component.css']
+  templateUrl: './patrimonio-editar.component.html'
 })
 export class PatrimonioEditarComponent implements OnInit {
 
@@ -19,6 +19,7 @@ export class PatrimonioEditarComponent implements OnInit {
 
   constructor(private patrimonioService: PatrimonioService,
     private router: Router,
+    private usuarioService: UsuarioService,
     private messageService: MessageService,
     private route: ActivatedRoute) { }
 
@@ -37,7 +38,7 @@ export class PatrimonioEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
       }
     );
   }
@@ -70,7 +71,7 @@ export class PatrimonioEditarComponent implements OnInit {
 
     this.itemProduto.nome = this.itemProduto.nome.trim().toUpperCase(); 
     this.itemProduto.descricao = this.itemProduto.descricao.trim().toUpperCase(); 
-    this.itemProduto.idUsuario = 1;
+    this.itemProduto.idFuncionario = Number.parseInt(this.usuarioService.getUsuarioSessao().id);
 
     this.patrimonioService.editar(this.itemProduto).subscribe(
       () => {
@@ -80,7 +81,7 @@ export class PatrimonioEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar editar o produto' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar editar o produto' });
       },
       () => { }
     )

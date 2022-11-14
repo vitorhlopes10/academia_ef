@@ -1,3 +1,4 @@
+<app-menu></app-menu>
 <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
 <p-toast position="top-right"></p-toast>
 
@@ -63,9 +64,8 @@
 
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
-                    <label for="float-input" style="margin-right: 5px;">Fixo?</label>
-                    <p-checkbox *ngIf="funcionario?.fixo" [(ngModel)]="funcionario.fixo" [binary]="true"
-                        style="margin-left: 5px;" [disabled]="true"></p-checkbox>
+                    <label *ngIf="funcionario && !(funcionario.fixo)" for="float-input" style="margin-right: 5px;">Não é Fixo!</label>
+                    <label *ngIf="funcionario && funcionario.fixo"  for="float-input" style="margin-right: 5px;">É Fixo!</label>
                 </div>
             </div>
         </p-fieldset>

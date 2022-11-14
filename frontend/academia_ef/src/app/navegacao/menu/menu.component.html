@@ -1,0 +1,13 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <img src="assets/favicon.png" height="40" class="mr-2">
+    </ng-template>
+    <ng-template pTemplate="end">
+        <a (click)="confirmarLogout()">
+            <i class="pi pi-sign-out" style="font-size: 2rem; color: gray;"></i>
+        </a>
+    </ng-template>
+</p-menubar>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>

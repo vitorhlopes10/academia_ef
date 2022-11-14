@@ -7,8 +7,7 @@ import { AlunoService } from 'src/app/services/aluno.service';
 
 @Component({
   selector: 'app-alunos-detalhes',
-  templateUrl: './alunos-detalhes.component.html',
-  styleUrls: ['./alunos-detalhes.component.css']
+  templateUrl: './alunos-detalhes.component.html'
 })
 export class AlunosDetalhesComponent implements OnInit {
 
@@ -26,6 +25,7 @@ export class AlunosDetalhesComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Number.parseInt(this.route.snapshot.params["parametro"]);
+    this.buscarPorId();
   }
 
   buscarPorId() {
@@ -40,7 +40,7 @@ export class AlunosDetalhesComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Aluno' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o Aluno' });
       }
     );
   }

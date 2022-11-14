@@ -14,8 +14,7 @@ import { Estados } from 'src/app/utils/estados-lista';
 
 @Component({
   selector: 'app-alunos-editar',
-  templateUrl: './alunos-editar.component.html',
-  styleUrls: ['./alunos-editar.component.css']
+  templateUrl: './alunos-editar.component.html'
 })
 export class AlunosEditarComponent implements OnInit {
 
@@ -74,7 +73,7 @@ export class AlunosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar o produto' });
       }
     );
   }
@@ -85,7 +84,7 @@ export class AlunosEditarComponent implements OnInit {
         this.planos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Planos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Planos' });
       }
     )
   }
@@ -96,7 +95,7 @@ export class AlunosEditarComponent implements OnInit {
         this.sexos = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar os Sexos' });
       }
     )
   }
@@ -107,7 +106,7 @@ export class AlunosEditarComponent implements OnInit {
         this.unidades = list;
       },
       () => {
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar buscar as Unidades' });
       }
     )
   }
@@ -123,7 +122,7 @@ export class AlunosEditarComponent implements OnInit {
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'danger', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar atualizar o cadastro' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar atualizar o cadastro' });
       },
       () => { }
     )
@@ -165,12 +164,12 @@ export class AlunosEditarComponent implements OnInit {
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário preencher o campo de Data de Nascimento' });
     }
 
-    if (this.aluno.idSexo === 0) {
+    if (!(this.aluno.idSexo)) {
       prosseguir = false;
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Sexos' });
     }
 
-    if (this.aluno.idPlano === 0) {
+    if (!(this.aluno.idPlano)) {
       prosseguir = false;
       this.messageService.add({ severity: 'warn', summary: 'Erro', detail: 'É necessário escolher algum dos Planos' });
     }

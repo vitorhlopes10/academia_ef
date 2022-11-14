@@ -18,7 +18,6 @@ export class UsuarioModel {
 
     aluno!: AlunoModel;
     funcionario!: FuncionarioModel;
-    patrimonio!: PatrimonioModel;
     statusUsuario!: StatusUsuarioModel;
 
     idStatusUsuario: number;
