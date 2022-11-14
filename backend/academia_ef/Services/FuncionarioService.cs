@@ -94,7 +94,7 @@ namespace academia_ef.Services
 
             //Dados do Básicos
             obj.Id = funcionario.Id;
-            obj.Cpf = funcionario.Cpf;
+            obj.Cpf = funcionario.Cpf.Replace(".", "").Replace("-", "");
             obj.Nome = funcionario.Nome;
             obj.Email = funcionario.Email;
             obj.DataNascimento = funcionario.DataNascimento;

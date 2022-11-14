@@ -76,11 +76,11 @@ export class TreinosEditarComponent implements OnInit {
     this.treinoServico.editar(this.treino).subscribe(
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Treino inserido com sucesso!' });
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Treino atualizado com sucesso!' });
       },
       () => {
         this.loading = false;
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar inserir o Treino' });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu algum erro ao tentar atualizar o Treino' });
       },
       () => { }
     )

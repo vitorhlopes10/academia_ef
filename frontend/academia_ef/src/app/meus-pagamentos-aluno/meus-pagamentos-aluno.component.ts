@@ -43,7 +43,7 @@ export class MeusPagamentosAlunoComponent implements OnInit {
 
         if (ocorreuPagamentoDoMes) {
           this.statusMensalidade = 'EM_DIA';
-        } else if (!(ocorreuPagamentoDoMes) && hoje.getDate() > diaDataVencimento) {
+        } else if (!(ocorreuPagamentoDoMes) && (hoje.getDate() > diaDataVencimento)) {
           this.statusMensalidade = 'PENDENTE';
         } else {
           this.statusMensalidade = 'EM_DEBITO';

@@ -22,7 +22,7 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Unidade</label>
-                    <input *ngIf="funcionario?.unidade?.nome" type="email" pInputText
+                    <input *ngIf="funcionario?.unidade?.nome" type="text" pInputText
                         [(ngModel)]="funcionario.unidade.nome" disabled="true">
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="row p-fluid" style="margin-top: 15px;">
                 <div class="col">
                     <label for="float-input">Email</label>
-                    <input *ngIf="funcionario?.email" type="text" pInputText [(ngModel)]="funcionario.email"
+                    <input *ngIf="funcionario?.email" type="email" pInputText [(ngModel)]="funcionario.email"
                         disabled="true">
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Cargo</label>
-                    <input *ngIf="funcionario?.cargo?.nome" type="email" pInputText [(ngModel)]="funcionario.cargo.nome"
+                    <input *ngIf="funcionario?.cargo?.nome" type="text" pInputText [(ngModel)]="funcionario.cargo.nome"
                         disabled="true">
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col">
                     <label for="float-input">Sexo</label>
-                    <input *ngIf="funcionario?.sexo?.nome" type="email" pInputText [(ngModel)]="funcionario.sexo.nome"
+                    <input *ngIf="funcionario?.sexo?.nome" type="text" pInputText [(ngModel)]="funcionario.sexo.nome"
                         disabled="true">
                 </div>
             </div>
